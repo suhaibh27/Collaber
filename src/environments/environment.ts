@@ -1,9 +1,19 @@
+/* eslint-disable @typescript-eslint/quotes */
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+    firebaseConfig : {
+    apiKey: "AIzaSyA0FchEvLNaKNfzEaVKc3RvPuS_eFQJkOA",
+    authDomain: "collaber-ef166.firebaseapp.com",
+    projectId: "collaber-ef166",
+    storageBucket: "collaber-ef166.appspot.com",
+    messagingSenderId: "80388126325",
+    appId: "1:80388126325:web:062343bc3b9dd9ed1d2a3c",
+    measurementId: "G-TR8T9GZFE5"
+  }
 };
 
 /*

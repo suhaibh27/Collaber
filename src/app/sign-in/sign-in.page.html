@@ -1,0 +1,88 @@
+<ion-header>
+  <ion-toolbar color="success">
+    <ion-title >Register</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding >
+  <div class="login-content">
+    <h1 class="Title" >Collaber</h1>
+    <!-- Logo -->
+    <ion-img class="mImage" ></ion-img>
+
+    <!-- Login form -->
+    <div *ngIf="login">
+      <form >
+        <ion-item>
+          <ion-label>
+            <ion-icon name="person-outline"></ion-icon>
+            Username
+          </ion-label>
+          <ion-input type="text"></ion-input>
+        </ion-item>
+      <br>
+        <ion-item>
+          <ion-label >
+            <ion-icon name="lock-closed"></ion-icon>
+                          Password
+          </ion-label>
+          <ion-input type="password"></ion-input>
+        </ion-item>
+      </form>
+      <br>
+      <div class="centerDev">
+        <ion-button color="success" (click)="signIn()">
+        <ion-icon name="log-in" ></ion-icon>
+            SIGN IN
+        </ion-button>
+        <br>
+        <ion-label class="link">Forgot Password?</ion-label>
+        <p ion-text color="secondary" >New here? <a (click)="toggleRegisterForm()">Sign Up</a></p>
+      </div>
+    </div>
+
+    <!-- Sign Up Form -->
+    <div *ngIf="!login">
+      <form >
+        <ion-item>
+          <ion-label position="floating">
+            Username
+          </ion-label>
+          <ion-input type="text"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label position="floating" >
+            Name
+          </ion-label>
+          <ion-input ></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label position="floating"> Password</ion-label>
+          <ion-input type="password"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label position="floating">Confirm Password</ion-label>
+          <ion-input type="password"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item >
+          <ion-label position="floating"> Phone Number</ion-label>
+          <ion-input></ion-input>
+        </ion-item>
+      </form>
+      <div class="centerDev">
+        <ion-button color="success" (click)="signUp()">
+        <ion-icon name="log-in"></ion-icon>
+            SIGN up
+        </ion-button>
+        <p ion-text color="secondary"  >Already have an Account?</p>
+        <ion-button fill="clear" (click)="toggleRegisterForm()"  shape="round">
+          Sign In
+        </ion-button>
+      </div>
+    </div>
+  </div>
+</ion-content>
