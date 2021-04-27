@@ -1,6 +1,6 @@
-<ion-header>
-  <ion-toolbar color="success">
-    <ion-title >Register</ion-title>
+<ion-header >
+  <ion-toolbar class="myBackgroundColor">
+    <ion-title color="light">Register</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -8,7 +8,7 @@
   <div class="login-content">
     <h1 class="Title" >Collaber</h1>
     <!-- Logo -->
-    <ion-img class="mImage" ></ion-img>
+    <ion-img class="mImage" src="..\..\assets\icon\logo.jpeg"></ion-img>
     <!-- Login form -->
     <div *ngIf="login">
       <form>
@@ -30,7 +30,7 @@
       </form>
       <br>
       <div class="centerDev">
-        <ion-button color="success" (click)="signIn()">
+        <ion-button class="myBackgroundColor" (click)="signIn()">
         <ion-icon name="log-in" ></ion-icon>
             SIGN IN
         </ion-button>
@@ -117,7 +117,7 @@
           </ng-container>
         </div>
           <div class="centerDev">
-            <ion-button color="success" type="submit">
+            <ion-button class="myBackgroundColor" type="submit">
               <ion-icon name="log-in"></ion-icon>
                   SIGN up
               </ion-button>

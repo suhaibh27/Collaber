@@ -1,6 +1,6 @@
 .Title{
   text-align: center;
-  color: #2dd36f;
+  color: #000f50;
   font-variant-caps: small-caps;
   font-size: 40px;
 }
@@ -26,4 +26,7 @@
   }
   .submit-btn {
     margin: 48px 12px 12px;
+  }
+  .myBackgroundColor{
+    --background: #000f50;
   }
