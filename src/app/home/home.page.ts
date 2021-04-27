@@ -16,11 +16,6 @@ export class HomePage {
     constructor(public groupSrv: GroupsServiceService) {
       this.myGroups=this.groupSrv.getGroups();
 
-<<<<<<< HEAD
   }
-
-=======
-  constructor() {}
 //hello
->>>>>>> 284c5d417c03bfac91ec84e289cfe7a93db35ade
 }
