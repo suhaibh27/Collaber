@@ -1,3 +1,5 @@
+/* eslint-disable arrow-body-style */
+/* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/quotes */
 /* eslint-disable @typescript-eslint/member-delimiter-style */
 /* eslint-disable @typescript-eslint/naming-convention */
@@ -13,9 +15,15 @@ import { Observable } from 'rxjs';
 })
 export class HomePage {
   myGroups=[];
+  filteredList;
     constructor(public groupSrv: GroupsServiceService) {
       this.myGroups=this.groupSrv.getGroups();
-
+      this.filteredList=this.myGroups;
+  }
+  getItems(ev: any){
+    this.myGroups=this.filteredList;
+    let v=ev.target.value;
+    this.myGroups=this.myGroups.filter((product)=>{return(product.Name.toLowerCase().indexOf(v.toLowerCase())>-1);});
   }
 //hello
 }
