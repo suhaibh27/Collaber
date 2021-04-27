@@ -8,19 +8,23 @@
 <ion-content>
   <ion-searchbar placeholder="Filter groups" (ionInput)="getItems($event)"></ion-searchbar>
   <ion-grid>
-    <ion-row style="background-color:#96a9fc" *ngFor="let group of myGroups ">
+    <ion-row style="background-color:#96a9fc" *ngFor="let group of myGroups; let i = index ">
       <ion-col size="3">
         <ion-img src="..\..\assets\icon\logo.jpeg"></ion-img>
       </ion-col>
-      <ion-col *ngIf="group.isPrivate" size="9">
-            <ion-icon name="lock-closed"></ion-icon>
-          <ion-label>{{group.Name}}</ion-label> <br><br>
+      <ion-col *ngIf="group.isPrivate" size="7">
+        <ion-icon name="lock-closed"></ion-icon>
+        <ion-label>{{group.data().Name}}</ion-label> <br><br>
       </ion-col>
-      <ion-col *ngIf="!group.isPrivate" size="9">
+      <ion-col *ngIf="!group.isPrivate" size="7">
         <ion-icon name="lock-open"></ion-icon>
-      <ion-label>{{group.Name}}</ion-label> <br><br>
-  </ion-col>
+        <ion-label>{{group.data().Name}}</ion-label> <br><br>
+      </ion-col>
+      <ion-col size='2'>
+          <ion-button (click)="presentPopover($event,group.id)" color="dark" fill="clear">
+            <ion-icon name="ellipsis-vertical"></ion-icon>
+          </ion-button>
+      </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>
-

@@ -7,10 +7,6 @@ import { Injectable, ɵɵinjectPipeChangeDetectorRef } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFirestoreCollection } from '@angular/fire/firestore';
-export interface group {
-  Name: string,
-  isPrivate: boolean
-};
 @Injectable({
   providedIn: 'root'
 })
@@ -33,7 +29,6 @@ export class GroupsServiceService {
   getGroups(){
     let groups=[];
     this.userGroupsCollectionRef = this.afs.collection('users-groups',ref=>ref.where('userID','==','RJvbBwI1ZtCHbEs6EWP3'));
-    //this.groupCollectionRef.valueChanges().subscribe(res=>res.map(r=>console.log(r.Name)));
     let count=0;
     this.userGroupsCollectionRef.valueChanges().subscribe(res=>{ if (count<1){
                                                                         count++;
@@ -42,7 +37,8 @@ export class GroupsServiceService {
                                                                             let myref= this.afs.collection('Groups').doc(r.groupID);
                                                                             myref.get().subscribe((snap)=>{
                                                                               if(snap.exists){
-                                                                                  groups.push((snap.data()));
+                                                                                  console.log(snap.id);
+                                                                                  groups.push((snap));
                                                                                 }
                                                                               else
                                                                                   console.log('no data');

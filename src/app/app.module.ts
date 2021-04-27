@@ -8,9 +8,12 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { GrouppopoverComponent } from './grouppopover/grouppopover.component';
+
+
 //h//
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent,GrouppopoverComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(),
             AngularFireModule.initializeApp(environment.firebaseConfig),
