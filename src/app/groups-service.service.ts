@@ -21,7 +21,8 @@ export class GroupsServiceService {
     return;
   }
   getgroup(id){
-    return;
+    this.afs.collection('Groups').doc(id.toString()).get().subscribe(res=>console.log(res.data()));
+    return this.afs.collection('Groups').doc(id);
   }
   deleteGroup(id){
     return;
@@ -47,8 +48,9 @@ export class GroupsServiceService {
                                                                         });
     return groups;
   }
-  updateGroup()
+  async updateGroup(doc,newData)
   {
-    return;
+    console.log(doc);
+    const res = await this.afs.collection('Groups').doc(doc).set(newData);
   }
 }

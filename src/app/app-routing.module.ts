@@ -15,6 +15,10 @@ const routes: Routes = [
     path: 'sign-in',
     loadChildren: () => import('./sign-in/sign-in.module').then( m => m.SignInPageModule)
   },
+  {
+    path: 'edit-group/:id',
+    loadChildren: () => import('./edit-group/edit-group.module').then( m => m.EditGroupPageModule)
+  },
 ];
 
 @NgModule({

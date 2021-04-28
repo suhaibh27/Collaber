@@ -12,11 +12,11 @@
       <ion-col size="3">
         <ion-img src="..\..\assets\icon\logo.jpeg"></ion-img>
       </ion-col>
-      <ion-col *ngIf="group.isPrivate" size="7">
+      <ion-col *ngIf="group.data().isPrivate" size="7">
         <ion-icon name="lock-closed"></ion-icon>
         <ion-label>{{group.data().Name}}</ion-label> <br><br>
       </ion-col>
-      <ion-col *ngIf="!group.isPrivate" size="7">
+      <ion-col *ngIf="!group.data().isPrivate" size="7">
         <ion-icon name="lock-open"></ion-icon>
         <ion-label>{{group.data().Name}}</ion-label> <br><br>
       </ion-col>

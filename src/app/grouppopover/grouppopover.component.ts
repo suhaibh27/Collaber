@@ -1,10 +1,12 @@
+import { GroupsServiceService } from './../groups-service.service';
 /* eslint-disable @typescript-eslint/quotes */
 import { AlertController } from '@ionic/angular';
 /* eslint-disable @angular-eslint/component-selector */
 /* eslint-disable @angular-eslint/contextual-lifecycle */
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, Input  } from '@angular/core';
+import { Component, OnInit, Input, ɵsetCurrentInjector  } from '@angular/core';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'grouppopover',
@@ -13,11 +15,14 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 })
 export class GrouppopoverComponent implements OnInit {
   @Input() name;
-  constructor(public alertController: AlertController) { }
+  constructor(public alertController: AlertController, public groupSrv: GroupsServiceService,public router: Router) { }
   ngOnInit() {
   }
   delete(){
     alert(this.name);
+  }
+  edit(){
+    this.router.navigateByUrl('/edit-group/'+this.name);
   }
   async presentAlertConfirm() {
     const alert = await this.alertController.create({

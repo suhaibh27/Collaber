@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Edit Group</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <img src="..\..\assets\icon\logo.jpeg"/>
+    <ion-card-header>
+      <ion-input [(ngModel)]='newName' value={{thisGroup.Name}} color='dark' style="font-size: 26px !important;"></ion-input>
+    </ion-card-header>
+    <ion-card-content style="padding: 0px;">
+      <ion-item>
+        <ion-label>Privacy</ion-label>
+        <ion-item *ngIf="newPrivacy==true">
+          <ion-select (ionChange)=selectPrivacy($event) value='true'>
+            <ion-select-option value='true'><ion-icon name="lock-closed"></ion-icon>private</ion-select-option>
+            <ion-select-option value='false'><ion-icon name="lock-open"></ion-icon>public</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item *ngIf="newPrivacy==false">
+          <ion-select (ionChange)=selectPrivacy($event) value='false'>
+            <ion-select-option value='true'><ion-icon name="lock-closed"></ion-icon>private</ion-select-option>
+            <ion-select-option value='false'><ion-icon name="lock-open"></ion-icon>public</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-item>
+    </ion-card-content>
+    <div style="text-align-last: center;">
+    <ion-button (click)='save()'>Save</ion-button>
+    </div>
+  </ion-card>
+</ion-content>
