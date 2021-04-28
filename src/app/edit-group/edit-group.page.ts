@@ -5,6 +5,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GroupsServiceService } from '../groups-service.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-edit-group',
@@ -16,11 +17,15 @@ export class EditGroupPage implements OnInit {
   thisGroup;
   newName;
   newPrivacy;
+  users;
+  usersNames=[];
   constructor(public groupSrv: GroupsServiceService,private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.grId = this.activatedRoute.snapshot.paramMap.get('id');
     this.thisGroup=this.groupSrv.getgroup(this.grId).get().subscribe(res=>{this.thisGroup=res.data();this.newPrivacy=this.thisGroup.isPrivate;});
+    this.users=this.groupSrv.getGroupUsers(this.grId);
+    this.users.subscribe(res=>res.forEach(r=>this.groupSrv.getuser(r.userID).then(rr=>rr.get().subscribe(ii=>this.usersNames.push(ii.data())))));
   }
   save(){
     let newGroup={Name:this.newName.toString(),isPrivate:this.newPrivacy==='true'};
@@ -28,6 +33,8 @@ export class EditGroupPage implements OnInit {
   }
   selectPrivacy(ev){
     this.newPrivacy=ev.target.value;
+  }
+  getUsers(){
   }
 
 }

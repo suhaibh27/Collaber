@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable max-len */
 import { GroupsServiceService } from './../groups-service.service';
 /* eslint-disable @typescript-eslint/quotes */
-import { AlertController } from '@ionic/angular';
+import { AlertController, PopoverController } from '@ionic/angular';
 /* eslint-disable @angular-eslint/component-selector */
 /* eslint-disable @angular-eslint/contextual-lifecycle */
 import { CommonModule } from '@angular/common';
@@ -15,13 +17,14 @@ import { Router } from '@angular/router';
 })
 export class GrouppopoverComponent implements OnInit {
   @Input() name;
-  constructor(public alertController: AlertController, public groupSrv: GroupsServiceService,public router: Router) { }
+  constructor(public alertController: AlertController, public groupSrv: GroupsServiceService,public router: Router,private popoverController: PopoverController) { }
   ngOnInit() {
   }
   delete(){
     alert(this.name);
   }
   edit(){
+    this.DismissClick();
     this.router.navigateByUrl('/edit-group/'+this.name);
   }
   async presentAlertConfirm() {
@@ -45,5 +48,8 @@ export class GrouppopoverComponent implements OnInit {
       ]
     });
     await alert.present();
+  }
+  async DismissClick() {
+    await this.popoverController.dismiss();
   }
 }

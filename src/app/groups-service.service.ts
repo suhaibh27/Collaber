@@ -15,10 +15,19 @@ export class GroupsServiceService {
   group: Observable<any[]>;
   groupCollectionRef: AngularFirestoreCollection<any>;
   userGroupsCollectionRef: AngularFirestoreCollection<any>;
+  usersCollectionRef: AngularFirestoreCollection<any>;
   constructor(public afs: AngularFirestore) {
    }
   createGroup(){
     return;
+  }
+  //move this to user service
+  async getuser(mid){
+    return this.afs.collection('users').doc(mid);
+  }
+  getGroupUsers(id){
+    this.userGroupsCollectionRef = this.afs.collection('users-groups',ref=>ref.where('groupID','==',id));
+    return this.userGroupsCollectionRef.valueChanges();
   }
   getgroup(id){
     this.afs.collection('Groups').doc(id.toString()).get().subscribe(res=>console.log(res.data()));

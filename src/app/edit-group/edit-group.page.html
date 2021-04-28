@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Edit Group</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+        <ion-title>Edit Group</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,14 +16,14 @@
     <ion-card-content style="padding: 0px;">
       <ion-item>
         <ion-label>Privacy</ion-label>
-        <ion-item *ngIf="newPrivacy==true">
-          <ion-select (ionChange)=selectPrivacy($event) value='true'>
+        <ion-item *ngIf="newPrivacy==true || newPrivacy=='true'">
+          <ion-select  interface="popover" (ionChange)=selectPrivacy($event) value='true'>
             <ion-select-option value='true'><ion-icon name="lock-closed"></ion-icon>private</ion-select-option>
             <ion-select-option value='false'><ion-icon name="lock-open"></ion-icon>public</ion-select-option>
           </ion-select>
         </ion-item>
-        <ion-item *ngIf="newPrivacy==false">
-          <ion-select (ionChange)=selectPrivacy($event) value='false'>
+        <ion-item *ngIf="newPrivacy==false || newPrivacy=='false'">
+          <ion-select interface="popover" (ionChange)=selectPrivacy($event) value='false'>
             <ion-select-option value='true'><ion-icon name="lock-closed"></ion-icon>private</ion-select-option>
             <ion-select-option value='false'><ion-icon name="lock-open"></ion-icon>public</ion-select-option>
           </ion-select>
@@ -31,4 +34,19 @@
     <ion-button (click)='save()'>Save</ion-button>
     </div>
   </ion-card>
+  <div *ngIf="this.usersNames.length>0">
+    <ion-row *ngFor="let user of users |async; let i=index">
+      <ion-item-divider style="color: black;">
+        <ion-col size='7'>
+          {{usersNames[i].username}}
+        </ion-col>
+        <ion-col style="align-self: center;" size='5' *ngIf="user.isAdmin==true">
+        <span style="color: green;">Admin</span>
+        </ion-col>
+        <ion-col style="align-self: center;" size='5' *ngIf="user.isAdmin==false">
+          <span style="color: blue;">Member</span>
+        </ion-col>
+      </ion-item-divider>
+    </ion-row>
+  </div>
 </ion-content>
