@@ -1,6 +1,17 @@
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/theming/
 
+/**my varibale*/
+.divider{
+  border-color: #000f50;
+  color:black;
+}
+.myBackgroundColor{
+  --background: #000f50;
+}
+.mfont{
+  font-family: Arial, Helvetica, sans-serif;
+}
 /** Ionic CSS Variables **/
 :root {
   /** primary **/

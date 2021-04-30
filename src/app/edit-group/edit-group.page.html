@@ -1,9 +1,9 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar class='myBackgroundColor'>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="home"></ion-back-button>
+      <ion-back-button color='light' defaultHref="home"></ion-back-button>
     </ion-buttons>
-        <ion-title>Edit Group</ion-title>
+        <ion-title color='light'>Edit Group</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,18 +11,20 @@
   <ion-card>
     <img src="..\..\assets\icon\logo.jpeg"/>
     <ion-card-header>
-      <ion-input [(ngModel)]='newName' value={{thisGroup.Name}} color='dark' style="font-size: 26px !important;"></ion-input>
+      <ion-input placeholder='Group Name' [(ngModel)]='newName' value={{thisGroup.Name}} color='dark' style="font-size: 26px !important;"></ion-input>
     </ion-card-header>
     <ion-card-content style="padding: 0px;">
       <ion-item>
         <ion-label>Privacy</ion-label>
         <ion-item *ngIf="newPrivacy==true || newPrivacy=='true'">
+          <ion-toggle [(ngModel)]='newPrivacy'></ion-toggle>
           <ion-select  interface="popover" (ionChange)=selectPrivacy($event) value='true'>
             <ion-select-option value='true'><ion-icon name="lock-closed"></ion-icon>private</ion-select-option>
             <ion-select-option value='false'><ion-icon name="lock-open"></ion-icon>public</ion-select-option>
           </ion-select>
         </ion-item>
         <ion-item *ngIf="newPrivacy==false || newPrivacy=='false'">
+          <ion-toggle [(ngModel)]='newPrivacy' ></ion-toggle>
           <ion-select interface="popover" (ionChange)=selectPrivacy($event) value='false'>
             <ion-select-option value='true'><ion-icon name="lock-closed"></ion-icon>private</ion-select-option>
             <ion-select-option value='false'><ion-icon name="lock-open"></ion-icon>public</ion-select-option>

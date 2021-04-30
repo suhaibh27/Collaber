@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar class='myBackgroundColor'>
+    <ion-buttons slot="start">
+      <ion-back-button color='light' defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title color='light'>Collaber</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-item>
+    <h1>Create Group</h1> <br>
+  </ion-item>
+  <ion-item style="--border-color: white;">
+    <ion-label class="ion-margin">Finaly your group details</ion-label>
+  </ion-item>
+  <ion-card style="text-align: -webkit-center;">
+    <ion-img style="width:'280px'; height:'280px'" src="..\..\assets\icon\logo.jpeg"></ion-img>
+    <ion-card-header>
+      <ion-input [(ngModel)]='name' placeholder='Group Name' color='dark' style="font-size: 26px !important;"></ion-input>
+    </ion-card-header>
+    <ion-card-content style="padding: 0px;">
+      <ion-item>
+          <ion-label class="ion-margin-end" style='max-inline-size: fit-content;'>Privacy</ion-label>
+          <ion-toggle class='ion-margin-end' [(ngModel)]='privacy'></ion-toggle>
+          <div *ngIf="privacy">
+            <ion-label class="ion-margin-right">
+              Private
+            </ion-label>
+            <span style="font-size: small;">(not visible to outsiders)</span>
+          </div>
+          <div *ngIf="!privacy">
+            <ion-label>
+              Public
+            </ion-label>
+            <span style="font-size: small;">(visible to outsiders)</span>
+          </div>
+        </ion-item>
+    </ion-card-content>
+    <div style="text-align-last: center;">
+      <ion-button (click)="createGroup()">Create</ion-button>
+    </div>
+  </ion-card>
+</ion-content>

@@ -6,10 +6,13 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="refresh()">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-searchbar placeholder="Filter groups" (ionInput)="getItems($event)"></ion-searchbar>
   <ion-grid>
-    <ion-row  *ngFor="let group of myGroups; let i = index ">
-      <ion-item-divider style="color:black;">
+    <ion-row *ngFor="let group of myGroups; let i = index ">
+      <ion-item-divider class='divider' >
       <ion-col size="3">
         <ion-avatar>
         <ion-img src="..\..\assets\icon\logo.jpeg"></ion-img>
@@ -17,10 +20,10 @@
       </ion-col>
       <ion-col *ngIf="group.data().isPrivate" size="7">
 
-       <h4 style='font-family: Arial, Helvetica, sans-serif;'><ion-icon name="lock-closed"></ion-icon>&nbsp; <b>{{group.data().Name}}</b></h4>
+       <h4 class='mfont'><ion-icon name="lock-closed"></ion-icon>&nbsp; <b>{{group.data().Name}}</b></h4>
       </ion-col>
       <ion-col  *ngIf="!group.data().isPrivate" size="7">
-        <h4 style='font-family: Arial, Helvetica, sans-serif;'><ion-icon name="lock-open"></ion-icon>&nbsp; <b>{{group.data().Name}}</b></h4>
+        <h4 class='mfont'><ion-icon name="lock-open"></ion-icon>&nbsp; <b>{{group.data().Name}}</b></h4>
       </ion-col>
       <ion-col size='2'>
           <ion-button (click)="presentPopover($event,group.id)" color="dark" fill="clear">
@@ -31,4 +34,9 @@
     </ion-item-divider>
     </ion-row>
   </ion-grid>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)='createGroup()'>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

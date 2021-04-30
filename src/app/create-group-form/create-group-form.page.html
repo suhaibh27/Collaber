@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar class='myBackgroundColor'>
+    <ion-buttons slot="end" >
+      <ion-back-button color=light icon='close' defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title color='light'>Collaber</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-item>
+    <h1>Create Group</h1> <br>
+  </ion-item>
+  <ion-item style="--border-color: white;">
+    <ion-label class="ion-margin">First add the users you want to the group</ion-label>
+  </ion-item>
+  <ion-searchbar placeholder="Username" (ionInput)="searchUsers($event)"></ion-searchbar>
+  <ion-row *ngFor="let user of users" >
+    <ion-item-divider class='divider'>
+    <ion-col size='3' >
+      <ion-avatar><ion-img src="..\..\assets\icon\logo.jpeg"></ion-img>
+      </ion-avatar>
+    </ion-col>
+    <ion-col size='7'><h3>{{user.username}}</h3></ion-col>
+    <ion-col>
+      <ion-button fill=outline (click)='addUser(user.username)'>
+        <ion-icon name='add'></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-item-divider>
+  </ion-row>
+  <ion-item>
+    <h3>Added Users</h3> <br>
+  </ion-item>
+  <ion-row *ngFor="let user of addeddUsers; let i=index" >
+    <ion-item-divider class='divider'>
+    <ion-col size='3' >
+      <ion-avatar><ion-img src="..\..\assets\icon\logo.jpeg"></ion-img>
+      </ion-avatar>
+    </ion-col>
+    <ion-col size='7'><h3>{{user}}</h3></ion-col>
+    <ion-col>
+      <ion-button color='danger' fill=outline (click)='removeUser(i)'>
+        <ion-icon name='remove'></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-item-divider>
+  </ion-row>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon (click)='nextPage()' name="arrow-forward"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

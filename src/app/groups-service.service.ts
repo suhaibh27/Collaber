@@ -21,6 +21,10 @@ export class GroupsServiceService {
   createGroup(){
     return;
   }
+  addTousersGroups()
+  {
+    return;
+  }
   //move this to user service
   async getuser(mid){
     return this.afs.collection('users').doc(mid);
@@ -61,5 +65,16 @@ export class GroupsServiceService {
   {
     console.log(doc);
     const res = await this.afs.collection('Groups').doc(doc).set(newData);
+  }
+  async addGroupUsers(users,name,pr)
+  {
+    let uid=[];
+    for(let user of users){
+      this.usersCollectionRef=await this.afs.collection('users',ref=>ref.where('username','==',user));
+      const data=this.usersCollectionRef.get().forEach(ds=>(ds.docs.forEach(d=>uid.push(d.id))));
+    }
+    const id=(await this.afs.collection('Groups').add({Name:name,privacy: pr})).id;
+    for(let i of uid)
+      this.afs.collection('user group').add({userID:i,groupID: id,isAdmin: false});
   }
 }

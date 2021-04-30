@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 /* eslint-disable max-len */
 /* eslint-disable no-var */
 /* eslint-disable @typescript-eslint/prefer-for-of */
@@ -22,7 +23,7 @@ export class HomePage {
   filteredList;
   currentPopover = null;
 
-  constructor(public groupSrv: GroupsServiceService, public popoverController: PopoverController , public alertController: AlertController) {
+  constructor(public groupSrv: GroupsServiceService, public popoverController: PopoverController , public alertController: AlertController,public router:Router) {
       this.myGroups=this.groupSrv.getGroups();
       this.filteredList=this.myGroups;
   }
@@ -41,6 +42,12 @@ export class HomePage {
     this.currentPopover = popover;
     return popover.present();
   }
-  edit(){}
+  createGroup()
+  {
+    this.router.navigateByUrl('\create-group-form');
+  }
+  refresh(): void {
+    window.location.reload();
+  }
 
 }
