@@ -7,7 +7,8 @@ import { environment } from './environments/environment';
 if (environment.production) {
   enableProdMode();
 }
-
+import { defineCustomElements } from '@ionic/pwa-elements/loader';
+defineCustomElements(window);
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.log(err));
-// aqeela hussain 
+// aqeela hussain

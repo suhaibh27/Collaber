@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable curly */
 /* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/quotes */
@@ -73,8 +74,21 @@ export class GroupsServiceService {
       this.usersCollectionRef=await this.afs.collection('users',ref=>ref.where('username','==',user));
       const data=this.usersCollectionRef.get().forEach(ds=>(ds.docs.forEach(d=>uid.push(d.id))));
     }
-    const id=(await this.afs.collection('Groups').add({Name:name,privacy: pr})).id;
+    const id=(await this.afs.collection('Groups').add({Name:name,isPrivate: pr})).id;
     for(let i of uid)
-      this.afs.collection('user group').add({userID:i,groupID: id,isAdmin: false});
+      this.afs.collection('users-groups').add({userID:i,groupID: id,isAdmin: false});
   }
+  removeUser(id,groupid){
+    //remove user that is signed up
+    //check if no admins make the first to join admin
+  }
+  async makeAdmin(id,groupid){
+    let doc=await this.afs.collection('users-groups',ref=>ref.where('userID','==',id).where('groupID','==',groupid));
+    doc.get().subscribe(res=>res.forEach(d=>console.log(this.afs.collection('users-groups').doc(d.id).set({userID:id,groupID:groupid,isAdmin: true}))));
+  }
+  async makeMember(id,groupid){
+    let doc=await this.afs.collection('users-groups',ref=>ref.where('userID','==',id).where('groupID','==',groupid));
+    doc.get().subscribe(res=>res.forEach(d=>console.log(this.afs.collection('users-groups').doc(d.id).set({userID:id,groupID:groupid,isAdmin: false}))));
+  }
+
 }

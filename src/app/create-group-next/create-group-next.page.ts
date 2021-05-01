@@ -1,5 +1,5 @@
 import { GroupsServiceService } from './../groups-service.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -9,15 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateGroupNextPage implements OnInit {
   users;
-  privacy: boolean;
+  privacy= false;
   name;
-  constructor(private activatedRoute: ActivatedRoute,public groupSrv: GroupsServiceService) { }
+  constructor(private activatedRoute: ActivatedRoute,public groupSrv: GroupsServiceService, public router: Router) { }
   ngOnInit() {
     this.users=JSON.parse(this.activatedRoute.snapshot.paramMap.get('users'));
     console.log(this.users);
   }
   createGroup(){
     this.groupSrv.addGroupUsers(this.users,this.name,this.privacy);
+    this.router.navigateByUrl('/home');
   }
 
 }

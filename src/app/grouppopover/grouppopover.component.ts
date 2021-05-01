@@ -16,16 +16,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./grouppopover.component.scss'],
 })
 export class GrouppopoverComponent implements OnInit {
-  @Input() name;
+  @Input() id;
   constructor(public alertController: AlertController, public groupSrv: GroupsServiceService,public router: Router,private popoverController: PopoverController) { }
   ngOnInit() {
   }
   delete(){
-    alert(this.name);
+    alert(this.id);
   }
   edit(){
     this.DismissClick();
-    this.router.navigateByUrl('/edit-group/'+this.name);
+    this.router.navigateByUrl('/edit-group/'+this.id);
+  }
+  leave(){
+    this.presentAlertConfirm();
   }
   async presentAlertConfirm() {
     const alert = await this.alertController.create({

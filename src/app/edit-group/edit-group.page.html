@@ -6,9 +6,8 @@
         <ion-title color='light'>Edit Group</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
-  <ion-card>
+  <ion-card >
     <img src="..\..\assets\icon\logo.jpeg"/>
     <ion-card-header>
       <ion-input placeholder='Group Name' [(ngModel)]='newName' value={{thisGroup.Name}} color='dark' style="font-size: 26px !important;"></ion-input>
@@ -42,13 +41,24 @@
         <ion-col size='7'>
           {{usersNames[i].username}}
         </ion-col>
-        <ion-col style="align-self: center;" size='5' *ngIf="user.isAdmin==true">
-        <span style="color: green;">Admin</span>
+        <div *ngIf="user.isAdmin==true">
+        <ion-col style="align-self: center;" size='4'>
+        <span style="color: green; vertical-align: -webkit-baseline-middle;">Admin</span>
         </ion-col>
-        <ion-col style="align-self: center;" size='5' *ngIf="user.isAdmin==false">
-          <span style="color: blue;">Member</span>
+        <ion-col size='2'>
+          &nbsp; <ion-button (click)='presentDemoteActionSheet(user.userID,usersNames[i].username)'><ion-icon name="create-outline"></ion-icon></ion-button>
         </ion-col>
+        </div>
+        <div *ngIf="user.isAdmin==false">
+          <ion-col style="align-self: center;" size='4'>
+            <span style="color: blue; vertical-align: -webkit-baseline-middle;">Member</span>
+          </ion-col>
+          <ion-col class="align-items-end" size='1'>
+            <ion-button (click)='presentActionSheet(user.userID,usersNames[i].username)'><ion-icon name="create-outline"></ion-icon></ion-button>
+          </ion-col>
+          </div>
       </ion-item-divider>
     </ion-row>
   </div>
+
 </ion-content>

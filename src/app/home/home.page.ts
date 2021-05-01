@@ -36,7 +36,7 @@ export class HomePage {
     let popover = await this.popoverController.create({
       component: GrouppopoverComponent,
       event: ev,
-      componentProps:{name: i},
+      componentProps:{id: i},
       translucent: true
     });
     this.currentPopover = popover;
