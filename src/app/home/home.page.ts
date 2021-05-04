@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 import {  GroupsServiceService } from './../groups-service.service';
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AlertController, PopoverController } from '@ionic/angular';
+import { AlertController, LoadingController, PopoverController } from '@ionic/angular';
 import { GrouppopoverComponent } from './../grouppopover/grouppopover.component';
 @Component({
   selector: 'app-home',
@@ -23,9 +23,11 @@ export class HomePage {
   filteredList;
   currentPopover = null;
 
-  constructor(public groupSrv: GroupsServiceService, public popoverController: PopoverController , public alertController: AlertController,public router:Router) {
-      this.myGroups=this.groupSrv.getGroups();
-      this.filteredList=this.myGroups;
+  constructor(private loadingController:LoadingController, public groupSrv: GroupsServiceService, public popoverController: PopoverController , public alertController: AlertController,public router:Router) {
+    this.presentLoading();
+    this.myGroups=this.groupSrv.getGroups();
+    this.loadingController.dismiss();
+    this.filteredList=this.myGroups;
   }
   getItems(ev: any){
     this.myGroups=this.filteredList;
@@ -49,5 +51,13 @@ export class HomePage {
   refresh(): void {
     window.location.reload();
   }
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'Please wait...',
+      duration: 1500
+    });
+    await loading.present();
 
+}
 }

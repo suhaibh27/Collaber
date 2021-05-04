@@ -35,7 +35,7 @@ export class GroupsServiceService {
     return this.userGroupsCollectionRef.valueChanges();
   }
   getgroup(id){
-    this.afs.collection('Groups').doc(id.toString()).get().subscribe(res=>console.log(res.data()));
+    //this.afs.collection('Groups').doc(id.toString()).get().subscribe(res=>console.log(res.data()));
     return this.afs.collection('Groups').doc(id);
   }
   deleteGroup(id){

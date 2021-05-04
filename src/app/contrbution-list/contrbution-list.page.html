@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar class="myBackgroundColor">
+    <ion-buttons slot="start">
+      <ion-back-button color='light' defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons class="ion-margin-end" slot="end">
+      <ion-icon size='large' color='light' name="create-outline"></ion-icon>
+    </ion-buttons>
+    <ion-title color='light'>{{this.title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div>
+    <ion-item>
+      <ion-text  class="ion-margin">{{this.description}}</ion-text>
+    </ion-item>
+    <h4 class="ion-margin mheader">Date and Time</h4>
+    <ion-item class="ion-no-margin">
+          <ion-button fill='clear' class="mpickers no-click">
+          <ion-icon class="mMargin-bottom" name="calendar-outline"></ion-icon>
+          <ion-datetime [(ngModel)]="date"  class="ion-margin"></ion-datetime>
+          </ion-button>
+          <ion-button fill='clear' class="mpickers no-click">
+          <ion-icon class="mMargin-bottom ion-margin-start" name="time-outline"></ion-icon>
+          <ion-datetime class="ion-margin" display-format="h:mm A" picker-format="h:mm A" [(ngModel)]="date"></ion-datetime>
+          </ion-button>
+    </ion-item>
+    <ion-item>
+      <h4 class=" mLheader ion-margin">Location:</h4>
+      <ion-icon name="location-outline"></ion-icon>
+      <a style="font-size: large;" class='ion-margin-top' [href]="this.locLink">{{this.location}}</a>
+    </ion-item>
+  </div>
+  <ion-grid>
+    <ion-row *ngFor="let user of usersNames; let i=index" >
+      <ion-item-divider [color]="myUser(i)" class='divider' >
+      <ion-col size="3">
+        <ion-avatar>
+        <ion-img src="..\..\assets\icon\logo.jpeg"></ion-img>
+        </ion-avatar>
+      </ion-col>
+      <ion-col  size="4">
+        <h4 class='mfont ion-no-margin'>{{user.username}}</h4>
+      </ion-col>
+      <ion-col  size="5" >
+        <ion-item [color]="myUser(i)" lines='none' >
+          <ion-label  class="ion-no-margin" color='success' *ngIf="this.isjoined[i]">Joined</ion-label>
+          <ion-label class="ion-no-margin" color='danger' *ngIf="!this.isjoined[i]">not Joined</ion-label>
+          <ion-checkbox (click)='toggleJoin(i)' [(ngModel)]="isjoined[i]" class="ion-no-margin " [class]="disable(i)"></ion-checkbox>
+        </ion-item>
+      </ion-col>
+    </ion-item-divider>
+    </ion-row>
+  </ion-grid>
+</ion-content>

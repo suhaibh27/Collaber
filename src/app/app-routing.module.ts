@@ -27,6 +27,10 @@ const routes: Routes = [
     path: 'create-group-next/:users',
     loadChildren: () => import('./create-group-next/create-group-next.module').then( m => m.CreateGroupNextPageModule)
   },
+  {
+    path: 'contrbution-list',
+    loadChildren: () => import('./contrbution-list/contrbution-list.module').then( m => m.ContrbutionListPageModule)
+  },
 ];
 
 @NgModule({
