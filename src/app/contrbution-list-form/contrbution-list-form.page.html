@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar class="myBackgroundColor">
+    <ion-buttons slot="start">
+      <ion-back-button color='light' defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title color='light'>contrbution-list-form</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label style="font-size:x-large;" position='stacked'>Title</ion-label>
+    <ion-input [(ngModel)]='title'></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label style="font-size:x-large;" position='stacked'>Description</ion-label>
+    <ion-textarea [(ngModel)]='description' rows='5' cols='40'></ion-textarea>
+  </ion-item>
+  <ion-item>
+    <ion-label style="font-size:x-large;" position='stacked'>Location</ion-label>
+    <ion-input [(ngModel)]='loc'></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label style="font-size:x-large;" position='stacked'>Copy Location link here if exits</ion-label>
+    <ion-input [(ngModel)]='locLink'></ion-input>
+    <ion-button class="ion-margin" color='success'><a style="color: black;" href="https://www.google.com/maps">google maps</a><ion-icon color="dark" name="map-outline"></ion-icon></ion-button>
+  </ion-item>
+  <ion-item class="ion-no-margin">
+    <ion-button fill='clear' class="mpickers">
+    <ion-icon class="mMargin-bottom" name="calendar-outline"></ion-icon>
+    <ion-datetime [(ngModel)]="date"  class="ion-margin"></ion-datetime>
+    </ion-button>
+    <ion-button fill='clear' class="mpickers">
+    <ion-icon class="mMargin-bottom ion-margin-start" name="time-outline"></ion-icon>
+    <ion-datetime class="ion-margin" display-format="h:mm A" picker-format="h:mm A" [(ngModel)]="date"></ion-datetime>
+    </ion-button>
+</ion-item>
+  <ion-button (click)='save()' expand='block'>Save</ion-button>
+
+</ion-content>

@@ -1,10 +1,11 @@
+/* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/quotes */
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFirestoreCollection } from '@angular/fire/firestore';
-
+import firebase from 'firebase/app';
 @Injectable({
   providedIn: 'root'
 })
@@ -26,5 +27,19 @@ updateJoin(uid,isjoin,lid,jid){
   else{
     this.cListCollectionRef.add({userID:uid});
   }
+}
+createList(title,desc,loc,locLink,dT,gID){
+  let timestampDate=firebase.firestore.Timestamp.fromDate(new Date(dT));
+  this.afs.collection('contributionList').add({
+                                              Title:title.toString(),
+                                              Description:desc.toString(),
+                                              Location:loc.toString(),
+                                              dateTime:timestampDate,
+                                              locationLink:locLink.toString(),
+                                              groupID:gID.toString()}).then(res=> {
+                                                                            if(res){
+                                                                              alert('listAdded');
+                                                                            }}
+                                                                            ).catch(e=>console.log(e));
 }
 }
