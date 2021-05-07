@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar class="myBackgroundColor">
+    <ion-buttons>
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light">Tasks</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-list *ngFor="let item of array; let i = index"> <!-- i will make this based on array in task.page.ts, change this and connect it to firestore -->
+  <ion-item>
+    <ion-avatar>
+      <ion-img src="..\..\assets\icon\logo.jpeg"></ion-img>
+    </ion-avatar>
+    <ion-grid>
+      <ion-col>
+        <ion-row>Title: {{item.title}}</ion-row>
+        <ion-row>From : {{item.creationDate}} - To: {{item.dueDate}}</ion-row>
+        <ion-row>Created By: {{item.creator}}</ion-row> 
+        <ion-row><a routerLink='../task-details/{{i}}'> View Task Details>> </a> </ion-row>
+      </ion-col>
+   
+    </ion-grid>
+  </ion-item>
+</ion-list>
+</ion-content>

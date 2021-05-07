@@ -35,6 +35,15 @@ const routes: Routes = [
     path: 'contrbution-list-form',
     loadChildren: () => import('./contrbution-list-form/contrbution-list-form.module').then( m => m.ContrbutionListFormPageModule)
   },
+  {
+    path: 'task',
+    loadChildren: () => import('./task/task.module').then( m => m.TaskPageModule)
+  },
+  {
+    path: 'task-details/:id',
+    loadChildren: () => import('./task-details/task-details.module').then( m => m.TaskDetailsPageModule)
+  },
+
 ];
 
 @NgModule({
