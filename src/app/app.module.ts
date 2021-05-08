@@ -11,7 +11,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { GrouppopoverComponent } from './grouppopover/grouppopover.component';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-
+import { ResponsePageModule } from './response/response.module';
 
 @NgModule({
   declarations: [AppComponent,GrouppopoverComponent],
@@ -20,7 +20,11 @@ import { AppRoutingModule } from './app-routing.module';
             AngularFireModule.initializeApp(environment.firebaseConfig),
             AngularFireStorageModule,
             AppRoutingModule,
-            AngularFirestoreModule.enablePersistence()],
+            AngularFirestoreModule.enablePersistence(),
+            ResponsePageModule
+          
+          ],
+
   providers: [
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

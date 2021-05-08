@@ -42,7 +42,11 @@ const routes: Routes = [
   {
     path: 'task-details/:id',
     loadChildren: () => import('./task-details/task-details.module').then( m => m.TaskDetailsPageModule)
+  },  {
+    path: 'response',
+    loadChildren: () => import('./response/response.module').then( m => m.ResponsePageModule)
   },
+
 
 ];
 

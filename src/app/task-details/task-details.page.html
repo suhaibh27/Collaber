@@ -1,9 +1,86 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>taskDetails</ion-title>
+  <ion-toolbar class="myBackgroundColor">
+    <ion-buttons slot="start">
+      <ion-button routerLink="/task" routerDirection="back">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title color="light">Task Details</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+<h2 class="ion-text-center">
+ <b>{{array[0].title}}</b> 
+</h2>
+    
+  
+
+
+<ion-grid>
+
+<ion-row id="firstRow">
+  <ion-col>
+  <ion-text id="creator"> Created By: {{array[0].creator}}</ion-text>  <br>
+  <ion-text id="start"> From {{array[0].creationDate}}</ion-text>  <br>
+  <ion-text id="end"> To {{array[0].dueDate}}</ion-text>  <br>
+  <ion-text>Progress Done: {{prog}}%</ion-text><br>
+  <ion-text [color]="clr">Status: {{sts}}</ion-text>
+  </ion-col>
+</ion-row>
+
+</ion-grid>
+
+
+
+<ion-grid>
+  <ion-row>
+  <ion-card id="subtasks-card">
+    <h3 class="ion-text-center"> <b>Sub-tasks</b></h3>
+  <ion-card-content>
+    <ion-list *ngFor="let item of array[0].othertasks">
+      <ion-item> 
+        <ion-text>{{item.title}} </ion-text>
+        <ion-checkbox slot="end" color="success"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+    <div style="height: 20px;"></div>
+  </ion-card-content>
+  </ion-card>
+</ion-row>
+
+
+<ion-row>
+  <ion-card id="comments-card" >
+    <h3 class="ion-text-center"> <b>Comments</b></h3>
+  <ion-card-content>
+    <ion-list *ngFor="let item of array[0].comments; let i=index" >
+      <ion-item> 
+        <ion-grid>
+          <ion-row>
+          <ion-col size="10">
+            <ion-row id="title-row"><ion-text>{{item.title}} ({{item.creator}})</ion-text></ion-row>
+          <ion-row id="body-row"><ion-text>{{item.body}}</ion-text></ion-row>
+          </ion-col>
+         <ion-col size="2">
+           <ion-button fill="none" id="response-button" size="default" (click)="respond(i)">
+               <ion-icon name="chatbubble-ellipses-outline" color="primary" id="response-icon"></ion-icon>
+           </ion-button>
+        
+         </ion-col>
+        </ion-row>
+         
+        </ion-grid> 
+      </ion-item>
+    </ion-list>
+    <div style="height: 20px;"></div>
+  </ion-card-content>
+  </ion-card>
+</ion-row>
+</ion-grid>
+
+
+
 
 </ion-content>
