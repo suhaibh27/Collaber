@@ -11,7 +11,7 @@ export class ContrbutionListFormPage implements OnInit {
   description='';
   loc='';
   locLink='';
-  date='';
+  date=new Date().toISOString();
   constructor(private clSrv: ClistService) { }
 
   ngOnInit() {

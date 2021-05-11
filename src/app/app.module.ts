@@ -22,7 +22,6 @@ import { ResponsePageModule } from './response/response.module';
             AppRoutingModule,
             AngularFirestoreModule.enablePersistence(),
             ResponsePageModule
-          
           ],
 
   providers: [

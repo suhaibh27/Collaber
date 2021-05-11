@@ -18,7 +18,7 @@
 }
 #title-row{
     padding-top: 10px;
-    
+
 }
 #body-row{
     padding-top: 5px;
@@ -28,4 +28,27 @@
     position: absolute;
     top: 20%;
     size: 30px;
+}
+.progress-outer {
+  width: 96%;
+  margin:0px,10px,10px,10px ;
+  text-align: center;
+  background-color: #bcd4f3;
+  border: 1px solid #dcdcdc;
+  color: #fff;
+  border-radius: 8px;
+}
+
+.progress-inner {
+  min-width: 15%;
+  width: 90%;
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 5px;
+  border-radius: 8px;
+  background-color: var(--ion-color-primary);
+}
+ion-item-divider{
+  margin-top: 0px;
+  min-height: 1px!important;
 }

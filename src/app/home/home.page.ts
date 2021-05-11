@@ -1,3 +1,4 @@
+/* eslint-disable curly */
 import { Router } from '@angular/router';
 /* eslint-disable max-len */
 /* eslint-disable no-var */
@@ -22,12 +23,26 @@ export class HomePage {
   myGroups=[];
   filteredList;
   currentPopover = null;
-
+  count=0;
   constructor(private loadingController:LoadingController, public groupSrv: GroupsServiceService, public popoverController: PopoverController , public alertController: AlertController,public router:Router) {
     this.presentLoading();
-    this.myGroups=this.groupSrv.getGroups();
-    this.loadingController.dismiss();
-    this.filteredList=this.myGroups;
+    this.groupSrv.getGroups2().subscribe(res=>{ if (this.count<1){
+      this.count++;
+      res.map(r=>{
+          console.log(r.groupID);
+          let myref= this.groupSrv.getMyref(r.groupID);
+          myref.get().subscribe((snap)=>{
+            if(snap.exists){
+                console.log(snap.id);
+                this.myGroups.push((snap));
+              }
+            else
+                console.log('no data');
+          });
+      });}
+      this.loadingController.dismiss();this.filteredList=this.myGroups;
+    });
+    //this.filteredList=this.myGroups;
   }
   getItems(ev: any){
     this.myGroups=this.filteredList;

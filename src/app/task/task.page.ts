@@ -1,55 +1,55 @@
+/* eslint-disable prefer-const */
+import { GroupsServiceService } from './../groups-service.service';
+import { TasksService } from './../tasks.service';
+/* eslint-disable @typescript-eslint/type-annotation-spacing */
+/* eslint-disable @typescript-eslint/member-delimiter-style */
+/* eslint-disable @typescript-eslint/ban-types */
+/* eslint-disable max-len */
+/* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable @typescript-eslint/quotes */
+/* eslint-disable @typescript-eslint/member-ordering */
 import { Component, OnInit } from '@angular/core';
-
-
-interface myComment{
-  title:String,
-  body:String,
-  creator:String
-
-}
-
-interface task{
-  title:String,
-  creationDate:String,
-  dueDate:String,
-  progress:number, //the number of the progress percentage
-  isFinished:boolean,
-  comments:myComment[],
-  creator:String,
-  othertasks:subtask[],
-
-}
-interface subtask{
-  title:String,
-  Priority:number //on scale from 1 to 10 where 1 is least importent and 10 is most important
-}
+import { LoadingController, RouterLinkDelegate } from '@ionic/angular';
 @Component({
   selector: 'app-task',
   templateUrl: './task.page.html',
   styleUrls: ['./task.page.scss'],
 })
 export class TaskPage implements OnInit {
-
-  constructor() { }
-
+  tasks=[];
+  planId='ISjS0B7sqvjonjiZ3BQo';
+  username=[];
+  progress=[];
+  constructor(private taskSrv: TasksService, private loadingController: LoadingController) {
+    this.presentLoading();
+    this.taskSrv.getTasks(this.planId).subscribe(res=>{
+                                                  res.forEach(r=>
+                                                      {(this.tasks.push(r));this.tasks.forEach(
+                                                                                            (ros,index)=>{this.getUsername(ros.data().creator); this.progress.push(this.calcProgress(ros.id,index));});
+                                                                                            });
+    loadingController.dismiss();});
+   }
   ngOnInit() {
   }
-  comments:myComment[]=[
-    {title:"First comment",body:"This is my first comment's body",creator:"Yasmeen"},
-    {title:"Second comment",body:"This is my Second comment's body",creator:"Lina"},
-  ];
-  subtasks:subtask[]=[
-    {title:"First subtask",Priority:4},
-    {title:"Second subtask",Priority:3},
-    
-
-  ];
-
 //for the date type it will differ from the firestore so you can use the best method to show DD-MM-YYYY in the tasks page
-array:task[]=[
-  {title:"my first task",creationDate:"10-10-2020",dueDate:"10-10-2021",progress:0.7,isFinished:false,creator:"Yasmeen",comments:this.comments,othertasks:this.subtasks},
-  {title:"my Second task",creationDate:"10-10-2020",dueDate:"10-10-2021",progress:0.5,isFinished:false,creator:"Lina",comments:this.comments,othertasks:this.subtasks},
-];
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'Please wait...',
+      duration: 2000
+    });
+    await loading.present();
 
-
+    const { role, data } = await loading.onDidDismiss();
+    console.log('Loading dismissed!');
+  }
+  getUsername(id){
+    let name;
+    this.taskSrv.getuser(id).subscribe(res=>{this.username.push(res.data());});
+  }
+  calcProgress(id,index){
+    let count=0;
+    let finshed=0;
+    this.taskSrv.getSteps(id).subscribe(data=>{data.forEach(res=>{if(res.data().isFinished){finshed+=1;} count++;});this.progress[index]=finshed/count;});
+  }
 }

@@ -41,6 +41,7 @@ export class GroupsServiceService {
   deleteGroup(id){
     return;
   }
+
   getGroups(){
     let groups=[];
     this.userGroupsCollectionRef = this.afs.collection('users-groups',ref=>ref.where('userID','==','RJvbBwI1ZtCHbEs6EWP3'));
@@ -61,6 +62,16 @@ export class GroupsServiceService {
                                                                         });}
                                                                         });
     return groups;
+  }
+  getGroups2(){
+    let groups=[];
+    this.userGroupsCollectionRef = this.afs.collection('users-groups',ref=>ref.where('userID','==','RJvbBwI1ZtCHbEs6EWP3'));
+    let count=0;
+    return this.userGroupsCollectionRef.valueChanges();
+    //return groups;
+  }
+  getMyref(groupID){
+    return this.afs.collection('Groups').doc(groupID);
   }
   async updateGroup(doc,newData)
   {

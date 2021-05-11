@@ -9,32 +9,41 @@
 
 <ion-content>
   <ion-item>
-    <ion-label style="font-size:x-large;" position='stacked'>Title</ion-label>
-    <ion-input [(ngModel)]='title'></ion-input>
+    <ion-label class='mlables' position='stacked'>Title*</ion-label>
+   <ion-input placeholder="Your list Title" style="--padding-start: 10px;" minlength=3 [(ngModel)]='title'></ion-input>
   </ion-item>
+
   <ion-item>
-    <ion-label style="font-size:x-large;" position='stacked'>Description</ion-label>
-    <ion-textarea [(ngModel)]='description' rows='5' cols='40'></ion-textarea>
+    <ion-label class='mlables' position='stacked'>Description</ion-label>
+    <ion-textarea placeholder="details of your list(optional)" style="--padding-start: 10px;"  [(ngModel)]='description' rows='4' cols='40'></ion-textarea>
   </ion-item>
+
   <ion-item>
-    <ion-label style="font-size:x-large;" position='stacked'>Location</ion-label>
-    <ion-input [(ngModel)]='loc'></ion-input>
+    <ion-label class='mlables' position='stacked'>Location</ion-label>
+    <ion-input placeholder="where the event will happen" style="--padding-start: 10px;"  [(ngModel)]='loc'></ion-input>
   </ion-item>
-  <ion-item>
-    <ion-label style="font-size:x-large;" position='stacked'>Copy Location link here if exits</ion-label>
-    <ion-input [(ngModel)]='locLink'></ion-input>
+
+  <ion-item class="ion-align-items-center">
+    <ion-label class='mlables' position='stacked'>Location link </ion-label>
+    <ion-input placeholder="link users to follow and get the location(optional)" style="--padding-start: 10px;"  [(ngModel)]='locLink'></ion-input>
     <ion-button class="ion-margin" color='success'><a style="color: black;" href="https://www.google.com/maps">google maps</a><ion-icon color="dark" name="map-outline"></ion-icon></ion-button>
   </ion-item>
+<ion-item lines='none'>
+  <ion-label class='mlables class="ion-no-margin"' position="stacked">
+    Date & Time
+  </ion-label>
+</ion-item>
   <ion-item class="ion-no-margin">
     <ion-button fill='clear' class="mpickers">
-    <ion-icon class="mMargin-bottom" name="calendar-outline"></ion-icon>
-    <ion-datetime [(ngModel)]="date"  class="ion-margin"></ion-datetime>
+      <ion-icon class="mMargin-bottom" name="calendar-outline"></ion-icon>
+      <ion-datetime [(ngModel)]="date"  class="ion-margin"></ion-datetime>
     </ion-button>
     <ion-button fill='clear' class="mpickers">
-    <ion-icon class="mMargin-bottom ion-margin-start" name="time-outline"></ion-icon>
-    <ion-datetime class="ion-margin" display-format="h:mm A" picker-format="h:mm A" [(ngModel)]="date"></ion-datetime>
+      <ion-icon class="mMargin-bottom ion-margin-start" name="time-outline"></ion-icon>
+      <ion-datetime class="ion-margin" display-format="h:mm A" picker-format="h:mm A" [(ngModel)]="date"></ion-datetime>
     </ion-button>
-</ion-item>
-  <ion-button (click)='save()' expand='block'>Save</ion-button>
+  </ion-item>
+
+  <ion-button  (click)='save()' expand='block'>Save</ion-button>
 
 </ion-content>
