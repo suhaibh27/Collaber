@@ -8,6 +8,8 @@ import { Injectable, ɵɵinjectPipeChangeDetectorRef } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFirestoreCollection } from '@angular/fire/firestore';
+import firebase from 'firebase/app';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -25,6 +27,9 @@ export class GroupsServiceService {
   addTousersGroups()
   {
     return;
+  }
+  getFilteredGroups(name){
+    return this.afs.collection('Groups',ref=>ref.where('Name','==',name).where('isPrivate','==',false)).get();
   }
   //move this to user service
   async getuser(mid){
@@ -89,9 +94,10 @@ export class GroupsServiceService {
     for(let i of uid)
       this.afs.collection('users-groups').add({userID:i,groupID: id,isAdmin: false});
   }
-  removeUser(id,groupid){
-    //remove user that is signed up
-    //check if no admins make the first to join admin
+  async removeUser(id,groupid){
+    let doc=await this.afs.collection('users-groups',ref=>ref.where('userID','==',id).where('groupID','==',groupid));
+    doc.get().subscribe(res=>res.forEach(d=>console.log(this.afs.collection('users-groups').doc(d.id).delete())));
+
   }
   async makeAdmin(id,groupid){
     let doc=await this.afs.collection('users-groups',ref=>ref.where('userID','==',id).where('groupID','==',groupid));
@@ -100,6 +106,15 @@ export class GroupsServiceService {
   async makeMember(id,groupid){
     let doc=await this.afs.collection('users-groups',ref=>ref.where('userID','==',id).where('groupID','==',groupid));
     doc.get().subscribe(res=>res.forEach(d=>console.log(this.afs.collection('users-groups').doc(d.id).set({userID:id,groupID:groupid,isAdmin: false}))));
+  }
+  async addUser(uid,gid){
+    await this.afs.collection('users-groups').add({userID:uid,groupID:gid,isAdmin:false});
+  }
+  searchbyCode(code)
+  {
+    let group=this.afs.collection('Groups').doc(code).get();
+      return group;
+
   }
 
 }

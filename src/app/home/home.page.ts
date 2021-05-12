@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 /* eslint-disable curly */
 import { Router } from '@angular/router';
 /* eslint-disable max-len */
@@ -24,7 +25,10 @@ export class HomePage {
   filteredList;
   currentPopover = null;
   count=0;
-  constructor(private loadingController:LoadingController, public groupSrv: GroupsServiceService, public popoverController: PopoverController , public alertController: AlertController,public router:Router) {
+  seg;
+  constructor(private loadingController:LoadingController, public groupSrv: GroupsServiceService, public popoverController: PopoverController , public alertController: AlertController,public router:Router)
+  {
+    this.seg='home';
     this.presentLoading();
     this.groupSrv.getGroups2().subscribe(res=>{ if (this.count<1){
       this.count++;
@@ -42,6 +46,7 @@ export class HomePage {
       });}
       this.loadingController.dismiss();this.filteredList=this.myGroups;
     });
+
     //this.filteredList=this.myGroups;
   }
   getItems(ev: any){
@@ -73,6 +78,11 @@ export class HomePage {
       duration: 1500
     });
     await loading.present();
-
-}
+  }
+  changePage(){
+    return;
+  }
+  viewGroup(id){
+    this.router.navigateByUrl('edit-group/'+id+'/true');
+  }
 }

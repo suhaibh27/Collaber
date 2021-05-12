@@ -1,3 +1,6 @@
+import { Router } from '@angular/router';
+/* eslint-disable curly */
+import { AlertController } from '@ionic/angular';
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable @typescript-eslint/member-ordering */
 /* eslint-disable @typescript-eslint/semi */
@@ -28,19 +31,31 @@ export class EditGroupPage implements OnInit {
   users;
   usersNames=[];
   toastCtrl: any;
+  userExist=false;
+  view=true;
+  myUsersId=[];
   constructor(
+        private alertController:AlertController,
         public groupSrv: GroupsServiceService,
         private activatedRoute: ActivatedRoute,
-        public actionSheetController: ActionSheetController
+        public actionSheetController: ActionSheetController,
+        private router: Router
         ) {
           }
 
   ngOnInit() {
     this.grId = this.activatedRoute.snapshot.paramMap.get('id');
+    this.view = this.activatedRoute.snapshot.paramMap.get('view')=='true';
+
     this.thisGroup=this.groupSrv.getgroup(this.grId).get().subscribe(res=>{this.thisGroup=res.data();this.newPrivacy=this.thisGroup.isPrivate;});
     this.users=this.groupSrv.getGroupUsers(this.grId);
-    this.users.subscribe(res=>res.forEach(r=>this.groupSrv.getuser(r.userID).then(rr=>rr.get().subscribe(ii=>this.usersNames.push(ii.data())))));
-  }
+    this.users.subscribe(res=>{res.forEach(r=>{
+                                            this.myUsersId.push(r.userID);
+                                            this.groupSrv.getuser(r.userID).then(rr=>
+                                                                              rr.get().subscribe(ii=>this.usersNames.push(ii.data())));
+                                                                            });
+                                            this.doesUserExist();});
+}
   save(){
     let newGroup={Name:this.newName.toString(),isPrivate:this.newPrivacy==='true'};
     this.groupSrv.updateGroup(this.grId,newGroup);
@@ -56,20 +71,26 @@ export class EditGroupPage implements OnInit {
   demote(user){
     this.groupSrv.makeMember(user,this.grId)
   }
-  async presentActionSheet(user,name) {
+  async presentActionSheet(user,name,index) {
+    let stat="Delete";
+    if(this.userExist){
+      stat="Leave";
+    }
     const actionSheet = await this.actionSheetController.create({
       header:'Actions On '+name,
       cssClass: 'actionSheet',
       buttons: [{
-        text: 'Delete',
+        text: stat,
         role: 'destructive',
         icon: 'person-remove',
+        cssClass:'remove',
         handler: () => {
           console.log('delete')
         }
       }, {
         text: 'Promote',
-        icon: 'arrow-up-circle-outline',cssClass:'promoteActionSheet',
+        icon: 'arrow-up-circle-outline',
+        cssClass:'promoteActionSheet',
         handler: () => {
           this.promote(user);
         }
@@ -88,16 +109,21 @@ export class EditGroupPage implements OnInit {
     const { role } = await actionSheet.onDidDismiss();
     console.log('onDidDismiss resolved with role', role);
   }
-  async presentDemoteActionSheet(user,name) {
+  async presentDemoteActionSheet(user,name,index) {
+    let stat="Delete";
+    if(this.userExist){
+      stat="Leave";
+    }
     const actionSheet = await this.actionSheetController.create({
       header:'Actions On '+name,
       cssClass: 'actionSheet',
       buttons: [{
-        text: 'Delete',
+        text: stat,
         role: 'destructive',
         icon: 'person-remove',
+        cssClass:'remove',
         handler: () => {
-          console.log('delete')
+          this.deleteUser(stat)
         }
       }, {
         text: 'Demote',
@@ -119,9 +145,46 @@ export class EditGroupPage implements OnInit {
     const { role } = await actionSheet.onDidDismiss();
     console.log('onDidDismiss resolved with role', role);
   }
+  doesUserExist(userId='RJvbBwI1ZtCHbEs6EWP3'){
+    for(let user of this.myUsersId ){
+      if(user==userId){
+        console.log(this.userExist);
+        this.userExist=true;
+      }
+    }
 
+  }
+  deleteUser(stat,user='RJvbBwI1ZtCHbEs6EWP3'){
+    this.groupSrv.removeUser(user,this.grId).then(()=>{this.usersNames=[];if(stat=='Leave'){
+                                                                              this.router.navigateByUrl('home');}})
+  }
+  addUser(user='RJvbBwI1ZtCHbEs6EWP3'){
+    this.groupSrv.addUser(user,this.grId).then(()=>this.usersNames=[])
+  }
+  async presentAlertConfirm(stat) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Confirm!',
+      message: 'Are you sure you want to '+stat+'?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Confirm',
+          handler: () => {
+            if(stat=='Leave')
+              this.deleteUser(stat);
+            else
+              this.addUser()
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
 }
-
-
-
-

@@ -3,62 +3,71 @@
     <ion-buttons slot="start">
       <ion-back-button color='light' defaultHref="home"></ion-back-button>
     </ion-buttons>
-        <ion-title color='light'>Edit Group</ion-title>
+        <ion-title color='light'>{{thisGroup.Name}}</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
   <ion-card >
-    <img src="..\..\assets\icon\logo.jpeg"/>
+    <div style="text-align: -webkit-center;">
+      <img width="244" height="244" src="..\..\assets\icon\logo.jpeg"/>
+    </div>
     <ion-card-header>
-      <ion-input placeholder='Group Name' [(ngModel)]='newName' value={{thisGroup.Name}} color='dark' style="font-size: 26px !important;"></ion-input>
+      <ion-input [readonly]='view' placeholder='Group Name' [(ngModel)]='newName' value={{thisGroup.Name}} color='dark' style="font-size: 26px !important;"></ion-input>
+      <ion-textarea [readonly]='view' style="font-size: large !important; height: fit-content;" value={{thisGroup.description}} placeholder='description'></ion-textarea>
     </ion-card-header>
     <ion-card-content style="padding: 0px;">
       <ion-item>
         <ion-label>Privacy</ion-label>
-        <ion-item *ngIf="newPrivacy==true || newPrivacy=='true'">
-          <ion-toggle [(ngModel)]='newPrivacy'></ion-toggle>
-          <ion-select  interface="popover" (ionChange)=selectPrivacy($event) value='true'>
+        <ion-item *ngIf="(newPrivacy==true || newPrivacy=='true')">
+            <ion-toggle *ngIf="!view" [(ngModel)]='newPrivacy'></ion-toggle>
+          <ion-select *ngIf="!view" class="disabled" [disabled]='view' interface="popover" (ionChange)=selectPrivacy($event) value='true'>
             <ion-select-option value='true'><ion-icon name="lock-closed"></ion-icon>private</ion-select-option>
             <ion-select-option value='false'><ion-icon name="lock-open"></ion-icon>public</ion-select-option>
           </ion-select>
+          <ion-text *ngIf="view" style="font-size: large;">Private</ion-text>
         </ion-item>
-        <ion-item *ngIf="newPrivacy==false || newPrivacy=='false'">
-          <ion-toggle [(ngModel)]='newPrivacy' ></ion-toggle>
-          <ion-select interface="popover" (ionChange)=selectPrivacy($event) value='false'>
+        <ion-item *ngIf="(newPrivacy==false || newPrivacy=='false')">
+          <ion-toggle *ngIf="!view" [disabled]='view' [(ngModel)]='newPrivacy' ></ion-toggle>
+          <ion-select *ngIf="!view" [disabled]='view' interface="popover" (ionChange)=selectPrivacy($event) value='false'>
             <ion-select-option value='true'><ion-icon name="lock-closed"></ion-icon>private</ion-select-option>
             <ion-select-option value='false'><ion-icon name="lock-open"></ion-icon>public</ion-select-option>
           </ion-select>
+          <ion-text *ngIf="view" style="font-size: large;">Public</ion-text>
         </ion-item>
       </ion-item>
     </ion-card-content>
-    <div style="text-align-last: center;">
-    <ion-button (click)='save()'>Save</ion-button>
+    <div  style="text-align-last: center;">
+      <ion-button *ngIf="!view" (click)='save()'>Save</ion-button>
     </div>
   </ion-card>
   <div *ngIf="this.usersNames.length>0">
     <ion-row *ngFor="let user of users |async; let i=index">
       <ion-item-divider style="color: black;">
         <ion-col size='7'>
-          {{usersNames[i].username}}
+          <ion-text style="font-size: large;">{{usersNames[i].username}}</ion-text>
         </ion-col>
         <div *ngIf="user.isAdmin==true">
-        <ion-col style="align-self: center;" size='4'>
-        <span style="color: green; vertical-align: -webkit-baseline-middle;">Admin</span>
+        <ion-col style="align-self: center; margin-left: 3px;" size='4'>
+        <span style="font-size: large;color: green; vertical-align: -webkit-baseline-middle;">Admin</span>
         </ion-col>
         <ion-col size='2'>
-          &nbsp; <ion-button (click)='presentDemoteActionSheet(user.userID,usersNames[i].username)'><ion-icon name="create-outline"></ion-icon></ion-button>
+          &nbsp; <ion-button *ngIf="!view" (click)='presentDemoteActionSheet(user.userID,usersNames[i].username,i)'><ion-icon name="create-outline"></ion-icon></ion-button>
         </ion-col>
         </div>
         <div *ngIf="user.isAdmin==false">
           <ion-col style="align-self: center;" size='4'>
-            <span style="color: blue; vertical-align: -webkit-baseline-middle;">Member</span>
+            <span style="font-size: large;color: blue; vertical-align: -webkit-baseline-middle;">Member</span>
           </ion-col>
           <ion-col class="align-items-end" size='1'>
-            <ion-button (click)='presentActionSheet(user.userID,usersNames[i].username)'><ion-icon name="create-outline"></ion-icon></ion-button>
+            <ion-button *ngIf="!view" (click)='presentActionSheet(user.userID,usersNames[i].username,i)'><ion-icon name="create-outline"></ion-icon></ion-button>
           </ion-col>
           </div>
       </ion-item-divider>
     </ion-row>
+    <div style='text-align: -webkit-center;'>
+      <ion-button  *ngIf="!view"><ion-icon name="person-add-outline"></ion-icon></ion-button>
+      <ion-button (click)="presentAlertConfirm('leave')" color="danger" *ngIf='userExist'>leave<ion-icon name="exit-outline"></ion-icon></ion-button>
+      <ion-button (click)="presentAlertConfirm('join')" color="primary" *ngIf='!userExist'>Join<ion-icon name="enter-outline"></ion-icon></ion-button>
+    </div>
   </div>
-
 </ion-content>

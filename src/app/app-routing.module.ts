@@ -16,7 +16,7 @@ const routes: Routes = [
     loadChildren: () => import('./sign-in/sign-in.module').then( m => m.SignInPageModule)
   },
   {
-    path: 'edit-group/:id',
+    path: 'edit-group/:id/:view',
     loadChildren: () => import('./edit-group/edit-group.module').then( m => m.EditGroupPageModule)
   },
   {
@@ -42,9 +42,14 @@ const routes: Routes = [
   {
     path: 'task-details/:id',
     loadChildren: () => import('./task-details/task-details.module').then( m => m.TaskDetailsPageModule)
-  },  {
+  },
+  {
     path: 'response',
     loadChildren: () => import('./response/response.module').then( m => m.ResponsePageModule)
+  },
+  {
+    path: 'groups-page',
+    loadChildren: () => import('./groups-page/groups-page.module').then( m => m.GroupsPagePageModule)
   },
 
 

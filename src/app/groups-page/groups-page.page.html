@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar class="myBackgroundColor">
+    <ion-buttons slot="start">
+      <ion-back-button color='light' defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title color='light'>Explore groups</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="segment=='name'">
+  <h1 class="ion-margin-start ion-margin-top">Join Group by its Name </h1>
+  <ion-searchbar placeholder='name' (ionInput)="searchGroups($event)"></ion-searchbar>
+  <ion-item>
+    <h1>Groups</h1> <br>
+  </ion-item>
+  <ion-row *ngFor="let group of groups" (click)='viewGroup(group.id)'>
+    <ion-item-divider class='divider'>
+    <ion-col size='3' >
+      <ion-avatar><ion-img src="..\..\assets\icon\logo.jpeg"></ion-img>
+      </ion-avatar>
+    </ion-col>
+    <ion-col size='7'>
+      <h3>{{group.data().Name}}</h3>
+      <ion-note>{{group.id}}</ion-note>
+    </ion-col>
+
+  </ion-item-divider>
+  </ion-row>
+</ion-content>
+<ion-content *ngIf="segment=='code'">
+  <h1 class="ion-margin-start ion-margin-top">Join Group by its Code </h1>
+  <ion-note class="ion-margin-start">Example: IoXfCkxwTULpZHHuAKH4</ion-note>
+  <ion-searchbar placeholder='Enter Code' searchIcon='barcode-outline' (ionInput)="searchGroupsCode($event)"></ion-searchbar>
+  <ion-item>
+    <h1>Group</h1> <br>
+  </ion-item>
+  <ion-row *ngFor="let group of groups" (click)='viewGroup(group.id)'>
+    <ion-item-divider class='divider'>
+    <ion-col size='3' >
+      <ion-avatar><ion-img src="..\..\assets\icon\logo.jpeg"></ion-img>
+      </ion-avatar>
+    </ion-col>
+    <ion-col size='7'>
+      <h3>{{group.data().Name}}</h3>
+      <ion-note>{{group.id}}</ion-note>
+    </ion-col>
+
+  </ion-item-divider>
+  </ion-row>
+</ion-content>
+<ion-footer>
+  <ion-segment [(ngModel)]='segment' swipeGesture=true>
+    <ion-segment-button color="dark" (click)='changePage()' value="code">
+      <ion-icon name="barcode-outline"></ion-icon>
+      join using code
+    </ion-segment-button>
+    <ion-segment-button color="dark" (click)='changePage()' value="name">
+      <ion-icon name="search-circle-outline"></ion-icon>
+      search group names
+    </ion-segment-button>
+  </ion-segment>
+</ion-footer>

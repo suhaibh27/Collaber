@@ -2,11 +2,33 @@
 // http://ionicframework.com/docs/theming/
 
 /**my varibale*/
+.loading {
+  --backdrop-opacity:0;
+  --background: transparent;
+  --spinner-color	:#000;
+  .loading-wrapper {
+    background: transparent;
+    box-shadow: none;
+  }
+
+}
 .promoteActionSheet{
+  ion-icon{
+    color: green !important;
+    }
   color: green !important;
 }
 .demoteActionSheet{
+  ion-icon{
+    color: blue !important;
+    }
   color: blue !important;
+}
+.remove{
+  ion-icon{
+  color: red !important;
+  }
+  color: red !important;
 }
 .divider{
   border-color: #000f50;

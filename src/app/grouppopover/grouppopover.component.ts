@@ -25,7 +25,7 @@ export class GrouppopoverComponent implements OnInit {
   }
   edit(){
     this.DismissClick();
-    this.router.navigateByUrl('/edit-group/'+this.id);
+    this.router.navigateByUrl('/edit-group/'+this.id+'/'+false);
   }
   leave(){
     this.presentAlertConfirm();
