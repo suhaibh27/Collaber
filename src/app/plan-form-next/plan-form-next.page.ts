@@ -49,7 +49,7 @@ export class PlanFormNextPage implements OnInit {
     }
     let id=this.activatedRoute.snapshot.paramMap.get('id');
     this.array.push({title:this.capitalizeFirstLetter(this.title),dueDate:this.date,subtasks:this.list});
-    this.taskSrv.addTask(id,this.title,this.date,this.desc,this.list).then(res=>{if(this.list.length>0){
+    this.taskSrv.addTask(id,this.title,this.date,this.desc,this.list).then(res=>{{
                                                                                     for(let s of this.list){
                                                                                         this.taskSrv.addStep(s.title,res.id);this.router.navigateByUrl('task-details/'+res.id);}}});
   }

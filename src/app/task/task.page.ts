@@ -1,3 +1,4 @@
+/* eslint-disable no-var */
 import { ActivatedRoute, Router } from '@angular/router';
 /* eslint-disable prefer-const */
 import { GroupsServiceService } from './../groups-service.service';
@@ -59,5 +60,17 @@ export class TaskPage implements OnInit {
   }
   addTask(){
     this.router.navigateByUrl('plan-form-next/'+this.planId);
+  }
+  toDateTime(secs) {
+    var t =secs.toDate();
+    return t;
+  }
+  isOverdue(d){
+    let now=new Date();
+    let due=new Date(d);
+    if(due<now){
+      return true;
+    }
+    return false;
   }
 }

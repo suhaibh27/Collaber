@@ -16,7 +16,7 @@
   </h2>
   <h2 class="ion-text-center ion-no-margin">
     <ion-icon name="hourglass-outline"></ion-icon>
-            Due {{this.dueDate}}
+            Due {{this.dueDate}}<ion-note *ngIf="isOverdue()" color='danger'>(Overdue)</ion-note>
   </h2>
   <ion-item-divider></ion-item-divider>
   <ion-grid>

@@ -1,3 +1,5 @@
+/* eslint-disable eqeqeq */
+import { UsersService } from './../users.service';
 /* eslint-disable arrow-body-style */
 /* eslint-disable @typescript-eslint/quotes */
 /* eslint-disable @typescript-eslint/naming-convention */
@@ -41,26 +43,48 @@ export class SignInPage implements OnInit {
       { type: 'areEqual', message: 'Password mismatch.' }
     ],
     name: [
-      { type: 'pattern', message: 'only letters are accepted.' }
+      { type: 'pattern', message: 'only letters are accepted.' },
+      {type: 'required', message: 'name is Required' }
     ],
     phone: [
       { type: 'required', message: 'Phone is required.' },
       { type: 'pattern', message: 'only numbers are accepted.' }
-    ],};
+    ],
+    email:[{type: 'required',message:'Email is required.'},
+          {type: 'pattern', message: 'not a valid Email form.' }
+    ]
+};
   public login=true;
   signUpForm: FormGroup;
   matching_passwords_group: FormGroup;
-  constructor(public router: Router,public formbuilder: FormBuilder) {
+  email;
+  username;
+  password;
+  phone;
+  name;
+  error='';
+  signInEmail;
+  signInPassword;
+  signInError;
+
+  constructor(public userSrv: UsersService, public router: Router,public formbuilder: FormBuilder) {
     }
   toggleRegisterForm(){
     this.login=((this.login) ?false:true);
   }
   signIn(){
+    this.userSrv.signIn({email:this.signInEmail,password:this.signInPassword}).catch(er=>this.signInError=er.message);
 
   }
   signUp(val){
-    console.log(val);
-    console.log("sign");
+
+    if(val.status=='VALID'){
+      this.userSrv.signup({email: this.email,
+                          password: this.password,
+                          name: this.name,
+                          usrname: this.username,
+                          phone: this.phone}).catch(er=>console.log(this.error=er.message));
+    }
   }
 
   ngOnInit() {
@@ -86,9 +110,13 @@ export class SignInPage implements OnInit {
         Validators.required,
         Validators.pattern('^[0-9]*$')
       ])),
+      email: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.pattern('^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$')
+      ])),
       name: new FormControl('', Validators.compose([
         Validators.required,
-        Validators.pattern('^[a-zA-Z]+$')
+        Validators.pattern('^[a-zA-Z \s]*$')
       ])),
       matching_passwords: this.matching_passwords_group,
   });

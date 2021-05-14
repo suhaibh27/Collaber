@@ -27,9 +27,11 @@
           </ion-avatar>
         </ion-col>
         <ion-col size="9">
-          <ion-text id="title">Title: {{item.data().title}} </ion-text>
+          <ion-text id="title">Title: {{item.data().title}} </ion-text><br>
+          <ion-text>Due: {{this.toDateTime(item.data().dueDate).toString().slice(0,21)}}
+          </ion-text><ion-note *ngIf="isOverdue(this.toDateTime(item.data().dueDate))" color='danger'>(Overdue)</ion-note>
             <br>
-          <ion-text *ngIf="this.username[i]" id="creator"> Created By: {{this.username[i].username}}</ion-text>  <br>
+          <ion-text *ngIf="this.username[i]"> Created By: {{this.username[i].username}}</ion-text><br>
           <a routerLink='../task-details/{{item.id}}' id="more-details"> View Task Details>> </a> <br>
         </ion-col>
       </ion-row>

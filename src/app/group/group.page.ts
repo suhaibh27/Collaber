@@ -63,7 +63,10 @@ export class GroupPage implements OnInit {
     }
   }
   goCalender(){
-    this.router.navigateByUrl('calender');
+    this.router.navigateByUrl('calender/'+this.id);
+  }
+  goChat(){
+    this.router.navigateByUrl('chat/'+this.id);
   }
   async presentActionSheet() {
     const actionSheet = await this.actionSheetController.create({

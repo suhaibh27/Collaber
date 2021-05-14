@@ -18,7 +18,7 @@ import { Component, ViewChild, OnInit, Inject, LOCALE_ID } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { formatDate } from '@angular/common';
 import { CalenderModalPage } from '../calender-modal/calender-modal.page';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CalendarMode } from 'ionic2-calendar/calendar';
 
 @Component({
@@ -28,7 +28,7 @@ import { CalendarMode } from 'ionic2-calendar/calendar';
 })
 export class CalenderPage implements OnInit {
   @ViewChild(CalendarComponent) myCal: CalendarComponent;
-  gr='kiLFwJTBSq0yA3OZk8qU';
+  gr='';
   s=6;
   e=20;
   st=30;
@@ -43,9 +43,10 @@ export class CalenderPage implements OnInit {
     currentDate: new Date(),
   };
   selectedDate: Date;
-  constructor(private alertCtrl: AlertController,
+  constructor(private activatedRoute:ActivatedRoute, private alertCtrl: AlertController,
     @Inject(LOCALE_ID) private locale: string,
     private modalCtrl: ModalController,private loadingController:LoadingController,private taskSrv: TasksService,private listSrv: ClistService) {
+      this.gr=this.activatedRoute.snapshot.paramMap.get('id');
       this.taskSrv.getCalenderTasks(this.gr).subscribe(res=>{res
           .forEach(plan=>{this.pids.push(plan.data());this.taskSrv.getTasks(plan.id)
               .subscribe(r=>r

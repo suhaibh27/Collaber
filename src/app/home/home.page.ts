@@ -1,3 +1,4 @@
+import { UsersService } from './../users.service';
 /* eslint-disable eqeqeq */
 /* eslint-disable curly */
 import { Router } from '@angular/router';
@@ -27,7 +28,7 @@ export class HomePage {
   count=0;
   seg;
   isAdmin=[];
-  constructor(private loadingController:LoadingController, public groupSrv: GroupsServiceService, public popoverController: PopoverController , public alertController: AlertController,public router:Router)
+  constructor(private userSrv:UsersService, private loadingController:LoadingController, public groupSrv: GroupsServiceService, public popoverController: PopoverController , public alertController: AlertController,public router:Router)
   {
     this.seg='home';
     this.presentLoading();

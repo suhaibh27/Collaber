@@ -3,7 +3,7 @@
     <ion-title color="light">Register</ion-title>
   </ion-toolbar>
 </ion-header>
-
+<ion-content>
   <div class="login-content">
     <h1 class="Title" >Collaber</h1>
     <!-- Logo -->
@@ -13,10 +13,10 @@
       <form>
         <ion-item>
           <ion-label>
-            <ion-icon name="person-outline"></ion-icon>
-            Username
+            <ion-icon name="mail"></ion-icon>
+            Email
           </ion-label>
-          <ion-input type="text"></ion-input>
+          <ion-input [(ngModel)]='signInEmail' name='email' type="text"></ion-input>
         </ion-item>
       <br>
         <ion-item>
@@ -24,7 +24,7 @@
             <ion-icon name="lock-closed"></ion-icon>
                           Password
           </ion-label>
-          <ion-input type="password"></ion-input>
+          <ion-input [(ngModel)]='signInPassword' name='password'  type="password"></ion-input>
         </ion-item>
       </form>
       <br>
@@ -33,6 +33,9 @@
         <ion-icon name="log-in" ></ion-icon>
             SIGN IN
         </ion-button>
+        <div style='text-align-last: center;'>
+          <ion-text color='danger'>{{signInError}}</ion-text>
+        </div>
         <br>
         <ion-label class="link">Forgot Password?</ion-label>
         <p ion-text color="secondary" >New here? <a (click)="toggleRegisterForm()">Sign Up</a></p>
@@ -44,9 +47,22 @@
       <form [formGroup]="signUpForm" (ngSubmit)="signUp(signUpForm)">
         <ion-item>
           <ion-label position="floating">
+            Email
+          </ion-label>
+          <ion-input [(ngModel)]='email' formControlName="email" type="email"></ion-input>
+        </ion-item>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.email">
+            <div class="error-message" *ngIf="signUpForm.get('email').hasError(validation.type) && (signUpForm.get('email').dirty || signUpForm.get('email').touched)">
+              <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+        <ion-item>
+          <ion-label position="floating">
             Username
           </ion-label>
-          <ion-input formControlName="username" type="text"></ion-input>
+          <ion-input [(ngModel)]='username' formControlName="username" type="text"></ion-input>
         </ion-item>
         <div class="validation-errors">
           <ng-container *ngFor="let validation of validation_messages.username">
@@ -60,7 +76,7 @@
           <ion-label position="floating" >
             Name
           </ion-label>
-          <ion-input formControlName="name"></ion-input>
+          <ion-input [(ngModel)]='name' formControlName="name"></ion-input>
         </ion-item>
         <div class="validation-errors">
           <ng-container *ngFor="let validation of validation_messages.name">
@@ -73,7 +89,7 @@
         <div formGroupName="matching_passwords">
           <ion-item>
             <ion-label position="floating" >Password</ion-label>
-            <ion-input type="password" formControlName="password"></ion-input>
+            <ion-input [(ngModel)]='password' type="password" formControlName="password"></ion-input>
           </ion-item>
           <div class="validation-errors">
             <ng-container *ngFor="let validation of validation_messages.password">
@@ -105,7 +121,7 @@
         <br>
         <ion-item >
         <ion-label position="floating"> Phone Number</ion-label>
-          <ion-input formControlName="phone"></ion-input>
+          <ion-input [(ngModel)]='phone' formControlName="phone"></ion-input>
         </ion-item>
         <div class="validation-errors">
           <ng-container *ngFor="let validation of validation_messages.phone">
@@ -120,6 +136,9 @@
               <ion-icon name="log-in"></ion-icon>
                   SIGN up
               </ion-button>
+          </div>
+          <div style='text-align-last: center;'>
+            <ion-text color='danger'>{{error}}</ion-text>
           </div>
       </form>
       <div class="centerDev">

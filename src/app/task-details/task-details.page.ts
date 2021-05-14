@@ -78,13 +78,14 @@ export class TaskDetailsPage implements OnInit {
     return await modal.present();
   }
   calcProgress(id){
-    let mcolor='blue';
-    console.log(this.b.length);
-    for(let step of this.b){
-      if(step){
-        this.finished++;}
-      this.count++;
-    }
+    if(this.b.length>0){
+      let mcolor='blue';
+      console.log(this.b.length);
+      for(let step of this.b){
+        if(step){
+          this.finished++;}
+        this.count++;
+      }
     this.progress=Math.round((this.finished/this.count)*100);
     if(this.progress<100){
       this.sts="uncompleted";
@@ -97,6 +98,7 @@ export class TaskDetailsPage implements OnInit {
     }
     if (this.progress==0){mcolor='#bcd4f3';}
     this.mstyle=' width:'+this.progress+'%; background-color:'+mcolor;
+  }
   }
   toDateTime(secs) {
     var t =secs.toDate().toString(); // Epoch
@@ -192,5 +194,13 @@ export class TaskDetailsPage implements OnInit {
       }
 
     }
+  }
+  isOverdue(){
+    let now=new Date();
+    let due=new Date(this.dueDate);
+    if(due<now){
+      return true;
+    }
+    return false;
   }
 }

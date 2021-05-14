@@ -1,10 +1,15 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { canActivate, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
+
+const redirectUnauthorizedToLogin = () =>redirectUnauthorizedTo(['/sign-in']);
+const redirectLoggedInToHome = () => redirectLoggedInTo(['/']);
 
 const routes: Routes = [
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
+    //...canActivate(redirectUnauthorizedToLogin),
   },
   {
     path: '',
@@ -13,7 +18,8 @@ const routes: Routes = [
   },
   {
     path: 'sign-in',
-    loadChildren: () => import('./sign-in/sign-in.module').then( m => m.SignInPageModule)
+    loadChildren: () => import('./sign-in/sign-in.module').then( m => m.SignInPageModule),
+    //...canActivate(redirectLoggedInToHome),
   },
   {
     path: 'edit-group/:id/:view',
@@ -56,7 +62,7 @@ const routes: Routes = [
     loadChildren: () => import('./calender-modal/calender-modal.module').then( m => m.CalenderModalPageModule)
   },
   {
-    path: 'calender',
+    path: 'calender/:id',
     loadChildren: () => import('./calender/calender.module').then( m => m.CalenderPageModule)
   },
   {
@@ -75,6 +81,11 @@ const routes: Routes = [
     path: 'plan-form-next/:id',
     loadChildren: () => import('./plan-form-next/plan-form-next.module').then( m => m.PlanFormNextPageModule)
   },
+  {
+    path: 'chat/:id',
+    loadChildren: () => import('./chat/chat.module').then( m => m.ChatPageModule)
+  },
+
 
 
 
