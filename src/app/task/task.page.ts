@@ -1,3 +1,4 @@
+import { ActivatedRoute, Router } from '@angular/router';
 /* eslint-disable prefer-const */
 import { GroupsServiceService } from './../groups-service.service';
 import { TasksService } from './../tasks.service';
@@ -20,7 +21,8 @@ export class TaskPage implements OnInit {
   planId='ISjS0B7sqvjonjiZ3BQo';
   username=[];
   progress=[];
-  constructor(private taskSrv: TasksService, private loadingController: LoadingController) {
+  constructor(private router:Router, private activatedRoute:ActivatedRoute, private taskSrv: TasksService, private loadingController: LoadingController) {
+    this.planId=this.activatedRoute.snapshot.paramMap.get('id');
     this.presentLoading();
     this.taskSrv.getTasks(this.planId).subscribe(res=>{
                                                   res.forEach(r=>
@@ -51,5 +53,11 @@ export class TaskPage implements OnInit {
     let count=0;
     let finshed=0;
     this.taskSrv.getSteps(id).subscribe(data=>{data.forEach(res=>{if(res.data().isFinished){finshed+=1;} count++;});this.progress[index]=finshed/count;});
+  }
+  detail(id){
+    this.router.navigateByUrl('task-details/'+id);
+  }
+  addTask(){
+    this.router.navigateByUrl('plan-form-next/'+this.planId);
   }
 }

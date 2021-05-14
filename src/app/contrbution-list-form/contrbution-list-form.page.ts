@@ -1,5 +1,7 @@
+import { Router } from '@angular/router';
 import { ClistService } from './../clist.service';
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-contrbution-list-form',
@@ -12,13 +14,12 @@ export class ContrbutionListFormPage implements OnInit {
   loc='';
   locLink='';
   date=new Date().toISOString();
-  constructor(private clSrv: ClistService) { }
-
+  constructor(private clSrv: ClistService, private router: Router, private navCtrl: NavController) { }
   ngOnInit() {
   }
   save(){
     this.clSrv.createList(this.title,this.description,this.loc,this.locLink,this.date,'kiLFwJTBSq0yA3OZk8qU');
-    return;
+    this.navCtrl.back();
   }
 
 }

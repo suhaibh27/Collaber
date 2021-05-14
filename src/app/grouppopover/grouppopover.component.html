@@ -1,4 +1,5 @@
 <ion-list>
-  <ion-item (click)='edit()' button>Edit</ion-item>
+  <ion-item *ngIf='admin' (click)='edit()' button>Edit</ion-item>
   <ion-item button>Leave</ion-item>
+  <ion-item (click)='view()' button>View Info</ion-item>
 </ion-list>

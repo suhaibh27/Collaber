@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 /* eslint-disable eqeqeq */
 /* eslint-disable no-var */
@@ -29,14 +30,15 @@ export class ContrbutionListPage implements OnInit {
   usersjoinedDocs=[];
   listID='9AWRGZ9QmmGEKusCGurk';
   grId='kiLFwJTBSq0yA3OZk8qU';
-  constructor(private alertController: AlertController, private groupSrv: GroupsServiceService, private userSrv: UsersService, private listSrv: ClistService){ }
+  constructor(private activatedRoute: ActivatedRoute, private alertController: AlertController, private groupSrv: GroupsServiceService, private userSrv: UsersService, private listSrv: ClistService){ }
   ngOnInit() {
+    this.listID=this.activatedRoute.snapshot.paramMap.get('id');
     //this.groupSrv.getgroup(this.grId).get().subscribe(res=>{this.thisGroup=res.data();});
     this.groupSrv.getGroupUsers(this.grId).pipe(take(1)).subscribe(res=>res.forEach(r=> {this.isjoined.push(false);this.users.push(r.userID);this.groupSrv.getuser(r.userID).then(n=>n.get().subscribe(us=>this.usersNames.push(us.data())));}));
     this.listSrv.getcList(this.listID).get().subscribe(res=>{this.dataObj=res.data();
                                                                         this.title=this.dataObj.Title;
                                                                         this.description=this.dataObj.Description;
-                                                                        this.date=this.toDateTime(this.dataObj.dateTime).toISOString();
+                                                                        this.date=this.toDateTime(this.dataObj.dateTime).toISOString()  ;
                                                                         this.location=this.dataObj.Location;
                                                                         this.locLink=this.dataObj.locationLink;
                                                                       });

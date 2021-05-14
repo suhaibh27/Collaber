@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/prefer-for-of */
+/* eslint-disable no-trailing-spaces */
 import { AngularFirestore } from '@angular/fire/firestore';
 /* eslint-disable no-var */
 /* eslint-disable prefer-const */
@@ -14,7 +16,6 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ResponsePage } from '../response/response.page';
 import { ActivatedRoute } from '@angular/router';
-import { Timestamp } from 'rxjs/internal/operators/timestamp';
 import * as firebase from 'firebase';
 
 
@@ -42,6 +43,10 @@ export class TaskDetailsPage implements OnInit {
   comments=[];
   commenters=[];
   comment='';
+  finishers=[];
+  newStep=false;
+  stepTitle='';
+  titles=[];
   constructor( public modalController:ModalController, private taskSrv: TasksService,private activatedRoute: ActivatedRoute,
     ) {
     this.taskSrv.getTask(this.activatedRoute.snapshot.paramMap.get('id')).subscribe(res=>{
@@ -54,8 +59,8 @@ export class TaskDetailsPage implements OnInit {
                                                                           });
   }
   ngOnInit() {
-    this.taskSrv.getSteps(this.activatedRoute.snapshot.paramMap.get('id')).subscribe(res=>{res.forEach(step=>{this.steps.push(step);this.b.push(step.data().isFinished);});
-                                                                                          this.calcProgress(this.activatedRoute.snapshot.paramMap.get('id'));});
+    this.taskSrv.getSteps(this.activatedRoute.snapshot.paramMap.get('id')).subscribe(res=>{res.forEach(step=>{this.titles.push(step.data());this.steps.push(step);this.b.push(step.data().isFinished);});
+                                                                                          this.calcProgress(this.activatedRoute.snapshot.paramMap.get('id'));this.finisherName();});
     this.taskSrv.getComments(this.activatedRoute.snapshot.paramMap.get('id')).subscribe(res=>res.forEach(comment=>{this.comments.push(comment.data());this.addCommenter(comment.data().senderID);}));
 }
 //for the date type it will differ from the firestore so you can use the best method to show DD-MM-YYYY in the tasks page
@@ -108,9 +113,9 @@ export class TaskDetailsPage implements OnInit {
   }
   checkboxHandler(id,index){
     if(this.b[index])
-      {this.finished++;}
+      {this.finished++;this.Ifinished(id);}
     else{this.finished--;}
-    this.taskSrv.stepCheckHandeler(this.activatedRoute.snapshot.paramMap.get('id'),id);
+    this.taskSrv.stepCheckHandeler(this.activatedRoute.snapshot.paramMap.get('id'),id,'IoBBNSa8mNwXQbm8vrIP');
     this.updateProgress();
   }
   updateProgress(){
@@ -141,5 +146,51 @@ export class TaskDetailsPage implements OnInit {
   }
   doRefresh(ev){
     location.reload();
+  }
+  addStep(){
+    let i=this.taskSrv.addStep(this.stepTitle,this.activatedRoute.snapshot.paramMap.get('id'));
+    let d;
+    i.then(res=>{this.steps.push({id:res.id});
+    this.finishers.push({stepid:res.id,name:''});
+    });
+    this.newStep=false;
+    this.titles.push({title:this.stepTitle});
+    this.b.push(false);
+    this.count++;
+  }
+  deleteStep(id){
+    return;
+  }
+  finisherName(){
+    let u;
+    let i=0;
+    for(let s of this.steps)
+    {
+      if(this.b[i]){
+       this.taskSrv.getuser(s.data().finisherID).subscribe(res=>{ console.log(u=res.data());this.finishers.push({stepid:s.id,name:u.username});});
+      }
+      else{
+        this.finishers.push({stepid:s.id,name:''});
+      }
+      i++;
+    }
+  }
+  newfinisherName(){
+
+  }
+  fini(sid){
+    for(let f of this.finishers){
+      if(f.stepid==sid){
+        return f.name;
+      }
+    }
+  }
+  Ifinished(id){
+    for(let i=0;i<this.finishers.length;i++){
+      if(this.finishers[i].stepid==id){
+        this.finishers[i]={stepid:id,name:'Ahmad'};
+      }
+
+    }
   }
 }

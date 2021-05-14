@@ -17,6 +17,7 @@ import { Router } from '@angular/router';
 })
 export class GrouppopoverComponent implements OnInit {
   @Input() id;
+  @Input() admin;
   constructor(public alertController: AlertController, public groupSrv: GroupsServiceService,public router: Router,private popoverController: PopoverController) { }
   ngOnInit() {
   }
@@ -26,6 +27,10 @@ export class GrouppopoverComponent implements OnInit {
   edit(){
     this.DismissClick();
     this.router.navigateByUrl('/edit-group/'+this.id+'/'+false);
+  }
+  view(){
+    this.DismissClick();
+    this.router.navigateByUrl('/edit-group/'+this.id+'/'+true);
   }
   leave(){
     this.presentAlertConfirm();

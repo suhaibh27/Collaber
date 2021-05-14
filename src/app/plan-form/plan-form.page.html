@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar class='myBackgroundColor'>
+    <ion-title color='light'>New Plan</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button color='light' defaultHref="home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item >
+    <ion-label color='dark' style="font-size: x-large; " position='stacked'>Title</ion-label><br>
+    <ion-input [(ngModel)]='title' color='dark' placeholder='Your plan name'></ion-input>
+    <ion-text *ngIf="error" color='danger'><ion-icon color='danger' name="alert-circle-outline"></ion-icon>Please fill give the plan a title</ion-text>
+  </ion-item>
+  <ion-item-divider></ion-item-divider>
+  <ion-item>
+    <ion-label style="font-size: x-large;" position='stacked'>Description</ion-label><br>
+    <ion-textarea [(ngModel)]='description' placeholder='what is it about?'></ion-textarea>
+  </ion-item>
+  <div class="ion-margin" style="text-align-last: center;">
+    <ion-button (click)='create()'>Create</ion-button>
+  </div>
+</ion-content>

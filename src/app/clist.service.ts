@@ -12,6 +12,9 @@ import firebase from 'firebase/app';
 export class ClistService {
   cListCollectionRef: AngularFirestoreCollection<any>;
   constructor(public afs: AngularFirestore) { }
+  getgroupLists(grid){
+    return this.afs.collection('contributionList',ref=>ref.where('groupID','==',grid)).get();
+  }
   getcList(id){
       return this.afs.collection('contributionList').doc(id);
   }

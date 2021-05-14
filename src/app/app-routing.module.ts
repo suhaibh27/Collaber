@@ -28,7 +28,7 @@ const routes: Routes = [
     loadChildren: () => import('./create-group-next/create-group-next.module').then( m => m.CreateGroupNextPageModule)
   },
   {
-    path: 'contrbution-list',
+    path: 'contrbution-list/:id',
     loadChildren: () => import('./contrbution-list/contrbution-list.module').then( m => m.ContrbutionListPageModule)
   },
   {
@@ -36,7 +36,7 @@ const routes: Routes = [
     loadChildren: () => import('./contrbution-list-form/contrbution-list-form.module').then( m => m.ContrbutionListFormPageModule)
   },
   {
-    path: 'task',
+    path: 'task/:id',
     loadChildren: () => import('./task/task.module').then( m => m.TaskPageModule)
   },
   {
@@ -51,6 +51,32 @@ const routes: Routes = [
     path: 'groups-page',
     loadChildren: () => import('./groups-page/groups-page.module').then( m => m.GroupsPagePageModule)
   },
+  {
+    path: 'calender-modal',
+    loadChildren: () => import('./calender-modal/calender-modal.module').then( m => m.CalenderModalPageModule)
+  },
+  {
+    path: 'calender',
+    loadChildren: () => import('./calender/calender.module').then( m => m.CalenderPageModule)
+  },
+  {
+    path: 'plan',
+    loadChildren: () => import('./plan/plan.module').then( m => m.PlanPageModule)
+  },
+  {
+    path: 'group/:id',
+    loadChildren: () => import('./group/group.module').then( m => m.GroupPageModule)
+  },
+  {
+    path: 'plan-form/:id',
+    loadChildren: () => import('./plan-form/plan-form.module').then( m => m.PlanFormPageModule)
+  },
+  {
+    path: 'plan-form-next/:id',
+    loadChildren: () => import('./plan-form-next/plan-form-next.module').then( m => m.PlanFormNextPageModule)
+  },
+
+
 
 
 ];

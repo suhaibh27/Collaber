@@ -26,6 +26,7 @@ export class HomePage {
   currentPopover = null;
   count=0;
   seg;
+  isAdmin=[];
   constructor(private loadingController:LoadingController, public groupSrv: GroupsServiceService, public popoverController: PopoverController , public alertController: AlertController,public router:Router)
   {
     this.seg='home';
@@ -33,7 +34,7 @@ export class HomePage {
     this.groupSrv.getGroups2().subscribe(res=>{ if (this.count<1){
       this.count++;
       res.map(r=>{
-          console.log(r.groupID);
+          this.isAdmin.push(r.isAdmin);
           let myref= this.groupSrv.getMyref(r.groupID);
           myref.get().subscribe((snap)=>{
             if(snap.exists){
@@ -54,11 +55,11 @@ export class HomePage {
     let v=ev.target.value;
     this.myGroups=this.myGroups.filter((product)=>{return(product.data().Name.toLowerCase().indexOf(v.toLowerCase())>-1);});
   }
-  async presentPopover(ev,i) {
+  async presentPopover(ev,i,isAd) {
     let popover = await this.popoverController.create({
       component: GrouppopoverComponent,
       event: ev,
-      componentProps:{id: i},
+      componentProps:{id: i,admin:isAd},
       translucent: true
     });
     this.currentPopover = popover;
@@ -83,6 +84,6 @@ export class HomePage {
     return;
   }
   viewGroup(id){
-    this.router.navigateByUrl('edit-group/'+id+'/true');
+    this.router.navigateByUrl('group/'+id);
   }
 }

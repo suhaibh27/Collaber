@@ -114,7 +114,6 @@ export class GroupsServiceService {
   {
     let group=this.afs.collection('Groups').doc(code).get();
       return group;
-
   }
 
 }

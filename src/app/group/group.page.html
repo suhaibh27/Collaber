@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-toolbar class="myBackgroundColor">
+    <ion-buttons slot="start">
+      <ion-back-button color='light' defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="g" color='light'>{{g.data().Name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar></ion-searchbar>
+  <ion-grid>
+    <ion-row>
+      <ion-col size='10'><h3>plans</h3></ion-col>
+      <ion-col size='2' style='align-self: flex-end;'><ion-button (click)='togglePlans()' fill='clear' color='dark'><ion-icon [name]="chevronIcon"></ion-icon></ion-button></ion-col>
+    </ion-row>
+    <div *ngIf="displayPlans">
+    <ion-row *ngFor="let plan of plans; let i = index " >
+      <ion-item-divider class='divider' >
+      <ion-col  size="1">
+        <ion-img style="height:24px; width: 24px;" src="..\..\assets\icon\planning.png"></ion-img>
+      </ion-col>
+      <ion-col (click)='viewPlan(plan.id)' size="9">
+       <h4  class='mfont' style="margin-top:0px ;">
+        <b style='vertical-align: -webkit-baseline-middle;'>{{plan.data().Title}}</b></h4>
+      </ion-col>
+      <ion-col size='2'>
+          <ion-button color="dark" fill="clear">
+            <ion-icon name="ellipsis-vertical"></ion-icon>
+          </ion-button>
+      </ion-col>
+      <ion-item-divider></ion-item-divider>
+    </ion-item-divider>
+    </ion-row>
+  </div>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col size='10'><h3>Contbution Lists</h3></ion-col>
+      <ion-col size='2' style='align-self: flex-end;'><ion-button (click)='togglecList()' fill='clear' color='dark'><ion-icon [name]="listChevronIcon"></ion-icon></ion-button></ion-col>
+    </ion-row>
+    <div *ngIf="displaylists">
+    <ion-row *ngFor="let list of contLists; let i = index " >
+      <ion-item-divider class='divider' >
+      <ion-col  size="1">
+        <ion-img style="height:24px; width: 24px;" src="..\..\assets\icon\attendant-list.png"></ion-img>
+      </ion-col>
+      <ion-col (click)='viewList(list.id)' size="9">
+       <h4  class='mfont' style="margin-top:0px ;">
+        <b style='vertical-align: -webkit-baseline-middle;'>{{list.data().Title}}</b></h4>
+      </ion-col>
+      <ion-col size='2'>
+          <ion-button color="dark" fill="clear">
+            <ion-icon name="ellipsis-vertical"></ion-icon>
+          </ion-button>
+      </ion-col>
+      <ion-item-divider></ion-item-divider>
+    </ion-item-divider>
+    </ion-row>
+  </div>
+  </ion-grid>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)='presentActionSheet()'>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+<ion-footer>
+  <ion-row>
+    <ion-col  size='6' class="ion-no-padding"><ion-button color='dark' fill='outline' size='large' expand='full'><ion-icon name="chatbubbles"></ion-icon>Chat Lobby</ion-button></ion-col>
+    <ion-col size='6' class="ion-no-padding"><ion-button (click)='goCalender()' color='dark' fill='outline' size='large' expand='full'><ion-icon name="calendar"></ion-icon>Calender</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>
