@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 import { AngularFireAuth } from '@angular/fire/auth';
 /* eslint-disable max-len */
 /* eslint-disable curly */
@@ -75,7 +76,7 @@ export class GroupsServiceService {
   }
   getGroups2(){
     let groups=[];
-    this.userGroupsCollectionRef = this.afs.collection('users-groups',ref=>ref.where('userID','==','RJvbBwI1ZtCHbEs6EWP3'));
+    this.userGroupsCollectionRef = this.afs.collection('users-groups',ref=>ref.where('userID','==','QSqITrKDOZPEY7qo68OnkTsXF8q1'));
     let count=0;
     return this.userGroupsCollectionRef.valueChanges();
     //return groups;
@@ -88,17 +89,22 @@ export class GroupsServiceService {
     console.log(doc);
     const res = await this.afs.collection('Groups').doc(doc).set(newData);
   }
-  async addGroupUsers(users,name,pr)
+  async addGroupUsers(users,name,pr,des)
   {
     let uid=[];
     for(let user of users){
       this.usersCollectionRef=await this.afs.collection('users',ref=>ref.where('username','==',user));
       const data=this.usersCollectionRef.get().forEach(ds=>(ds.docs.forEach(d=>uid.push(d.id))));
     }
-    const id=(await this.afs.collection('Groups').add({Name:name,isPrivate: pr})).id;
-    this.afs.collection('users-groups').add({userID:this.currentUser,groupID: id,isAdmin: true});
-    for(let i of uid)
+    const id=(await this.afs.collection('Groups').add({Name:name,isPrivate: pr,Description:des})).id;
+    let count=0;
+    for(let i of uid){
+    if(count==0){
+      this.afs.collection('users-groups').add({userID:'QSqITrKDOZPEY7qo68OnkTsXF8q1',groupID: id,isAdmin: true});
+      count++;
+    }
       this.afs.collection('users-groups').add({userID:i,groupID: id,isAdmin: false});
+  }
   }
   async removeUser(id,groupid){
     let doc=await this.afs.collection('users-groups',ref=>ref.where('userID','==',id).where('groupID','==',groupid));

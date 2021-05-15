@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar class='myBackgroundColor'>
     <ion-buttons slot="start">
-      <ion-back-button color='light' defaultHref="home"></ion-back-button>
+      <ion-back-button (click)="check()" color='light'></ion-back-button>
     </ion-buttons>
         <ion-title color='light'>{{thisGroup.Name}}</ion-title>
   </ion-toolbar>
@@ -13,7 +13,7 @@
     </div>
     <ion-card-header>
       <ion-input [readonly]='view' placeholder='Group Name' [(ngModel)]='newName' value={{thisGroup.Name}} color='dark' style="font-size: 26px !important;"></ion-input>
-      <ion-textarea [readonly]='view' style="font-size: large !important; height: fit-content;" value={{thisGroup.description}} placeholder='description'></ion-textarea>
+      <ion-textarea [readonly]='view' style="font-size: large !important; height: fit-content;" value={{thisGroup.Description}} placeholder='description'></ion-textarea>
     </ion-card-header>
     <ion-card-content style="padding: 0px;">
       <ion-item>
@@ -37,23 +37,26 @@
       </ion-item>
     </ion-card-content>
     <div  style="text-align-last: center;">
-      <ion-button *ngIf="!view" (click)='save()'>Save</ion-button>
+      <ion-button *ngIf="!view" (click)='presentconAlert()'>Save</ion-button>
     </div>
   </ion-card>
   <div *ngIf="this.usersNames.length>0">
     <ion-row *ngFor="let user of users |async; let i=index">
       <ion-item-divider style="color: black;">
-        <ion-col size='7'>
+        <ion-col *ngIf="user.userID!='QSqITrKDOZPEY7qo68OnkTsXF8q1'" size='7'>
           <ion-text style="font-size: large;">{{usersNames[i].username}}</ion-text>
         </ion-col>
+        <ion-col *ngIf="user.userID=='QSqITrKDOZPEY7qo68OnkTsXF8q1'" size='7'>
+          <ion-text color='primary' style="font-size: large;">{{usersNames[i].username}}</ion-text>
+        </ion-col>
         <div *ngIf="user.isAdmin==true">
-        <ion-col style="align-self: center; margin-left: 3px;" size='4'>
-        <span style="font-size: large;color: green; vertical-align: -webkit-baseline-middle;">Admin</span>
-        </ion-col>
-        <ion-col size='2'>
-          &nbsp; <ion-button *ngIf="!view" (click)='presentDemoteActionSheet(user.userID,usersNames[i].username,i)'><ion-icon name="create-outline"></ion-icon></ion-button>
-        </ion-col>
-        </div>
+          <ion-col style="align-self: center; margin-left: 3px;" size='4'>
+          <span style="font-size: large;color: green; vertical-align: -webkit-baseline-middle;">Admin</span>
+          </ion-col>
+          <ion-col size='2'>
+            &nbsp; <ion-button *ngIf="!view" (click)='presentDemoteActionSheet(user.userID,usersNames[i].username,i)'><ion-icon name="create-outline"></ion-icon></ion-button>
+          </ion-col>
+          </div>
         <div *ngIf="user.isAdmin==false">
           <ion-col style="align-self: center;" size='4'>
             <span style="font-size: large;color: blue; vertical-align: -webkit-baseline-middle;">Member</span>

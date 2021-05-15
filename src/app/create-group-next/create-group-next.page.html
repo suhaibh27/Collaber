@@ -20,6 +20,11 @@
     </ion-card-header>
     <ion-card-content style="padding: 0px;">
       <ion-item>
+        <ion-textarea [(ngModel)]='desc' placeholder='Description'>
+
+        </ion-textarea>
+      </ion-item>
+      <ion-item>
           <ion-label class="ion-margin-end" style='max-inline-size: fit-content;'>Privacy</ion-label>
           <ion-toggle class='ion-margin-end' [(ngModel)]='privacy'></ion-toggle>
           <div *ngIf="privacy">
