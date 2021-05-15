@@ -51,7 +51,6 @@ export class EditGroupPage implements OnInit {
   ngOnInit() {
     this.grId = this.activatedRoute.snapshot.paramMap.get('id');
     this.view = this.activatedRoute.snapshot.paramMap.get('view')=='true';
-
     this.thisGroup=this.groupSrv.getgroup(this.grId).get().subscribe(res=>{this.thisGroup=res.data();this.newPrivacy=this.thisGroup.isPrivate;});
     this.users=this.groupSrv.getGroupUsers(this.grId);
     this.users.subscribe(res=>{res.forEach(r=>{
@@ -221,7 +220,6 @@ export class EditGroupPage implements OnInit {
     if (!this.saved){
       {
         this.backpresentconAlert();
-        this.navCtrl.back();
         }
     }
   }
@@ -236,7 +234,6 @@ export class EditGroupPage implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: (blah) => {
-            this.navCtrl.back();
             console.log('Confirm Cancel: blah');
           }
         }, {
