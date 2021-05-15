@@ -87,4 +87,7 @@ export class HomePage {
   viewGroup(id){
     this.router.navigateByUrl('group/'+id);
   }
+  goJoin(){
+    this.router.navigateByUrl('groups-page');
+  }
 }
