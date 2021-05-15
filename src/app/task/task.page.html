@@ -21,12 +21,7 @@
       <!-- i didnt do this because the date from firestore will have another formate so it is better to do it directly -->
     <ion-grid>
       <ion-row (click)='detail(item.id)'>
-        <ion-col size="3">
-          <ion-avatar id="card-avatar">
-            <ion-img src="..\..\assets\icon\logo.jpeg"></ion-img>
-          </ion-avatar>
-        </ion-col>
-        <ion-col size="9">
+        <ion-col size="12">
           <ion-text id="title">Title: {{item.data().title}} </ion-text><br>
           <ion-text>Due: {{this.toDateTime(item.data().dueDate).toString().slice(0,21)}}
           </ion-text><ion-note *ngIf="isOverdue(this.toDateTime(item.data().dueDate))" color='danger'>(Overdue)</ion-note>
