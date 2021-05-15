@@ -51,6 +51,9 @@ export class UsersService {
   getUser(id){
     return this.afs.collection('users',ref=>ref.where('username','==',id)).get();
   }
+  searchUser(id){
+    return this.afs.collection('users',ref=>ref.where('username','==',id)).get();
+  }
   updateUser(){
     return;
   }

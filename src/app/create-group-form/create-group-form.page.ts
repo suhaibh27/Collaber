@@ -21,7 +21,7 @@ export class CreateGroupFormPage implements OnInit {
   }
   searchUsers(e){
     let v= e.target.value;
-    this.usersSrv.getUsers(v).subscribe(res=>{this.users=[];res.docs.forEach(u=>this.users.push(u.data()));});
+    this.usersSrv.searchUser(v).subscribe(res=>{this.users=[];res.docs.forEach(u=>this.users.push(u.data()));});
   }
   addUser(username){
     if(this.addeddUsers.includes(username)){

@@ -1,3 +1,4 @@
+import { AngularFireAuth } from '@angular/fire/auth';
 /* eslint-disable max-len */
 /* eslint-disable curly */
 /* eslint-disable prefer-const */
@@ -19,7 +20,11 @@ export class GroupsServiceService {
   groupCollectionRef: AngularFirestoreCollection<any>;
   userGroupsCollectionRef: AngularFirestoreCollection<any>;
   usersCollectionRef: AngularFirestoreCollection<any>;
-  constructor(public afs: AngularFirestore) {
+  currentUser=null;
+  constructor(private afAuth: AngularFireAuth,public afs: AngularFirestore) {
+    //this.afAuth.onAuthStateChanged((user) => {
+      this.currentUser = 'QSqITrKDOZPEY7qo68OnkTsXF8q1';
+    //});
    }
   createGroup(){
     return;
@@ -91,6 +96,7 @@ export class GroupsServiceService {
       const data=this.usersCollectionRef.get().forEach(ds=>(ds.docs.forEach(d=>uid.push(d.id))));
     }
     const id=(await this.afs.collection('Groups').add({Name:name,isPrivate: pr})).id;
+    this.afs.collection('users-groups').add({userID:this.currentUser,groupID: id,isAdmin: true});
     for(let i of uid)
       this.afs.collection('users-groups').add({userID:i,groupID: id,isAdmin: false});
   }
