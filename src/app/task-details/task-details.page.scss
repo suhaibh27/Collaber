@@ -29,6 +29,9 @@
     top: 20%;
     size: 30px;
 }
+#icon-col{
+  align-self: self-start;
+}
 .progress-outer {
   width: 96%;
   margin:0px,10px,10px,10px ;
@@ -51,4 +54,7 @@
 ion-item-divider{
   margin-top: 0px;
   min-height: 1px!important;
+}
+.xSmallFont{
+  font-size: x-small;
 }

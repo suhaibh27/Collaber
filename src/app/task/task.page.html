@@ -16,24 +16,22 @@
     <ion-button (click)='addTask()'>Add a Task here</ion-button>
   </div>
   <ion-list *ngFor="let item of tasks; let i = index" lines="none"> <!-- i will make this based on array in task.page.ts, change this and connect it to firestore -->
-    <ion-card id="card-outline">
+    <ion-card style="height: auto;" id="card-outline">
         <!--you can change the task [color]="color" based on the date from the database-->
       <!-- i didnt do this because the date from firestore will have another formate so it is better to do it directly -->
     <ion-grid>
       <ion-row (click)='detail(item.id)'>
         <ion-col size="12">
-          <ion-text id="title">Title: {{item.data().title}} </ion-text><br>
+          <ion-text color='dark' id="title">Title: {{item.data().title}} </ion-text><br>
           <ion-text>Due: {{this.toDateTime(item.data().dueDate).toString().slice(0,21)}}
           </ion-text><ion-note *ngIf="isOverdue(this.toDateTime(item.data().dueDate))" color='danger'>(Overdue)</ion-note>
             <br>
-          <ion-text *ngIf="this.username[i]"> Created By: {{this.username[i].username}}</ion-text><br>
-          <a routerLink='../task-details/{{item.id}}' id="more-details"> View Task Details>> </a> <br>
+          <ion-text *ngIf="this.username[i]"> Created By: {{this.username[i].username}}</ion-text>
         </ion-col>
       </ion-row>
-      <br>
       <ion-row>
-        <ion-col size="3" id="prg-title">Progress</ion-col>
-        <ion-col size="9"> <ion-progress-bar color="success" [value]="progress[i]" id="prg-bar"></ion-progress-bar></ion-col>
+        <ion-col size="3" id="prg-title"><ion-text style="font-size: x-small;">Progress</ion-text></ion-col>
+        <ion-col size="9"> <ion-progress-bar style="margin-top: 4px;" color="success" [value]="progress[i]" id="prg-bar"></ion-progress-bar></ion-col>
       </ion-row>
       </ion-grid>
     </ion-card>
