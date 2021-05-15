@@ -217,11 +217,14 @@ export class EditGroupPage implements OnInit {
     await alert.present();
   }
   check(){
-    if (!this.saved){
-      {
-        this.backpresentconAlert();
+    if(!this.view){
+      if (!this.saved)
+        {
+          this.backpresentconAlert();
         }
-    }
+      }
+    else
+    this.navCtrl.back();
   }
   async backpresentconAlert() {
     const alert = await this.alertController.create({

@@ -13,7 +13,7 @@
     </div>
     <ion-card-header>
       <ion-input [readonly]='view' placeholder='Group Name' [(ngModel)]='newName' value={{thisGroup.Name}} color='dark' style="font-size: 26px !important;"></ion-input>
-      <ion-textarea [readonly]='view' style="font-size: large !important; height: fit-content;" value={{thisGroup.Description}} placeholder='description'></ion-textarea>
+      <ion-textarea [readonly]='view' [(ngModel)]='desc' style="font-size: large !important; height: fit-content;" value={{thisGroup.Description}} placeholder='description'></ion-textarea>
     </ion-card-header>
     <ion-card-content style="padding: 0px;">
       <ion-item>
