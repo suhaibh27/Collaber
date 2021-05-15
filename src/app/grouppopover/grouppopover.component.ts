@@ -1,3 +1,4 @@
+import { ToastController } from '@ionic/angular';
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable max-len */
 import { GroupsServiceService } from './../groups-service.service';
@@ -18,7 +19,7 @@ import { Router } from '@angular/router';
 export class GrouppopoverComponent implements OnInit {
   @Input() id;
   @Input() admin;
-  constructor(public alertController: AlertController, public groupSrv: GroupsServiceService,public router: Router,private popoverController: PopoverController) { }
+  constructor(private toastController: ToastController ,public alertController: AlertController, public groupSrv: GroupsServiceService,public router: Router,private popoverController: PopoverController) { }
   ngOnInit() {
   }
   delete(){
@@ -34,6 +35,17 @@ export class GrouppopoverComponent implements OnInit {
   }
   leave(){
     this.presentAlertConfirm();
+  }
+  code(){
+    {
+      document.addEventListener('copy', (e: ClipboardEvent) => {
+        e.clipboardData.setData('text/plain', this.id);
+        e.preventDefault();
+        //document.removeEventListener('copy');
+      });
+      document.execCommand('copy');
+      this.presentToast();
+    }
   }
   async presentAlertConfirm() {
     const alert = await this.alertController.create({
@@ -59,5 +71,14 @@ export class GrouppopoverComponent implements OnInit {
   }
   async DismissClick() {
     await this.popoverController.dismiss();
+  }
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'group code copied to clipboard.',
+      duration: 1500,
+    });
+    toast.present();
+    await this.popoverController.dismiss();
+
   }
 }
