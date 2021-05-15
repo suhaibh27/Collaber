@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+import { ToastController } from '@ionic/angular';
 /* eslint-disable eqeqeq */
 import { UsersService } from './../users.service';
 /* eslint-disable arrow-body-style */
@@ -67,17 +69,25 @@ export class SignInPage implements OnInit {
   signInPassword;
   signInError;
 
-  constructor(public userSrv: UsersService, public router: Router,public formbuilder: FormBuilder) {
+  constructor(private toastController: ToastController, public userSrv: UsersService, public router: Router,public formbuilder: FormBuilder) {
     }
   toggleRegisterForm(){
     this.login=((this.login) ?false:true);
   }
   signIn(){
-    this.userSrv.signIn({email:this.signInEmail,password:this.signInPassword}).catch(er=>this.signInError=er.message);
+    this.signInError='';
+    this.userSrv.signIn({email:this.signInEmail,password:this.signInPassword}).then(()=>this.presentToast()).catch(er=>this.signInError=er.message);
+  }
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Successful :).',
+      duration: 1500,
+    });
+    toast.present();
 
   }
   signUp(val){
-
+    this.error='';
     if(val.status=='VALID'){
       this.userSrv.signup({email: this.email,
                           password: this.password,
