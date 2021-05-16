@@ -51,7 +51,7 @@ export class CalenderPage implements OnInit {
           .forEach(plan=>{this.pids.push(plan.data());this.taskSrv.getTasks(plan.id)
               .subscribe(r=>r
                   .forEach(task=>{this.tasks.push({tt:task,pp:plan.data()});this.createRandomEvents();}));});});
-      this.listSrv.getgroupLists(this.gr).subscribe(res=>res.forEach(lis=>this.lists.push(lis)));
+      this.listSrv.getgroupLists(this.gr).subscribe(res=>res.forEach(lis=>{this.lists.push(lis);this.createRandomEvents();}));
 
     }
 
@@ -92,6 +92,7 @@ export class CalenderPage implements OnInit {
         });}
         for(let t of this.lists){
           var date=t.data().dateTime.toDate();
+          console.log(date);
           var date2;
           console.log(date =new Date(Date.UTC(date.getUTCFullYear(),date.getUTCMonth(),date.getUTCDate())));
           date2 =new Date(Date.UTC(date.getUTCFullYear(),date.getUTCMonth(),date.getUTCDate()+1));

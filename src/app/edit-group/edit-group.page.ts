@@ -49,6 +49,7 @@ export class EditGroupPage implements OnInit {
           }
 
   ngOnInit() {
+    this.usersNames=[]
     this.grId = this.activatedRoute.snapshot.paramMap.get('id');
     this.view = this.activatedRoute.snapshot.paramMap.get('view')=='true';
     this.thisGroup=this.groupSrv.getgroup(this.grId).get().subscribe(res=>{this.thisGroup=res.data();this.newPrivacy=this.thisGroup.isPrivate;});

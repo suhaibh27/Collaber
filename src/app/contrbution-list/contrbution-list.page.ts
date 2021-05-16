@@ -28,8 +28,8 @@ export class ContrbutionListPage implements OnInit {
   location;
   locLink;
   usersjoinedDocs=[];
-  listID='9AWRGZ9QmmGEKusCGurk';
-  grId='kiLFwJTBSq0yA3OZk8qU';
+  listID='';
+  grId='GOl2qCH9kKVbVq1x1SSc';
   constructor(private activatedRoute: ActivatedRoute, private alertController: AlertController, private groupSrv: GroupsServiceService, private userSrv: UsersService, private listSrv: ClistService){ }
   ngOnInit() {
     this.listID=this.activatedRoute.snapshot.paramMap.get('id');
@@ -67,13 +67,13 @@ export class ContrbutionListPage implements OnInit {
     return;
   }
   disable(u){
-    if(this.users[u]!='RJvbBwI1ZtCHbEs6EWP3'){
+    if(this.users[u]!='QSqITrKDOZPEY7qo68OnkTsXF8q1'){
       return 'disabled';
     }
     return '';
   }
   myUser(i){
-    if(this.users[i]=='RJvbBwI1ZtCHbEs6EWP3'){
+    if(this.users[i]=='QSqITrKDOZPEY7qo68OnkTsXF8q1'){
       return 'secondary';
     }
     return '';
@@ -95,7 +95,7 @@ export class ContrbutionListPage implements OnInit {
           text: 'Yes',
           handler: () => {
             //update database server
-            this.listSrv.updateJoin(this.users[index],this.isjoined[index],'9AWRGZ9QmmGEKusCGurk',this.usersjoinedDocs[index]);
+            this.listSrv.updateJoin(this.users[index],this.isjoined[index],this.listID,this.usersjoinedDocs[index]);
           }
         }
       ]
