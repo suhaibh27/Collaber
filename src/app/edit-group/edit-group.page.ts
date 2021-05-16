@@ -1,3 +1,4 @@
+import { take } from 'rxjs/operators';
 import { Router } from '@angular/router';
 /* eslint-disable curly */
 import { AlertController } from '@ionic/angular';
@@ -45,16 +46,19 @@ export class EditGroupPage implements OnInit {
         private activatedRoute: ActivatedRoute,
         public actionSheetController: ActionSheetController,
         private router: Router
-        ) {
+        ) {  this.usersNames=[];
+          this.myUsersId=[];
+
           }
 
   ngOnInit() {
     this.usersNames=[]
+    this.myUsersId=[];
     this.grId = this.activatedRoute.snapshot.paramMap.get('id');
     this.view = this.activatedRoute.snapshot.paramMap.get('view')=='true';
-    this.thisGroup=this.groupSrv.getgroup(this.grId).get().subscribe(res=>{this.thisGroup=res.data();this.newPrivacy=this.thisGroup.isPrivate;});
+    this.thisGroup=this.groupSrv.getgroup(this.grId).get().pipe(take(1)).subscribe(res=>{this.thisGroup=res.data();this.newPrivacy=this.thisGroup.isPrivate;});
     this.users=this.groupSrv.getGroupUsers(this.grId);
-    this.users.subscribe(res=>{res.forEach(r=>{
+    this.users.pipe(take(1)).subscribe(res=>{res.forEach(r=>{
                                             this.myUsersId.push(r.userID);
                                             this.groupSrv.getuser(r.userID).then(rr=>
                                                                               rr.get().subscribe(ii=>this.usersNames.push(ii.data())));

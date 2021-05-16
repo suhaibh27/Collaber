@@ -31,10 +31,10 @@ export class TasksService {
     return this.afs.collection('users').doc(mid).get();
   }
   getSteps(taskID){
-   return this.afs.collection('tasks').doc(taskID).collection('steps').get();
+   return this.afs.collection('tasks',ref=>ref.orderBy('order')).doc(taskID).collection('steps',ref=>ref.orderBy('order')).get();
   }
   getComments(taskID){
-    return this.afs.collection('tasks').doc(taskID).collection('comments').get();
+    return this.afs.collection('tasks').doc(taskID).collection('comments',ref=>ref.orderBy('date')).get();
   }
   stepCheckHandeler(taskId,stepId,user){
     const FieldValue = firebase.firestore.FieldValue;
@@ -55,15 +55,15 @@ export class TasksService {
 
     return this.afs.collection('tasks').doc(taskID).collection('comments').add({comment:comm,senderID:sender,date:d});
   }
-  async addStep(tit,tID){
+  async addStep(tit,tID,ind){
     let s;
-    s= await this.afs.collection('tasks').doc(tID).collection('steps').add({title:tit, isFinished: false});
+    s= await this.afs.collection('tasks').doc(tID).collection('steps').add({title:tit, isFinished: false,order:ind});
     return s;
   }
   addTask(pID,t,dueD,desc,stps){
     let timestampDate=firebase.firestore.Timestamp.fromDate(new Date(dueD));
     let tsCreationDate=firebase.firestore.Timestamp.fromDate(new Date());
 
-    return this.afs.collection('tasks').add({planID:pID,creationDate:tsCreationDate,creator:'RJvbBwI1ZtCHbEs6EWP3',title:t,dueDate:timestampDate,description:desc});
+    return this.afs.collection('tasks').add({planID:pID,creationDate:tsCreationDate,creator:'QSqITrKDOZPEY7qo68OnkTsXF8q1',title:t,dueDate:timestampDate,description:desc});
   }
 }

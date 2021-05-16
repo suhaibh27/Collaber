@@ -1,3 +1,4 @@
+/* eslint-disable no-var */
 /* eslint-disable max-len */
 import { ToastController } from '@ionic/angular';
 /* eslint-disable eqeqeq */
@@ -16,6 +17,7 @@ interface user {
   // eslint-disable-next-line @typescript-eslint/member-delimiter-style
   phoneNumber: number
   username: string,
+
 
 }
 @Component({
@@ -68,7 +70,6 @@ export class SignInPage implements OnInit {
   signInEmail;
   signInPassword;
   signInError;
-
   constructor(private toastController: ToastController, public userSrv: UsersService, public router: Router,public formbuilder: FormBuilder) {
     }
   toggleRegisterForm(){
@@ -86,15 +87,19 @@ export class SignInPage implements OnInit {
     toast.present();
 
   }
-  signUp(val){
+  checkDup(val){
     this.error='';
     if(val.status=='VALID'){
-      this.userSrv.signup({email: this.email,
-                          password: this.password,
-                          name: this.name,
-                          usrname: this.username,
-                          phone: this.phone}).catch(er=>console.log(this.error=er.message));
-    }
+      var mUser;
+      this.userSrv.checkDuplicate().subscribe(res=>res.forEach(user=>{mUser=user.data();if(mUser.username==this.username){this.error='username is already taken';}else{this.signUp();};}));
+  }}
+  signUp(){
+    this.error='';
+    this.userSrv.signup({email: this.email,
+                        password: this.password,
+                        name: this.name,
+                        usrname: this.username,
+                        phone: this.phone}).catch(er=>console.log(this.error=er.message));
   }
 
   ngOnInit() {

@@ -77,7 +77,6 @@ export class HomePage {
     const loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
       message: 'Please wait...',
-      duration: 1500
     });
     await loading.present();
   }

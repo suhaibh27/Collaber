@@ -33,7 +33,7 @@
       <ion-grid>
         <ion-row>
           <ion-col size="1"></ion-col>
-          <ion-col size="7"> <ion-input placeholder="Sub task Name" [disabled]="list[i].dis" [(ngModel)]="list[i].title"></ion-input></ion-col>
+          <ion-col size="7"> <ion-input style="font-size: large;" placeholder="Sub task Name" [disabled]="list[i].dis" [(ngModel)]="list[i].title"></ion-input></ion-col>
           <ion-col size="2">
             <ion-button fill="none" (click)="done(i)" ><ion-icon name="checkmark-outline" color="success" ></ion-icon></ion-button></ion-col>
           <ion-col size="2" *ngIf="list[i].dis==false">
@@ -46,12 +46,12 @@
       <ion-row>
         <ion-col size="3">
         </ion-col>
-        <ion-col style='text-align-last: center;' size="4" id="col">  <ion-button color="success" fill="outline"  shape="round" (click)="add()">add a subtask <ion-icon name="add-outline"></ion-icon></ion-button></ion-col>
+        <ion-col style='text-align-last: center;' size="4" id="col">  <ion-button color="medium" fill="outline"  shape="round" (click)="add()">add a subtask <ion-icon name="add-outline"></ion-icon></ion-button></ion-col>
         <ion-col size="4"></ion-col>
       </ion-row>
     </ion-grid>
 
-    <ion-button expand="block" color="success" (click)="create()">Save Task!</ion-button>
+    <ion-button expand="block" color="medium" (click)="create()">Save Task!</ion-button>
 
     </ion-content>
 </ion-content>

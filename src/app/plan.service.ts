@@ -17,7 +17,8 @@ export class PlanService {
   }
   createPlan(title,description,gid){
     return this.afs.collection('plans').add({Title:title,Description:description,groupID:gid});
-
   }
-
+  getPlan(pid){
+    return this.afs.collection('plans').doc(pid).get();
+  }
 }

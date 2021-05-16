@@ -141,16 +141,16 @@ export class TaskDetailsPage implements OnInit {
     }
     console.log(this.comments,this.commenters);
     let mtimeStamp=firebase.default.firestore.Timestamp.now();
-    this.comments.push({comment:this.comment,senderID:'IoBBNSa8mNwXQbm8vrIP',date:mtimeStamp});
-    this.getUsername('IoBBNSa8mNwXQbm8vrIP');
-    this.taskSrv.sendComment(this.comment,'IoBBNSa8mNwXQbm8vrIP',mtimeStamp,this.activatedRoute.snapshot.paramMap.get('id'));
+    this.comments.push({comment:this.comment,senderID:'QSqITrKDOZPEY7qo68OnkTsXF8q1',date:mtimeStamp});
+    this.getUsername('QSqITrKDOZPEY7qo68OnkTsXF8q1');
+    this.taskSrv.sendComment(this.comment,'QSqITrKDOZPEY7qo68OnkTsXF8q1',mtimeStamp,this.activatedRoute.snapshot.paramMap.get('id'));
     this.comment='';
   }
   doRefresh(ev){
     location.reload();
   }
   addStep(){
-    let i=this.taskSrv.addStep(this.stepTitle,this.activatedRoute.snapshot.paramMap.get('id'));
+    let i=this.taskSrv.addStep(this.stepTitle,this.activatedRoute.snapshot.paramMap.get('id'),this.steps.length);
     let d;
     i.then(res=>{this.steps.push({id:res.id});
     this.finishers.push({stepid:res.id,name:''});
@@ -190,7 +190,7 @@ export class TaskDetailsPage implements OnInit {
   Ifinished(id){
     for(let i=0;i<this.finishers.length;i++){
       if(this.finishers[i].stepid==id){
-        this.finishers[i]={stepid:id,name:'Ahmad'};
+        this.finishers[i]={stepid:id,name:'me'};
       }
 
     }

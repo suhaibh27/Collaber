@@ -1,3 +1,4 @@
+/* eslint-disable curly */
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Injectable, ɵɵinjectPipeChangeDetectorRef } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -52,12 +53,17 @@ export class UsersService {
     return this.afs.collection('users',ref=>ref.where('username','==',id)).get();
   }
   searchUser(id){
-    return this.afs.collection('users',ref=>ref.where('username','==',id)).get();
+    return this.afs.collection('users',ref=>
+                      ref.orderBy('username').where('username','>=',id).where('username','<',id+'\uf8ff'))
+                      .get();
   }
   updateUser(){
     return;
   }
   deleteUser(){
 
+  }
+  checkDuplicate(){
+    return this.afs.collection('users').get();
   }
 }

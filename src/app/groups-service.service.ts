@@ -35,14 +35,14 @@ export class GroupsServiceService {
     return;
   }
   getFilteredGroups(name){
-    return this.afs.collection('Groups',ref=>ref.where('Name','==',name).where('isPrivate','==',false)).get();
+    return this.afs.collection('Groups',ref=>ref.orderBy('Name').where('Name','>=',name).where('Name','<',name+'\uf8ff').where('isPrivate','==',false)).get();
   }
   //move this to user service
   async getuser(mid){
     return this.afs.collection('users').doc(mid);
   }
   getGroupUsers(id){
-    this.userGroupsCollectionRef = this.afs.collection('users-groups',ref=>ref.where('groupID','==',id));
+    this.userGroupsCollectionRef = this.afs.collection('users-groups',ref=>ref.where('groupID','==',id).orderBy('isAdmin','desc'));
     return this.userGroupsCollectionRef.valueChanges();
   }
   getgroup(id){

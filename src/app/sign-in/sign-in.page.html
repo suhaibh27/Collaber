@@ -33,7 +33,7 @@
         <ion-icon name="log-in" ></ion-icon>
             SIGN IN
         </ion-button>
-        <div style='text-align-last: center;'>
+        <div class="ion-margin" style='text-align-last: center;'>
           <ion-text color='danger'>{{signInError}}</ion-text>
         </div>
         <br>
@@ -44,7 +44,7 @@
 
     <!-- Sign Up Form -->
     <div *ngIf="!login">
-      <form [formGroup]="signUpForm" (ngSubmit)="signUp(signUpForm)">
+      <form [formGroup]="signUpForm" (ngSubmit)="checkDup(signUpForm)">
         <ion-item>
           <ion-label position="floating">
             Email
@@ -137,7 +137,7 @@
                   SIGN UP
               </ion-button>
           </div>
-          <div style='text-align-last: center;'>
+          <div class="ion-margin" style='text-align-last: center;'>
             <ion-text color='danger'>{{error}}</ion-text>
           </div>
       </form>

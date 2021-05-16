@@ -1,3 +1,4 @@
+import { PlanService } from './../plan.service';
 /* eslint-disable no-var */
 import { ActivatedRoute, Router } from '@angular/router';
 /* eslint-disable prefer-const */
@@ -22,8 +23,12 @@ export class TaskPage implements OnInit {
   planId='ISjS0B7sqvjonjiZ3BQo';
   username=[];
   progress=[];
-  constructor(private router:Router, private activatedRoute:ActivatedRoute, private taskSrv: TasksService, private loadingController: LoadingController) {
+  name='plan';
+  desc='';
+  plan;
+  constructor(private planSrv:PlanService, private router:Router, private activatedRoute:ActivatedRoute, private taskSrv: TasksService, private loadingController: LoadingController) {
     this.planId=this.activatedRoute.snapshot.paramMap.get('id');
+    this.planSrv.getPlan(this.planId).subscribe(res=>{this.plan=res.data();this.name=this.plan.Title;this.desc=this.plan.Description;});
     this.presentLoading();
     this.taskSrv.getTasks(this.planId).subscribe(res=>{
                                                   res.forEach(r=>

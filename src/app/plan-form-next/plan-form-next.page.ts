@@ -29,7 +29,7 @@ export class PlanFormNextPage implements OnInit {
   dis = false;
   title='';
   date=new Date();
-  desc;
+  desc='';
   error=false;
   add() {
     this.list.push({title:this.subtask,dis:false});
@@ -50,8 +50,8 @@ export class PlanFormNextPage implements OnInit {
     let id=this.activatedRoute.snapshot.paramMap.get('id');
     this.array.push({title:this.capitalizeFirstLetter(this.title),dueDate:this.date,subtasks:this.list});
     this.taskSrv.addTask(id,this.title,this.date,this.desc,this.list).then(res=>{{
-                                                                                    for(let s of this.list){
-                                                                                        this.taskSrv.addStep(s.title,res.id);this.router.navigateByUrl('task-details/'+res.id);}}});
+                                                                                    for(let i=0;i<=this.list.length;i++){
+                                                                                        this.taskSrv.addStep(this.list[i].title,res.id,i);this.router.navigateByUrl('task-details/'+res.id);}}});
   }
   capitalizeFirstLetter(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);

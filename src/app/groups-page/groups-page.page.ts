@@ -15,6 +15,7 @@ export class GroupsPagePage implements OnInit {
   segment;
   groups=[];
   m;
+  load=0;
   constructor(private loadingController: LoadingController, private router: Router,private groupSrv: GroupsServiceService) {
     this.segment='code';
   }
@@ -25,24 +26,34 @@ export class GroupsPagePage implements OnInit {
    return;
   }
   searchGroups(ev){
-    this.loadingController.dismiss();
-    this.presentLoading();
     this.groups=[];
     let v= ev.target.value;
-    console.log(v);
-    this.groupSrv.getFilteredGroups(v).subscribe(res=>{res.forEach(g=>this.groups.push(g));this.loadingController.dismiss();});
-  }
+    if(v.length>0){
+      if(this.load==0){
+        this.presentLoading();this.load=1;}
+      this.groups=[];
+      console.log(v);
+      this.groupSrv.getFilteredGroups(v).subscribe(res=>{
+                              res.forEach(g=>this.groups.push(g));
+                              if(this.load==1)
+                              {this.loadingController.dismiss();this.load=0;}});}
+    }
   searchGroupsCode(ev){
-    this.presentLoading();
     this.groups=[];
     let v= ev.target.value.trim();
-    if(v==''){
-      v='!';
-    }
-    this.groupSrv.searchbyCode(v).subscribe(res=>{if(res.data()!=undefined)
-                                                          this.groups.push(res);
-                                                  this.loadingController.dismiss();
-                                                        });
+    if(v.length>0){
+      if(this.load==0){
+        this.presentLoading();
+        this.load=1;}
+      this.groups=[];
+      if(v==''){
+        v='!';
+      }
+      this.groupSrv.searchbyCode(v).subscribe(res=>{if(res.data()!=undefined)
+                                                            this.groups.push(res);
+                                                            if(this.load==1)
+                                                            {this.loadingController.dismiss();this.load=0;};
+                                                          });}
 
   }
   async presentLoading() {
