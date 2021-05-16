@@ -26,7 +26,7 @@ export interface Message {
 export class ChatService {
   currentUser = null;
   constructor(private afAuth: AngularFireAuth, private afs: AngularFirestore) {
-    this.currentUser={uid:'RJvbBwI1ZtCHbEs6EWP3'};
+    this.currentUser={uid:'QSqITrKDOZPEY7qo68OnkTsXF8q1'};
     /**this.afAuth.onAuthStateChanged((user) => {
       this.currentUser = user;
     });*/

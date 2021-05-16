@@ -27,7 +27,7 @@ export class ChatPage implements OnInit {
 
   messages: Observable<any[]>;
   newMsg = '';
-  gid='kiLFwJTBSq0yA3OZk8qU'
+  gid='GOl2qCH9kKVbVq1x1SSc'
   constructor(private activatedRoute:ActivatedRoute, private chatService: ChatService, private router: Router) {
     this.gid=this.activatedRoute.snapshot.paramMap.get('id')
    }

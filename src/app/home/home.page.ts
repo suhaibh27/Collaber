@@ -89,4 +89,7 @@ export class HomePage {
   goJoin(){
     this.router.navigateByUrl('groups-page');
   }
+  file(){
+    this.router.navigateByUrl('files');
+  }
 }
