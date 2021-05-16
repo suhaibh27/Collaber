@@ -29,25 +29,31 @@ export class ContrbutionListPage implements OnInit {
   locLink;
   usersjoinedDocs=[];
   listID='';
-  grId='GOl2qCH9kKVbVq1x1SSc';
+  grId='';
   constructor(private activatedRoute: ActivatedRoute, private alertController: AlertController, private groupSrv: GroupsServiceService, private userSrv: UsersService, private listSrv: ClistService){ }
   ngOnInit() {
     this.listID=this.activatedRoute.snapshot.paramMap.get('id');
     //this.groupSrv.getgroup(this.grId).get().subscribe(res=>{this.thisGroup=res.data();});
-    this.groupSrv.getGroupUsers(this.grId).pipe(take(1)).subscribe(res=>res.forEach(r=> {this.isjoined.push(false);this.users.push(r.userID);this.groupSrv.getuser(r.userID).then(n=>n.get().subscribe(us=>this.usersNames.push(us.data())));}));
     this.listSrv.getcList(this.listID).get().subscribe(res=>{this.dataObj=res.data();
+                                                                        this.grId=this.dataObj.groupID;
                                                                         this.title=this.dataObj.Title;
                                                                         this.description=this.dataObj.Description;
                                                                         this.date=this.toDateTime(this.dataObj.dateTime).toISOString()  ;
                                                                         this.location=this.dataObj.Location;
                                                                         this.locLink=this.dataObj.locationLink;
+                                                                        this.groupSrv.getGroupUsers(this.grId).pipe(take(1)).subscribe(r=>
+                                                                                                                  r.forEach(re=> {
+                                                                                                                      console.log(this.isjoined.push(false));
+                                                                                                                      this.users.push(re.userID);
+                                                                                                                      this.listSrv.getJoinedUsers(this.listID).subscribe(ro=>ro.forEach(u=>{
+                                                                                                                        if(this.users.includes(u.data().userID)){
+                                                                                                                          this.isjoined[this.users.indexOf(u.data().userID)]=true;
+                                                                                                                          this.usersjoinedDocs.push(u.id);}else{this.usersjoinedDocs.push('');}
+                                                                                                                        ;}
+                                                                                                                        ));
+                                                                                                                      this.groupSrv.getuser(re.userID).then(n=>
+                                                                                                                                            n.get().subscribe(us=>this.usersNames.push(us.data())));}));
                                                                       });
-    this.listSrv.getJoinedUsers(this.listID).subscribe(res=>res.forEach(u=>{
-                                                            if(this.users.includes(u.data().userID)){
-                                                              this.isjoined[this.users.indexOf(u.data().userID)]=true;
-                                                              this.usersjoinedDocs.push(u.id);}else{this.usersjoinedDocs.push('');}
-                                                            ;}
-                                                            ));
 
   }
   toggleJoin(index){
