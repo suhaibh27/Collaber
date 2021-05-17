@@ -84,9 +84,6 @@ const routes: Routes = [
   {
     path: 'chat/:id',
     loadChildren: () => import('./chat/chat.module').then( m => m.ChatPageModule)
-  },  {
-    path: 'files',
-    loadChildren: () => import('./files/files.module').then( m => m.FilesPageModule)
   },
   {
     path: 'map',
