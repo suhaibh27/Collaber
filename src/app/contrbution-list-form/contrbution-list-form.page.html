@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button color='light' defaultHref="home"></ion-back-button>
     </ion-buttons>
-    <ion-title color='light'>contrbution-list-form</ion-title>
+    <ion-title color='light'>New Contrbution List</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -24,9 +24,9 @@
   </ion-item>
 
   <ion-item class="ion-align-items-center">
-    <ion-label class='mlables' position='stacked'>Location link </ion-label>
-    <ion-input placeholder="link users to follow and get the location(optional)" style="--padding-start: 10px;"  [(ngModel)]='locLink'></ion-input>
-    <ion-button class="ion-margin" class='primary'><a style="color: white;" href="https://www.google.com/maps">google maps</a><ion-icon color="light" name="map-outline"></ion-icon></ion-button>
+    <ion-label class='mlables' position='stacked'>Location link </ion-label><ion-note style="font-size: small;" class="ion-margin-top">note: you can use google maps or an online meeting link</ion-note>
+    <ion-input placeholder="location link that users can follow" style="--padding-start: 10px;"  [(ngModel)]='locLink'></ion-input>
+    <ion-button (click)='presentModal()' class="ion-margin" class='primary'><ion-icon color="light" name="map-outline"></ion-icon>Maps</ion-button>
   </ion-item>
 <ion-item lines='none'>
   <ion-label class='mlables class="ion-no-margin"' position="stacked">
