@@ -89,6 +89,16 @@ const routes: Routes = [
     path: 'map',
     loadChildren: () => import('./map/map.module').then( m => m.MapPageModule)
   },
+  {
+    path: 'profile/:id',
+    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
+  },
+  {
+    path: 'profile-form/:id',
+    loadChildren: () => import('./profile-form/profile-form.module').then( m => m.ProfileFormPageModule)
+  },
+
+
 
 
 

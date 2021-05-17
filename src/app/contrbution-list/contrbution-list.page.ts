@@ -1,5 +1,5 @@
 import { ActivatedRoute } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 /* eslint-disable eqeqeq */
 /* eslint-disable no-var */
 import { ClistService } from './../clist.service';
@@ -30,10 +30,13 @@ export class ContrbutionListPage implements OnInit {
   usersjoinedDocs=[];
   listID='';
   grId='';
-  constructor(private activatedRoute: ActivatedRoute, private alertController: AlertController, private groupSrv: GroupsServiceService, private userSrv: UsersService, private listSrv: ClistService){ }
+  i=0;
+  all=0;
+  constructor(private loadingController: LoadingController, private activatedRoute: ActivatedRoute, private alertController: AlertController, private groupSrv: GroupsServiceService, private userSrv: UsersService, private listSrv: ClistService){ }
   ngOnInit() {
     this.listID=this.activatedRoute.snapshot.paramMap.get('id');
     //this.groupSrv.getgroup(this.grId).get().subscribe(res=>{this.thisGroup=res.data();});
+    this.presentLoading();
     this.listSrv.getcList(this.listID).get().subscribe(res=>{this.dataObj=res.data();
                                                                         this.grId=this.dataObj.groupID;
                                                                         this.title=this.dataObj.Title;
@@ -44,11 +47,14 @@ export class ContrbutionListPage implements OnInit {
                                                                         this.groupSrv.getGroupUsers(this.grId).pipe(take(1)).subscribe(r=>
                                                                                                                   r.forEach(re=> {
                                                                                                                       console.log(this.isjoined.push(false));
-                                                                                                                      this.users.push(re.userID);
-                                                                                                                      this.listSrv.getJoinedUsers(this.listID).subscribe(ro=>ro.forEach(u=>{
+                                                                                                                      this.users.push(re.userID);this.all++;
+                                                                                                                      this.listSrv.getJoinedUsers(this.listID).pipe(take(1)).subscribe(ro=>ro.forEach(u=>{
                                                                                                                         if(this.users.includes(u.data().userID)){
+                                                                                                                          this.i++;
+                                                                                                                          console.log(u.data().userID);
                                                                                                                           this.isjoined[this.users.indexOf(u.data().userID)]=true;
                                                                                                                           this.usersjoinedDocs.push(u.id);}else{this.usersjoinedDocs.push('');}
+                                                                                                                          this.loadingController.dismiss();
                                                                                                                         ;}
                                                                                                                         ));
                                                                                                                       this.groupSrv.getuser(re.userID).then(n=>
@@ -101,11 +107,20 @@ export class ContrbutionListPage implements OnInit {
           text: 'Yes',
           handler: () => {
             //update database server
-            this.listSrv.updateJoin(this.users[index],this.isjoined[index],this.listID,this.usersjoinedDocs[index]);
+            if(this.isjoined[index])this.i+=this.all;
+            else this.i-=this.all;
+            this.listSrv.updateJoin('QSqITrKDOZPEY7qo68OnkTsXF8q1',this.isjoined[index],this.listID,this.usersjoinedDocs[index]);
           }
         }
       ]
     });
     await alert.present();
+  }
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'Please wait...',
+    });
+    await loading.present();
   }
 }

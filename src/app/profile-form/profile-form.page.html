@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar class="myBackgroundColor">
+    <ion-buttons slot="start">
+      <ion-back-button color='light' defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title color='light'>Edit Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  <ion-card style="margin-top: 15%;">
+    <div style="text-align: -webkit-center;">
+      <img width="244" height="244" src="..\..\assets\icon\logo.jpeg"/>
+      <ion-icon size='large' name="create-outline"></ion-icon>
+    </div>
+    <ion-card-header>
+      <ion-item>
+        <ion-label position='stacked'>Name</ion-label>
+        <ion-input clearInput=true style='font-size: 20px;'  placeholder='Name' [(ngModel)]='user.Name'  color='dark' ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position='stacked'>username</ion-label>
+        <ion-input clearInput=true style='font-size: 20px;'  [(ngModel)]='user.username'  placeholder='Username'  color='dark'></ion-input>
+      </ion-item>
+      <ion-text color='danger'>{{error}}</ion-text>
+      <ion-item>
+        <ion-label position='stacked'>Phone Number</ion-label>
+        <ion-input clearInput=true style='font-size: 20px;' [(ngModel)]='user.phoneNumber'  placeholder='Phone Number'  color='dark' ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label  style='font-size: 20px;' placeholder='Name'  color='dark' >{{user.email}}</ion-label>
+      <ion-button color='secondary' ><ion-text color='dark'><b>Change</b></ion-text></ion-button>
+    </ion-item>
+  </ion-card-header>
+    <ion-card-content style="padding: 0px;">
+          </ion-card-content>
+    <div  style="text-align-last: center;">
+      <ion-button (click)="save()" color='medium' >Save</ion-button>
+    </div>
+  </ion-card>
+</ion-content>

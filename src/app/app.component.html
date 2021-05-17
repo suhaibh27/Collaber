@@ -1,3 +1,30 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-menu side="start" menuId="first" contentId="content1">
+    <ion-header>
+      <ion-toolbar class="myBackgroundColor">
+        <ion-buttons slot="start">
+        <ion-menu-button color='light'></ion-menu-button>
+      </ion-buttons>
+        <ion-title color='light'>Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list *ngFor="let pages of navigate">
+      <ion-menu-toggle auto-hide="true">
+        <ion-item [routerLink]="pages.url" routerDirection="forward">
+            <ion-icon [name]="pages.icon" slot="start"></ion-icon>
+                {{pages.title}}
+        </ion-item>
+      </ion-menu-toggle>
+      </ion-list>
+      <div class='menu'>
+        <ion-item (click)='signout()' class="ion-margin-top" color='medium' >
+          <ion-icon name="log-out-outline" slot="start"></ion-icon>
+          Signout
+        </ion-item>
+    </div>
+    </ion-content>
+  </ion-menu>
+
+  <ion-router-outlet id="content1"></ion-router-outlet>
 </ion-app>

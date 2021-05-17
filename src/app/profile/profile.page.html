@@ -1,0 +1,35 @@
+<ion-header translucent no-border>
+  <ion-toolbar class="myBackgroundColor">
+    <ion-buttons slot="start">
+      <ion-back-button color='light' defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title color='light'> Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true" slot="fixed" >
+  <div class="card">
+    <div class="header">
+      <div class="avatar">
+        <img src="..\..\assets\icon\logo.jpeg" alt="">
+      </div>
+    </div>
+  </div>
+  <div class="ion-margin-bottom"  class="card-body">
+  <div class="user-meta ion-text-center">
+    <h3 class="playername"><ion-icon name="person-outline"></ion-icon>{{this.user.username}}</h3>
+    <h5 class="country">{{this.user.Name}}</h5>
+  </div>
+  <ion-item class="ion-margin-top " color='secondary'>
+    <ion-icon color='dark' name="mail-outline"></ion-icon>
+    <ion-label color='dark' class="ion-margin">E-mail:&nbsp;{{this.user.email}}</ion-label><br>
+  </ion-item>
+  <ion-item  color='secondary'>
+    <ion-icon color='dark' name="phone-portrait-outline"></ion-icon>
+    <ion-label color='dark' class="ion-margin">Phone Number:&nbsp;{{this.user.phoneNumber}}</ion-label><br>
+  </ion-item>
+
+  <ion-button (click)="edit()" class="ion-margin" style="margin-top: 10%;" expand="full" color="medium">Edit</ion-button>
+  <ion-button class="ion-margin"  expand="full" color="medium">Change Password</ion-button>
+  </div>
+</ion-content>

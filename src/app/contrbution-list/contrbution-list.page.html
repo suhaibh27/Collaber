@@ -12,7 +12,7 @@
 <ion-content>
   <div>
     <ion-item>
-      <h4    class="ion-margin">{{this.description}}</h4>
+      <h4    class="ion-margin">{{this.description}} </h4>
     </ion-item>
     <h4 class="ion-margin mheader">Date and Time</h4>
     <ion-item class="ion-no-margin">
@@ -30,6 +30,10 @@
       <ion-icon name="location-outline"></ion-icon>
       <a style="font-size: large;" class='ion-margin-top' [href]="this.locLink">{{this.location}}</a>
     </ion-item>
+    <div  class='joinedcount'>
+        <ion-text  style="color:green">{{i/all}}/{{all}} Joined</ion-text>
+    </div>
+
   </div>
   <ion-grid>
     <ion-row *ngFor="let user of usersNames; let i=index" >

@@ -52,13 +52,16 @@ export class UsersService {
   getUser(id){
     return this.afs.collection('users',ref=>ref.where('username','==',id)).get();
   }
+  getUserbyID(id){
+    return this.afs.collection('users').doc(id);
+  }
   searchUser(id){
     return this.afs.collection('users',ref=>
                       ref.orderBy('username').where('username','>=',id).where('username','<',id+'\uf8ff'))
                       .get();
   }
-  updateUser(){
-    return;
+  updateUser(id,data){
+    return this.afs.collection('users').doc(id).set(data);
   }
   deleteUser(){
 
