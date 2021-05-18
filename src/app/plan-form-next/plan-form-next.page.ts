@@ -1,3 +1,4 @@
+import { AlertController } from '@ionic/angular';
 /* eslint-disable id-blacklist */
 import { Router } from '@angular/router';
 /* eslint-disable prefer-const */
@@ -19,7 +20,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlanFormNextPage implements OnInit {
 
-  constructor(private router:Router,private taskSrv:TasksService, private activatedRoute:ActivatedRoute) { }
+  constructor(private alertController: AlertController, private router:Router,private taskSrv:TasksService, private activatedRoute:ActivatedRoute) { }
 
   ngOnInit() {
   }
@@ -40,18 +41,42 @@ export class PlanFormNextPage implements OnInit {
   done(index) {
    this.list[index].dis = true;
   }
-
-  create() {
- //Add for validation .. i didnt know how to do it :)
+  async presentAlertConfirm() {
+    const alert = await this.alertController.create({
+      header: 'Confirm!',
+      message: 'Are you sure you want to create this task',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+          }
+        }, {
+          text: 'Yes',
+          handler: () => {
+            this.create();
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+  sav(){
+    this.error=false;
     if(this.title.length<=0){
       this.error=true;
       return;
     }
+    this.presentAlertConfirm();
+  }
+  create() {
+ //Add for validation .. i didnt know how to do it :)
     let id=this.activatedRoute.snapshot.paramMap.get('id');
     this.array.push({title:this.capitalizeFirstLetter(this.title),dueDate:this.date,subtasks:this.list});
     this.taskSrv.addTask(id,this.title,this.date,this.desc,this.list).then(res=>{{
-                                                                                    for(let i=0;i<=this.list.length;i++){
-                                                                                        this.taskSrv.addStep(this.list[i].title,res.id,i);this.router.navigateByUrl('task-details/'+res.id);}}});
+                                                                                    for(let i=0;i<this.list.length;i++){
+                                                                                        this.taskSrv.addStep(this.list[i].title,res.id,i);}this.router.navigateByUrl('task-details/'+res.id);}});
   }
   capitalizeFirstLetter(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);

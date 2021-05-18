@@ -152,7 +152,7 @@ let SignInPage = class SignInPage {
         this.error = '';
         if (val.status == 'VALID') {
             var mUser;
-            this.userSrv.checkDuplicate().subscribe(res => res.forEach(user => { mUser = user.data(); if (mUser.username == this.username) {
+            this.userSrv.checkDuplicate().subscribe(res => res.forEach(user => { mUser = user.data(); if (mUser.username.toLowerCase() == this.username.toLowerCase()) {
                 this.error = 'username is already taken';
             }
             else {

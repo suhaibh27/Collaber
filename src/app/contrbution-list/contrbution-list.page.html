@@ -12,17 +12,17 @@
 <ion-content>
   <div>
     <ion-item>
-      <h4    class="ion-margin">{{this.description}} </h4>
+      <h6    class="ion-margin">Description: &nbsp;{{this.description}} </h6>
     </ion-item>
     <h4 class="ion-margin mheader">Date and Time</h4>
-    <ion-item class="ion-no-margin">
-          <ion-button fill='clear' class="mpickers no-click">
-          <ion-icon class="mMargin-bottom" name="calendar-outline"></ion-icon>
-          <ion-datetime [(ngModel)]="date"  class="ion-margin"></ion-datetime>
+    <ion-item class="ion-no-margin ion-no-padding">
+          <ion-button class="ion-no-margin ion-no-padding" fill='clear' class="mpickers no-click">
+            <ion-icon  name="calendar-outline"></ion-icon>
+            <ion-datetime [(ngModel)]="date"  class="ion-margin"></ion-datetime>
           </ion-button>
-          <ion-button fill='clear' class="mpickers no-click">
-          <ion-icon class="mMargin-bottom ion-margin-start" name="time-outline"></ion-icon>
-          <ion-datetime class="ion-margin" display-format="h:mm A" picker-format="h:mm A" [(ngModel)]="date"></ion-datetime>
+          <ion-button class="ion-no-margin ion-no-padding" fill='clear' class="mpickers no-click">
+            <ion-icon  name="time-outline"></ion-icon>
+            <ion-datetime  display-format="h:mm A" picker-format="h:mm A" [(ngModel)]="date"></ion-datetime>
           </ion-button>
     </ion-item>
     <ion-item>
@@ -48,8 +48,8 @@
       </ion-col>
       <ion-col  size="5" >
         <ion-item [color]="myUser(i)" lines='none' >
-          <ion-label  class="ion-no-margin" color='success' *ngIf="this.isjoined[i]">Joined</ion-label>
-          <ion-label class="ion-no-margin" color='danger' *ngIf="!this.isjoined[i]">not Joined</ion-label>
+          <ion-label style='font-size:small;'  class="ion-no-margin" color='success' *ngIf="this.isjoined[i]">Joined</ion-label>
+          <ion-label style='font-size:small;' class="ion-no-margin" color='danger' *ngIf="!this.isjoined[i]">not Joined</ion-label>
           <ion-checkbox (click)='toggleJoin(i)' [(ngModel)]="isjoined[i]" class="ion-no-margin " [class]="disable(i)"></ion-checkbox>
         </ion-item>
       </ion-col>

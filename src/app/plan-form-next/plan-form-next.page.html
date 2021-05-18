@@ -35,7 +35,7 @@
           <ion-col size="1"></ion-col>
           <ion-col size="7"> <ion-input style="font-size: large;" placeholder="Sub task Name" [disabled]="list[i].dis" [(ngModel)]="list[i].title"></ion-input></ion-col>
           <ion-col size="2">
-            <ion-button fill="none" (click)="done(i)" ><ion-icon name="checkmark-outline" color="success" ></ion-icon></ion-button></ion-col>
+            <ion-button  fill="none" (click)="done(i)" ><ion-icon name="checkmark-outline" color="success" ></ion-icon></ion-button></ion-col>
           <ion-col size="2" *ngIf="list[i].dis==false">
             <ion-button fill="none" (click)="del(i)"><ion-icon name="trash-outline" color="danger"></ion-icon></ion-button>
           </ion-col>
@@ -51,7 +51,7 @@
       </ion-row>
     </ion-grid>
 
-    <ion-button expand="block" color="medium" (click)="create()">Save Task!</ion-button>
+    <ion-button expand="block" color="medium" (click)="sav()">Save Task!</ion-button>
 
     </ion-content>
 </ion-content>

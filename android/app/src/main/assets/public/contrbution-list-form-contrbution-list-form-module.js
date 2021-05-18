@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar class=\"myBackgroundColor\">\n    <ion-buttons slot=\"start\">\n      <ion-back-button color='light' defaultHref=\"home\"></ion-back-button>\n    </ion-buttons>\n    <ion-title color='light'>contrbution-list-form</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-item>\n    <ion-label class='mlables' position='stacked'>Title*</ion-label>\n   <ion-input placeholder=\"Your list Title\" style=\"--padding-start: 10px;\" minlength=3 [(ngModel)]='title'></ion-input>\n  </ion-item>\n\n  <ion-item>\n    <ion-label class='mlables' position='stacked'>Description</ion-label>\n    <ion-textarea placeholder=\"details of your list(optional)\" style=\"--padding-start: 10px;\"  [(ngModel)]='description' rows='4' cols='40'></ion-textarea>\n  </ion-item>\n\n  <ion-item>\n    <ion-label class='mlables' position='stacked'>Location</ion-label>\n    <ion-input placeholder=\"where the event will happen\" style=\"--padding-start: 10px;\"  [(ngModel)]='loc'></ion-input>\n  </ion-item>\n\n  <ion-item class=\"ion-align-items-center\">\n    <ion-label class='mlables' position='stacked'>Location link </ion-label>\n    <ion-input placeholder=\"link users to follow and get the location(optional)\" style=\"--padding-start: 10px;\"  [(ngModel)]='locLink'></ion-input>\n    <ion-button class=\"ion-margin\" class='primary'><a style=\"color: white;\" href=\"https://www.google.com/maps\">google maps</a><ion-icon color=\"light\" name=\"map-outline\"></ion-icon></ion-button>\n  </ion-item>\n<ion-item lines='none'>\n  <ion-label class='mlables class=\"ion-no-margin\"' position=\"stacked\">\n    Date & Time\n  </ion-label>\n</ion-item>\n  <ion-item class=\"ion-no-margin\">\n    <ion-button fill='clear' class=\"mpickers\">\n      <ion-icon class=\"mMargin-bottom\" name=\"calendar-outline\"></ion-icon>\n      <ion-datetime [(ngModel)]=\"date\"  class=\"ion-margin\"></ion-datetime>\n    </ion-button>\n    <ion-button fill='clear' class=\"mpickers\">\n      <ion-icon class=\"mMargin-bottom ion-margin-start\" name=\"time-outline\"></ion-icon>\n      <ion-datetime class=\"ion-margin\" display-format=\"h:mm A\" picker-format=\"h:mm A\" [(ngModel)]=\"date\"></ion-datetime>\n    </ion-button>\n  </ion-item>\n\n  <ion-button  (click)='save()' expand='block'>Save</ion-button>\n\n</ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n  <ion-toolbar class=\"myBackgroundColor\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button color='light' defaultHref=\"home\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title color='light'>New Contrbution List</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <ion-item>\r\n    <ion-label class='mlables' position='stacked'>Title*</ion-label>\r\n   <ion-input placeholder=\"Your list Title\" style=\"--padding-start: 10px;\" minlength=3 [(ngModel)]='title'></ion-input>\r\n  </ion-item>\r\n\r\n  <ion-item>\r\n    <ion-label class='mlables' position='stacked'>Description</ion-label>\r\n    <ion-textarea placeholder=\"details of your list(optional)\" style=\"--padding-start: 10px;\"  [(ngModel)]='description' rows='4' cols='40'></ion-textarea>\r\n  </ion-item>\r\n\r\n  <ion-item>\r\n    <ion-label class='mlables' position='stacked'>Location</ion-label>\r\n    <ion-input placeholder=\"where the event will happen\" style=\"--padding-start: 10px;\"  [(ngModel)]='loc'></ion-input>\r\n  </ion-item>\r\n\r\n  <ion-item class=\"ion-align-items-center\">\r\n    <ion-label class='mlables' position='stacked'>Location link </ion-label><ion-note style=\"font-size: small;\" class=\"ion-margin-top\">note: you can use google maps or an online meeting link</ion-note>\r\n    <ion-input placeholder=\"location link that users can follow\" style=\"--padding-start: 10px;\"  [(ngModel)]='locLink'></ion-input>\r\n    <ion-button (click)='presentModal()' class=\"ion-margin\" class='primary'><ion-icon color=\"light\" name=\"map-outline\"></ion-icon>Maps</ion-button>\r\n  </ion-item>\r\n<ion-item lines='none'>\r\n  <ion-label class='mlables class=\"ion-no-margin\"' position=\"stacked\">\r\n    Date & Time\r\n  </ion-label>\r\n</ion-item>\r\n  <ion-item class=\"ion-no-margin\">\r\n    <ion-button fill='clear' class=\"mpickers\">\r\n      <ion-icon class=\"mMargin-bottom\" name=\"calendar-outline\"></ion-icon>\r\n      <ion-datetime [(ngModel)]=\"date\"  class=\"ion-margin\"></ion-datetime>\r\n    </ion-button>\r\n    <ion-button fill='clear' class=\"mpickers\">\r\n      <ion-icon class=\"mMargin-bottom ion-margin-start\" name=\"time-outline\"></ion-icon>\r\n      <ion-datetime class=\"ion-margin\" display-format=\"h:mm A\" picker-format=\"h:mm A\" [(ngModel)]=\"date\"></ion-datetime>\r\n    </ion-button>\r\n  </ion-item>\r\n\r\n  <ion-button  (click)='save()' expand='block'>Save</ion-button>\r\n\r\n</ion-content>\r\n");
 
 /***/ }),
 
@@ -122,6 +122,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _clist_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./../clist.service */ "wp6f");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ "TEn/");
+/* harmony import */ var _map_map_page__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../map/map.page */ "SQ20");
+
+
 
 
 
@@ -130,7 +133,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let ContrbutionListFormPage = class ContrbutionListFormPage {
-    constructor(clSrv, router, navCtrl) {
+    constructor(modalCtrl, clSrv, router, navCtrl) {
+        this.modalCtrl = modalCtrl;
         this.clSrv = clSrv;
         this.router = router;
         this.navCtrl = navCtrl;
@@ -142,12 +146,28 @@ let ContrbutionListFormPage = class ContrbutionListFormPage {
     }
     ngOnInit() {
     }
+    presentModal() {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            const modal = yield this.modalCtrl.create({
+                component: _map_map_page__WEBPACK_IMPORTED_MODULE_7__["MapPage"],
+                backdropDismiss: false
+            });
+            modal.onDidDismiss().then(data => {
+                if (data.data) {
+                    console.log(data.data);
+                    this.locLink = 'https://maps.google.com/?q=' + data.data.lat + ',' + data.data.lng;
+                }
+            });
+            return yield modal.present();
+        });
+    }
     save() {
         this.clSrv.createList(this.title, this.description, this.loc, this.locLink, this.date, 'kiLFwJTBSq0yA3OZk8qU');
         this.navCtrl.back();
     }
 };
 ContrbutionListFormPage.ctorParameters = () => [
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["ModalController"] },
     { type: _clist_service__WEBPACK_IMPORTED_MODULE_4__["ClistService"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["NavController"] }

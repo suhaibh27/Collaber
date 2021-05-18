@@ -36,7 +36,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let ContrbutionListPage = class ContrbutionListPage {
-    constructor(activatedRoute, alertController, groupSrv, userSrv, listSrv) {
+    constructor(loadingController, activatedRoute, alertController, groupSrv, userSrv, listSrv) {
+        this.loadingController = loadingController;
         this.activatedRoute = activatedRoute;
         this.alertController = alertController;
         this.groupSrv = groupSrv;
@@ -49,10 +50,13 @@ let ContrbutionListPage = class ContrbutionListPage {
         this.usersjoinedDocs = [];
         this.listID = '';
         this.grId = '';
+        this.i = 0;
+        this.all = 0;
     }
     ngOnInit() {
         this.listID = this.activatedRoute.snapshot.paramMap.get('id');
         //this.groupSrv.getgroup(this.grId).get().subscribe(res=>{this.thisGroup=res.data();});
+        this.presentLoading();
         this.listSrv.getcList(this.listID).get().subscribe(res => {
             this.dataObj = res.data();
             this.grId = this.dataObj.groupID;
@@ -64,14 +68,18 @@ let ContrbutionListPage = class ContrbutionListPage {
             this.groupSrv.getGroupUsers(this.grId).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_9__["take"])(1)).subscribe(r => r.forEach(re => {
                 console.log(this.isjoined.push(false));
                 this.users.push(re.userID);
-                this.listSrv.getJoinedUsers(this.listID).subscribe(ro => ro.forEach(u => {
+                this.all++;
+                this.listSrv.getJoinedUsers(this.listID).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_9__["take"])(1)).subscribe(ro => ro.forEach(u => {
                     if (this.users.includes(u.data().userID)) {
+                        this.i++;
+                        console.log(u.data().userID);
                         this.isjoined[this.users.indexOf(u.data().userID)] = true;
                         this.usersjoinedDocs.push(u.id);
                     }
                     else {
                         this.usersjoinedDocs.push('');
                     }
+                    this.loadingController.dismiss();
                     ;
                 }));
                 this.groupSrv.getuser(re.userID).then(n => n.get().subscribe(us => this.usersNames.push(us.data())));
@@ -123,7 +131,11 @@ let ContrbutionListPage = class ContrbutionListPage {
                         text: 'Yes',
                         handler: () => {
                             //update database server
-                            this.listSrv.updateJoin(this.users[index], this.isjoined[index], this.listID, this.usersjoinedDocs[index]);
+                            if (this.isjoined[index])
+                                this.i += this.all;
+                            else
+                                this.i -= this.all;
+                            this.listSrv.updateJoin('QSqITrKDOZPEY7qo68OnkTsXF8q1', this.isjoined[index], this.listID, this.usersjoinedDocs[index]);
                         }
                     }
                 ]
@@ -131,8 +143,18 @@ let ContrbutionListPage = class ContrbutionListPage {
             yield alert.present();
         });
     }
+    presentLoading() {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            const loading = yield this.loadingController.create({
+                cssClass: 'my-custom-class',
+                message: 'Please wait...',
+            });
+            yield loading.present();
+        });
+    }
 };
 ContrbutionListPage.ctorParameters = () => [
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["LoadingController"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["AlertController"] },
     { type: _groups_service_service__WEBPACK_IMPORTED_MODULE_7__["GroupsServiceService"] },
@@ -239,7 +261,7 @@ ContrbutionListPageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorat
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n  <ion-toolbar class=\"myBackgroundColor\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button color='light' defaultHref=\"home\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-buttons class=\"ion-margin-end\" slot=\"end\">\r\n      <ion-icon size='large' color='light' name=\"create-outline\"></ion-icon>\r\n    </ion-buttons>\r\n    <ion-title color='light'>{{this.title}}</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n<ion-content>\r\n  <div>\r\n    <ion-item>\r\n      <h4    class=\"ion-margin\">{{this.description}}</h4>\r\n    </ion-item>\r\n    <h4 class=\"ion-margin mheader\">Date and Time</h4>\r\n    <ion-item class=\"ion-no-margin\">\r\n          <ion-button fill='clear' class=\"mpickers no-click\">\r\n          <ion-icon class=\"mMargin-bottom\" name=\"calendar-outline\"></ion-icon>\r\n          <ion-datetime [(ngModel)]=\"date\"  class=\"ion-margin\"></ion-datetime>\r\n          </ion-button>\r\n          <ion-button fill='clear' class=\"mpickers no-click\">\r\n          <ion-icon class=\"mMargin-bottom ion-margin-start\" name=\"time-outline\"></ion-icon>\r\n          <ion-datetime class=\"ion-margin\" display-format=\"h:mm A\" picker-format=\"h:mm A\" [(ngModel)]=\"date\"></ion-datetime>\r\n          </ion-button>\r\n    </ion-item>\r\n    <ion-item>\r\n      <h4 class=\" mLheader ion-margin\">Location:</h4>\r\n      <ion-icon name=\"location-outline\"></ion-icon>\r\n      <a style=\"font-size: large;\" class='ion-margin-top' [href]=\"this.locLink\">{{this.location}}</a>\r\n    </ion-item>\r\n  </div>\r\n  <ion-grid>\r\n    <ion-row *ngFor=\"let user of usersNames; let i=index\" >\r\n      <ion-item-divider [color]=\"myUser(i)\" class='divider' >\r\n      <ion-col size=\"3\">\r\n        <ion-avatar>\r\n        <ion-img src=\"..\\..\\assets\\icon\\logo.jpeg\"></ion-img>\r\n        </ion-avatar>\r\n      </ion-col>\r\n      <ion-col  size=\"4\">\r\n        <h4 class='mfont ion-no-margin'>{{user.username}}</h4>\r\n      </ion-col>\r\n      <ion-col  size=\"5\" >\r\n        <ion-item [color]=\"myUser(i)\" lines='none' >\r\n          <ion-label  class=\"ion-no-margin\" color='success' *ngIf=\"this.isjoined[i]\">Joined</ion-label>\r\n          <ion-label class=\"ion-no-margin\" color='danger' *ngIf=\"!this.isjoined[i]\">not Joined</ion-label>\r\n          <ion-checkbox (click)='toggleJoin(i)' [(ngModel)]=\"isjoined[i]\" class=\"ion-no-margin \" [class]=\"disable(i)\"></ion-checkbox>\r\n        </ion-item>\r\n      </ion-col>\r\n    </ion-item-divider>\r\n    </ion-row>\r\n  </ion-grid>\r\n</ion-content>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n  <ion-toolbar class=\"myBackgroundColor\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button color='light' defaultHref=\"home\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-buttons class=\"ion-margin-end\" slot=\"end\">\r\n      <ion-icon size='large' color='light' name=\"create-outline\"></ion-icon>\r\n    </ion-buttons>\r\n    <ion-title color='light'>{{this.title}}</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n<ion-content>\r\n  <div>\r\n    <ion-item>\r\n      <h4    class=\"ion-margin\">{{this.description}} </h4>\r\n    </ion-item>\r\n    <h4 class=\"ion-margin mheader\">Date and Time</h4>\r\n    <ion-item class=\"ion-no-margin\">\r\n          <ion-button fill='clear' class=\"mpickers no-click\">\r\n          <ion-icon class=\"mMargin-bottom\" name=\"calendar-outline\"></ion-icon>\r\n          <ion-datetime [(ngModel)]=\"date\"  class=\"ion-margin\"></ion-datetime>\r\n          </ion-button>\r\n          <ion-button fill='clear' class=\"mpickers no-click\">\r\n          <ion-icon class=\"mMargin-bottom ion-margin-start\" name=\"time-outline\"></ion-icon>\r\n          <ion-datetime class=\"ion-margin\" display-format=\"h:mm A\" picker-format=\"h:mm A\" [(ngModel)]=\"date\"></ion-datetime>\r\n          </ion-button>\r\n    </ion-item>\r\n    <ion-item>\r\n      <h4 class=\" mLheader ion-margin\">Location:</h4>\r\n      <ion-icon name=\"location-outline\"></ion-icon>\r\n      <a style=\"font-size: large;\" class='ion-margin-top' [href]=\"this.locLink\">{{this.location}}</a>\r\n    </ion-item>\r\n    <div  class='joinedcount'>\r\n        <ion-text  style=\"color:green\">{{i/all}}/{{all}} Joined</ion-text>\r\n    </div>\r\n\r\n  </div>\r\n  <ion-grid>\r\n    <ion-row *ngFor=\"let user of usersNames; let i=index\" >\r\n      <ion-item-divider [color]=\"myUser(i)\" class='divider' >\r\n      <ion-col size=\"3\">\r\n        <ion-avatar>\r\n        <ion-img src=\"..\\..\\assets\\icon\\logo.jpeg\"></ion-img>\r\n        </ion-avatar>\r\n      </ion-col>\r\n      <ion-col  size=\"4\">\r\n        <h4 class='mfont ion-no-margin'>{{user.username}}</h4>\r\n      </ion-col>\r\n      <ion-col  size=\"5\" >\r\n        <ion-item [color]=\"myUser(i)\" lines='none' >\r\n          <ion-label  class=\"ion-no-margin\" color='success' *ngIf=\"this.isjoined[i]\">Joined</ion-label>\r\n          <ion-label class=\"ion-no-margin\" color='danger' *ngIf=\"!this.isjoined[i]\">not Joined</ion-label>\r\n          <ion-checkbox (click)='toggleJoin(i)' [(ngModel)]=\"isjoined[i]\" class=\"ion-no-margin \" [class]=\"disable(i)\"></ion-checkbox>\r\n        </ion-item>\r\n      </ion-col>\r\n    </ion-item-divider>\r\n    </ion-row>\r\n  </ion-grid>\r\n</ion-content>\r\n");
 
 /***/ }),
 
@@ -252,7 +274,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".micon {\n  position: absolute;\n  top: 50%;\n  right: 5%;\n  transform: translate(-50%, -50%);\n  display: block;\n}\n\n.mheader {\n  font-family: \"Times New Roman\", Times, serif;\n  margin-bottom: 0px;\n}\n\n.mLheader {\n  font-family: \"Times New Roman\", Times, serif;\n  color: #000;\n}\n\na {\n  margin-bottom: 10px;\n}\n\n.disabled {\n  pointer-events: none;\n  opacity: 0.6;\n}\n\n.mpickers {\n  width: 100%;\n  height: 100%;\n  font-size: large;\n  color: #000;\n}\n\n.mMargin-bottom {\n  margin-bottom: 10px;\n}\n\n.no-click {\n  pointer-events: none;\n}\n\n.this-user {\n  background-color: aqua !important;\n  color: #000;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXGNvbnRyYnV0aW9uLWxpc3QucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQU8sa0JBQWtCO0VBQ3ZCLFFBQVE7RUFDUixTQUFTO0VBQ1QsZ0NBQWdDO0VBQ2hDLGNBQWM7QUFFaEI7O0FBREE7RUFDSSw0Q0FBNEM7RUFDNUMsa0JBQWtCO0FBSXRCOztBQUZFO0VBQ0UsNENBQTRDO0VBQzVDLFdBQVc7QUFLZjs7QUFGRTtFQUNFLG1CQUFtQjtBQUt2Qjs7QUFGRTtFQUNFLG9CQUFvQjtFQUNwQixZQUFZO0FBS2hCOztBQUhFO0VBQ0UsV0FBVztFQUNYLFlBQVk7RUFDWCxnQkFDTTtFQUNQLFdBQVc7QUFLZjs7QUFIQTtFQUNFLG1CQUFtQjtBQU1yQjs7QUFIQTtFQUNFLG9CQUFtQjtBQU1yQjs7QUFKQTtFQUNFLGlDQUFpQztFQUNqQyxXQUFXO0FBT2IiLCJmaWxlIjoiY29udHJidXRpb24tbGlzdC5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIubWljb257cG9zaXRpb246IGFic29sdXRlO1xyXG4gIHRvcDogNTAlO1xyXG4gIHJpZ2h0OiA1JTtcclxuICB0cmFuc2Zvcm06IHRyYW5zbGF0ZSgtNTAlLCAtNTAlKTtcclxuICBkaXNwbGF5OiBibG9jazt9XHJcbi5taGVhZGVyIHtcclxuICAgIGZvbnQtZmFtaWx5OiBcIlRpbWVzIE5ldyBSb21hblwiLCBUaW1lcywgc2VyaWY7XHJcbiAgICBtYXJnaW4tYm90dG9tOiAwcHg7XHJcbiAgfVxyXG4gIC5tTGhlYWRlciB7XHJcbiAgICBmb250LWZhbWlseTogXCJUaW1lcyBOZXcgUm9tYW5cIiwgVGltZXMsIHNlcmlmO1xyXG4gICAgY29sb3I6ICMwMDA7XHJcblxyXG4gIH1cclxuICBhe1xyXG4gICAgbWFyZ2luLWJvdHRvbTogMTBweDtcclxuICB9XHJcblxyXG4gIC5kaXNhYmxlZCB7XHJcbiAgICBwb2ludGVyLWV2ZW50czogbm9uZTtcclxuICAgIG9wYWNpdHk6IDAuNjtcclxuICB9XHJcbiAgLm1waWNrZXJze1xyXG4gICAgd2lkdGg6IDEwMCU7XHJcbiAgICBoZWlnaHQ6IDEwMCU7XHJcbiAgICAgZm9udC1zaXplOlxyXG4gICAgICBsYXJnZTtcclxuICAgIGNvbG9yOiAjMDAwO1xyXG4gIH1cclxuLm1NYXJnaW4tYm90dG9te1xyXG4gIG1hcmdpbi1ib3R0b206IDEwcHg7XHJcbn1cclxuXHJcbi5uby1jbGljayB7XHJcbiAgcG9pbnRlci1ldmVudHM6bm9uZTsgLy9UaGlzIG1ha2VzIGl0IG5vdCBjbGlja2FibGVcclxufVxyXG4udGhpcy11c2Vye1xyXG4gIGJhY2tncm91bmQtY29sb3I6IGFxdWEgIWltcG9ydGFudDtcclxuICBjb2xvcjogIzAwMDtcclxufVxyXG5cclxuIl19 */");
+/* harmony default export */ __webpack_exports__["default"] = (".micon {\n  position: absolute;\n  top: 50%;\n  right: 5%;\n  transform: translate(-50%, -50%);\n  display: block;\n}\n\n.mheader {\n  font-family: \"Times New Roman\", Times, serif;\n  margin-bottom: 0px;\n}\n\n.mLheader {\n  font-family: \"Times New Roman\", Times, serif;\n  color: #000;\n}\n\na {\n  margin-bottom: 10px;\n}\n\n.disabled {\n  pointer-events: none;\n  opacity: 0.6;\n}\n\n.mpickers {\n  width: 100%;\n  height: 100%;\n  font-size: large;\n  color: #000;\n}\n\n.mMargin-bottom {\n  margin-bottom: 10px;\n}\n\n.no-click {\n  pointer-events: none;\n}\n\n.this-user {\n  background-color: aqua !important;\n  color: #000;\n}\n\n.joinedcount {\n  text-align-last: center;\n  margin: 5px;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXGNvbnRyYnV0aW9uLWxpc3QucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQU8sa0JBQWtCO0VBQ3ZCLFFBQVE7RUFDUixTQUFTO0VBQ1QsZ0NBQWdDO0VBQ2hDLGNBQWM7QUFFaEI7O0FBREE7RUFDSSw0Q0FBNEM7RUFDNUMsa0JBQWtCO0FBSXRCOztBQUZFO0VBQ0UsNENBQTRDO0VBQzVDLFdBQVc7QUFLZjs7QUFGRTtFQUNFLG1CQUFtQjtBQUt2Qjs7QUFGRTtFQUNFLG9CQUFvQjtFQUNwQixZQUFZO0FBS2hCOztBQUhFO0VBQ0UsV0FBVztFQUNYLFlBQVk7RUFDWCxnQkFDTTtFQUNQLFdBQVc7QUFLZjs7QUFIQTtFQUNFLG1CQUFtQjtBQU1yQjs7QUFIQTtFQUNFLG9CQUFtQjtBQU1yQjs7QUFKQTtFQUNFLGlDQUFpQztFQUNqQyxXQUFXO0FBT2I7O0FBTEE7RUFDRSx1QkFBdUI7RUFDdkIsV0FBVztBQVFiIiwiZmlsZSI6ImNvbnRyYnV0aW9uLWxpc3QucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLm1pY29ue3Bvc2l0aW9uOiBhYnNvbHV0ZTtcclxuICB0b3A6IDUwJTtcclxuICByaWdodDogNSU7XHJcbiAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTUwJSk7XHJcbiAgZGlzcGxheTogYmxvY2s7fVxyXG4ubWhlYWRlciB7XHJcbiAgICBmb250LWZhbWlseTogXCJUaW1lcyBOZXcgUm9tYW5cIiwgVGltZXMsIHNlcmlmO1xyXG4gICAgbWFyZ2luLWJvdHRvbTogMHB4O1xyXG4gIH1cclxuICAubUxoZWFkZXIge1xyXG4gICAgZm9udC1mYW1pbHk6IFwiVGltZXMgTmV3IFJvbWFuXCIsIFRpbWVzLCBzZXJpZjtcclxuICAgIGNvbG9yOiAjMDAwO1xyXG5cclxuICB9XHJcbiAgYXtcclxuICAgIG1hcmdpbi1ib3R0b206IDEwcHg7XHJcbiAgfVxyXG5cclxuICAuZGlzYWJsZWQge1xyXG4gICAgcG9pbnRlci1ldmVudHM6IG5vbmU7XHJcbiAgICBvcGFjaXR5OiAwLjY7XHJcbiAgfVxyXG4gIC5tcGlja2Vyc3tcclxuICAgIHdpZHRoOiAxMDAlO1xyXG4gICAgaGVpZ2h0OiAxMDAlO1xyXG4gICAgIGZvbnQtc2l6ZTpcclxuICAgICAgbGFyZ2U7XHJcbiAgICBjb2xvcjogIzAwMDtcclxuICB9XHJcbi5tTWFyZ2luLWJvdHRvbXtcclxuICBtYXJnaW4tYm90dG9tOiAxMHB4O1xyXG59XHJcblxyXG4ubm8tY2xpY2sge1xyXG4gIHBvaW50ZXItZXZlbnRzOm5vbmU7IC8vVGhpcyBtYWtlcyBpdCBub3QgY2xpY2thYmxlXHJcbn1cclxuLnRoaXMtdXNlcntcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiBhcXVhICFpbXBvcnRhbnQ7XHJcbiAgY29sb3I6ICMwMDA7XHJcbn1cclxuLmpvaW5lZGNvdW50e1xyXG4gIHRleHQtYWxpZ24tbGFzdDogY2VudGVyO1xyXG4gIG1hcmdpbjogNXB4O1xyXG59XHJcblxyXG4iXX0= */");
 
 /***/ })
 

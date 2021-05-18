@@ -23,14 +23,179 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5b1e5eba-17f7-4c4f-b855-e0f8f7c5d110" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../capacitor.config.json" beforeDir="false" afterPath="$PROJECT_DIR$/../capacitor.config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../config.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/6.5/fileChanges/last-build.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/6.5/gc.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/workspace-id.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/workspace-id.txt.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/assets/public/profile-form-profile-form-module.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/assets/public/profile-form-profile-form-module.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/assets/public/profile-profile-module.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/assets/public/profile-profile-module.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/0.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/0.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/1.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/1.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/10.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/10.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/11.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/11.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/12.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/12.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/13.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/13.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/14.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/14.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/15.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/15.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/16.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/16.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/17.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/17.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/18.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/18.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/19.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/19.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/2.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/2.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/20.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/20.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/21.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/21.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/22.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/22.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/23.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/23.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/24.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/24.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/25.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/25.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/26.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/26.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/27.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/27.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/28.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/28.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/29.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/29.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/3.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/3.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/30.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/30.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/31.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/31.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/32.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/32.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/33.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/33.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/34.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/34.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/35.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/35.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/36.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/36.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/37.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/37.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/38.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/38.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/39.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/39.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/4.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/4.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/40.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/40.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/41.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/41.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/42.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/42.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/43.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/43.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/44.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/44.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/45.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/45.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/46.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/46.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/47.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/47.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/5.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/5.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/6.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/6.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/7.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/7.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/8.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/8.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/9.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/9.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/assets/shapes.svg" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/assets/shapes.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/calender-calender-module.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/calender-calender-module.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/calender-calender-module.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/calender-calender-module.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/chat-chat-module.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/chat-chat-module.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/chat-chat-module.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/chat-chat-module.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/common.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/common.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/common.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/common.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/contrbution-list-contrbution-list-module.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/contrbution-list-contrbution-list-module.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/contrbution-list-contrbution-list-module.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/contrbution-list-contrbution-list-module.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/contrbution-list-form-contrbution-list-form-module.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/contrbution-list-form-contrbution-list-form-module.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/contrbution-list-form-contrbution-list-form-module.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/contrbution-list-form-contrbution-list-form-module.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/cordova.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/cordova.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/cordova_plugins.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/cordova_plugins.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/core-js-js.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/core-js-js.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/create-group-form-create-group-form-module.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/create-group-form-create-group-form-module.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/create-group-form-create-group-form-module.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/create-group-form-create-group-form-module.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/create-group-next-create-group-next-module.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/create-group-next-create-group-next-module.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/create-group-next-create-group-next-module.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/create-group-next-create-group-next-module.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/default~calender-calender-module~calender-modal-calender-modal-module.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/default~calender-calender-module~calender-modal-calender-modal-module.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/default~firebase-auth~task-details-task-details-module.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/default~firebase-auth~task-details-task-details-module.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/dom-js.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/dom-js.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/edit-group-edit-group-module.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/edit-group-edit-group-module.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/edit-group-edit-group-module.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/edit-group-edit-group-module.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/files-files-module.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/files-files-module.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/firebase-auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/firebase-auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/focus-visible-f4ad4f1a-js.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/focus-visible-f4ad4f1a-js.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/group-group-module.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/group-group-module.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/groups-page-groups-page-module.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/groups-page-groups-page-module.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/groups-page-groups-page-module.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/groups-page-groups-page-module.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/home-home-module.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/home-home-module.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/home-home-module.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/home-home-module.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/input-shims-73f15161-js.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/input-shims-73f15161-js.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/keyboard-5742b5da-js.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/keyboard-5742b5da-js.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/main.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/main.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/native-bridge.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/native-bridge.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/plan-form-next-plan-form-next-module.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/plan-form-next-plan-form-next-module.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/plan-form-next-plan-form-next-module.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/plan-form-next-plan-form-next-module.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/plan-form-plan-form-module.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/plan-form-plan-form-module.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/plan-plan-module.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/plan-plan-module.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/plugins/com-sarriaroman-photoviewer/www/PhotoViewer.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/plugins/com-sarriaroman-photoviewer/www/PhotoViewer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-crop/www/crop.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-crop/www/crop.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-device/www/device.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-device/www/device.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-file/www/DirectoryEntry.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-file/www/DirectoryEntry.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-file/www/DirectoryReader.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-file/www/DirectoryReader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-file/www/Entry.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-file/www/Entry.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-file/www/File.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-file/www/File.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-file/www/FileEntry.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-file/www/FileEntry.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-file/www/FileError.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-file/www/FileError.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-file/www/FileReader.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-file/www/FileReader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-file/www/FileSystem.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-file/www/FileSystem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-file/www/FileUploadOptions.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-file/www/FileUploadOptions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-file/www/FileUploadResult.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-file/www/FileUploadResult.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-file/www/FileWriter.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-file/www/FileWriter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-file/www/Flags.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-file/www/Flags.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-file/www/LocalFileSystem.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-file/www/LocalFileSystem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-file/www/Metadata.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-file/www/Metadata.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-file/www/ProgressEvent.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-file/www/ProgressEvent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-file/www/android/FileSystem.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-file/www/android/FileSystem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-file/www/browser/isChrome.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-file/www/browser/isChrome.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-file/www/fileSystemPaths.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-file/www/fileSystemPaths.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-file/www/fileSystems-roots.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-file/www/fileSystems-roots.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-file/www/fileSystems.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-file/www/fileSystems.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-file/www/requestFileSystem.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-file/www/requestFileSystem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-file/www/resolveLocalFileSystemURI.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-file/www/resolveLocalFileSystemURI.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-firebase/www/firebase.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-firebase/www/firebase.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-inappbrowser/www/inappbrowser.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-inappbrowser/www/inappbrowser.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-media-capture/www/CaptureAudioOptions.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-media-capture/www/CaptureAudioOptions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-media-capture/www/CaptureError.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-media-capture/www/CaptureError.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-media-capture/www/CaptureImageOptions.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-media-capture/www/CaptureImageOptions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-media-capture/www/CaptureVideoOptions.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-media-capture/www/CaptureVideoOptions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-media-capture/www/MediaFile.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-media-capture/www/MediaFile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-media-capture/www/MediaFileData.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-media-capture/www/MediaFileData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-media-capture/www/android/init.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-media-capture/www/android/init.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-media-capture/www/capture.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-media-capture/www/capture.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-media-capture/www/helpers.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-media-capture/www/helpers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-media/www/Media.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-media/www/Media.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-media/www/MediaError.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-media/www/MediaError.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-statusbar/www/statusbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-statusbar/www/statusbar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-streaming-media/www/StreamingMedia.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-streaming-media/www/StreamingMedia.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-telerik-imagepicker/www/imagepicker.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/plugins/cordova-plugin-telerik-imagepicker/www/imagepicker.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/polyfills-core-js.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/polyfills-core-js.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/polyfills-css-shim.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/polyfills-css-shim.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/polyfills-dom.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/polyfills-dom.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/polyfills.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/polyfills.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/runtime.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/runtime.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/runtime.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/runtime.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/shadow-css-a3f00b33-js.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/shadow-css-a3f00b33-js.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/shadow-css-d7d058ec-d59cb009-js.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/shadow-css-d7d058ec-d59cb009-js.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/sign-in-sign-in-module.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/sign-in-sign-in-module.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/sign-in-sign-in-module.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/sign-in-sign-in-module.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/status-tap-bdecfebf-js.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/status-tap-bdecfebf-js.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/stencil-polyfills-css-shim.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/stencil-polyfills-css-shim.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/stencil-polyfills-dom.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/stencil-polyfills-dom.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/styles.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/styles.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/swipe-back-ee838cf8-js.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/swipe-back-ee838cf8-js.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/swiper-bundle-44a9b1f9-js.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/swiper-bundle-44a9b1f9-js.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/tap-click-cc1ae2b2-js.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/tap-click-cc1ae2b2-js.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/task-details-task-details-module.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/task-details-task-details-module.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/task-task-module.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/task-task-module.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/vendor.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/vendor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/public/vendor.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/public/vendor.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/capacitor-cordova-android-plugins/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/capacitor-cordova-android-plugins/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ionic.config.json" beforeDir="false" afterPath="$PROJECT_DIR$/../ionic.config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/plan-form-next/plan-form-next.page.html" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/plan-form-next/plan-form-next.page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/plan-form-next/plan-form-next.page.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/plan-form-next/plan-form-next.page.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,18 +206,22 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectId" id="1sdcuXLayFAhOxM9YtvYUXUjFZp" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="project.structure.last.edited" value="SDK Location" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -75,19 +244,39 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="435" y="188" key="#Notifications" timestamp="1621206162869">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="435" y="188" key="#Notifications/0.0.1366.728@0.0.1366.728" timestamp="1621206162869" />
-    <state x="200" y="110" key="#PSD" timestamp="1621207072032">
+    <state x="200" y="110" key="#PSD" timestamp="1621334081720">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="200" y="110" key="#PSD/0.0.1366.728@0.0.1366.728" timestamp="1621207072032" />
-    <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1621207069874">
+    <state x="200" y="110" key="#PSD/0.0.1366.728@0.0.1366.728" timestamp="1621334081720" />
+    <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1621332865337">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1621207069874" />
+    <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1621332865337" />
+    <state x="92" y="92" width="1182" height="544" key="AVDManager" timestamp="1621332939399">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="92" y="92" width="1182" height="544" key="AVDManager/0.0.1366.728@0.0.1366.728" timestamp="1621332939399" />
+    <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1621334560608">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1621334560608" />
+    <state x="184" y="9" key="SettingsEditor" timestamp="1621332360268">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1621332360268" />
+    <state x="339" y="162" key="run.anything.popup" timestamp="1621332648165">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1621332648165" />
   </component>
 </project>

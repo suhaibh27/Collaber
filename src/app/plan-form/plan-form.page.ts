@@ -19,6 +19,7 @@ export class PlanFormPage implements OnInit {
   ngOnInit() {
   }
   create(){
+    this.error=false;
     if(this.title.length<=0){
       this.error=true;
     }

@@ -17,8 +17,8 @@
     <div *ngIf="displayPlans">
     <ion-row *ngFor="let plan of plans; let i = index " >
       <ion-item-divider class='divider' >
-      <ion-col  size="1">
-        <ion-img style="height:24px; width: 24px;" src="..\..\assets\icon\planning.png"></ion-img>
+      <ion-col class="ion-margin-end" size="1">
+        <ion-icon class="ion-margin-end" size='large' src='../../assets/icon/planning.svg'></ion-icon>
       </ion-col>
       <ion-col (click)='viewPlan(plan.id)' size="9">
        <h4  class='mfont' style="margin-top:0px ;">
@@ -42,8 +42,8 @@
     <div *ngIf="displaylists">
     <ion-row *ngFor="let list of contLists; let i = index " >
       <ion-item-divider class='divider' >
-      <ion-col  size="1">
-        <ion-img style="height:24px; width: 24px;" src="..\..\assets\icon\attendant-list.png"></ion-img>
+      <ion-col class="ion-margin-end" size="1">
+        <ion-icon class="ion-margin-end" size='large' src='../../assets/icon/shopping-list.svg'></ion-icon>
       </ion-col>
       <ion-col (click)='viewList(list.id)' size="9">
        <h4  class='mfont' style="margin-top:0px ;">

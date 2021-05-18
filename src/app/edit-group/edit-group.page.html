@@ -37,7 +37,7 @@
       </ion-item>
     </ion-card-content>
     <div  style="text-align-last: center;">
-      <ion-button *ngIf="!view" (click)='presentconAlert()'>Save</ion-button>
+      <ion-button color='medium' *ngIf="!view" (click)='presentconAlert()'>Save</ion-button>
     </div>
   </ion-card>
   <div *ngIf="this.usersNames.length>0">
@@ -54,7 +54,7 @@
           <span style="font-size: large;color: green; vertical-align: -webkit-baseline-middle;">Admin</span>
           </ion-col>
           <ion-col size='2'>
-            &nbsp; <ion-button *ngIf="!view" (click)='presentDemoteActionSheet(user.userID,usersNames[i].username,i)'><ion-icon name="create-outline"></ion-icon></ion-button>
+            &nbsp; <ion-button color='medium' *ngIf="!view" (click)='presentDemoteActionSheet(user.userID,usersNames[i].username,i)'><ion-icon name="create-outline"></ion-icon></ion-button>
           </ion-col>
           </div>
         <div *ngIf="user.isAdmin==false">
@@ -62,7 +62,7 @@
             <span style="font-size: large;color: blue; vertical-align: -webkit-baseline-middle;">Member</span>
           </ion-col>
           <ion-col class="align-items-end" size='1'>
-            <ion-button *ngIf="!view" (click)='presentActionSheet(user.userID,usersNames[i].username,i)'><ion-icon name="create-outline"></ion-icon></ion-button>
+            <ion-button color='medium' *ngIf="!view" (click)='presentActionSheet(user.userID,usersNames[i].username,i)'><ion-icon name="create-outline"></ion-icon></ion-button>
           </ion-col>
           </div>
       </ion-item-divider>

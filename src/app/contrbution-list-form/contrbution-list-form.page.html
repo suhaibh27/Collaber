@@ -26,24 +26,24 @@
   <ion-item class="ion-align-items-center">
     <ion-label class='mlables' position='stacked'>Location link </ion-label><ion-note style="font-size: small;" class="ion-margin-top">note: you can use google maps or an online meeting link</ion-note>
     <ion-input placeholder="location link that users can follow" style="--padding-start: 10px;"  [(ngModel)]='locLink'></ion-input>
-    <ion-button (click)='presentModal()' class="ion-margin" class='primary'><ion-icon color="light" name="map-outline"></ion-icon>Maps</ion-button>
-  </ion-item>
-<ion-item lines='none'>
-  <ion-label class='mlables class="ion-no-margin"' position="stacked">
+    <ion-button color='medium' (click)='presentModal()' class="ion-margin" class='primary'><ion-icon color="light" name="map-outline"></ion-icon>Maps</ion-button>
+  </ion-item><br>
+  <ion-label style="margin:16px" class='mlables class="ion-margin"' position="stacked">
     Date & Time
   </ion-label>
-</ion-item>
   <ion-item class="ion-no-margin">
     <ion-button fill='clear' class="mpickers">
       <ion-icon class="mMargin-bottom" name="calendar-outline"></ion-icon>
       <ion-datetime [(ngModel)]="date"  class="ion-margin"></ion-datetime>
     </ion-button>
+    </ion-item>
+    <ion-item>
     <ion-button fill='clear' class="mpickers">
       <ion-icon class="mMargin-bottom ion-margin-start" name="time-outline"></ion-icon>
       <ion-datetime class="ion-margin" display-format="h:mm A" picker-format="h:mm A" [(ngModel)]="date"></ion-datetime>
     </ion-button>
   </ion-item>
 
-  <ion-button  (click)='save()' expand='block'>Save</ion-button>
+  <ion-button color='medium' (click)='save()' expand='block'>Save</ion-button>
 
 </ion-content>

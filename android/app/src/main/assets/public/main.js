@@ -74,6 +74,43 @@ ResponsePage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 /***/ }),
 
+/***/ "5MzG":
+/*!*******************************************!*\
+  !*** ./src/app/map/map-routing.module.ts ***!
+  \*******************************************/
+/*! exports provided: MapPageRoutingModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MapPageRoutingModule", function() { return MapPageRoutingModule; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var _map_page__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./map.page */ "SQ20");
+
+
+
+
+const routes = [
+    {
+        path: '',
+        component: _map_page__WEBPACK_IMPORTED_MODULE_3__["MapPage"]
+    }
+];
+let MapPageRoutingModule = class MapPageRoutingModule {
+};
+MapPageRoutingModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+        imports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forChild(routes)],
+        exports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"]],
+    })
+], MapPageRoutingModule);
+
+
+
+/***/ }),
+
 /***/ "AkbP":
 /*!*****************************************************!*\
   !*** ./src/app/response/response-routing.module.ts ***!
@@ -414,6 +451,170 @@ GroupsServiceService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])(
 
 /***/ }),
 
+/***/ "SQ20":
+/*!*********************************!*\
+  !*** ./src/app/map/map.page.ts ***!
+  \*********************************/
+/*! exports provided: MapPage */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MapPage", function() { return MapPage; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
+/* harmony import */ var _raw_loader_map_page_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! raw-loader!./map.page.html */ "jBmT");
+/* harmony import */ var _map_page_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./map.page.scss */ "je6D");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ "TEn/");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _agm_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @agm/core */ "pxUr");
+
+
+
+
+/* eslint-disable @angular-eslint/use-lifecycle-interface */
+/* eslint-disable quote-props */
+/* eslint-disable prefer-const */
+/* eslint-disable new-parens */
+/* eslint-disable @typescript-eslint/member-ordering */
+/* eslint-disable @typescript-eslint/quotes */
+
+
+let MapPage = class MapPage {
+    constructor(modalController, zone, mapsAPILoader, ngZone) {
+        this.modalController = modalController;
+        this.zone = zone;
+        this.mapsAPILoader = mapsAPILoader;
+        this.ngZone = ngZone;
+        this.options = {
+            componentRestrictions: { country: "bh" },
+            fields: ["formatted_address", "geometry", "name"],
+            strictBounds: false,
+            types: ["establishment"],
+        };
+        this.location = {
+            latitude: 19.0760,
+            longitude: 72.8777,
+            zoom: 200,
+            isFullScreen: true,
+            markers: [
+                {
+                    lat: 19.0760,
+                    lng: 72.8777,
+                    draggable: true
+                }
+            ]
+        };
+    }
+    ngOnInit() {
+        //load Places Autocomplete
+        this.mapsAPILoader.load().then(() => {
+            this.setCurrentLocation();
+            this.geoCoder = new google.maps.Geocoder;
+            let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, this.options);
+            autocomplete.addListener("place_changed", () => {
+                this.ngZone.run(() => {
+                    //get the place result
+                    let place = autocomplete.getPlace();
+                    //verify result
+                    if (place.geometry === undefined || place.geometry === null) {
+                        return;
+                    }
+                    //set latitude, longitude and zoom
+                    this.location.latitude = place.geometry.location.lat();
+                    this.location.longitude = place.geometry.location.lng();
+                    this.location.markers[0].lat = place.geometry.location.lat();
+                    this.location.markers[0].lng = place.geometry.location.lng();
+                    this.location.zoom = 18;
+                });
+            });
+        });
+    }
+    setCurrentLocation() {
+        if ('geolocation' in navigator) {
+            navigator.geolocation.getCurrentPosition((position) => {
+                this.location.latitude = position.coords.latitude;
+                this.location.longitude = position.coords.longitude;
+                this.location.markers[0].lat = position.coords.latitude;
+                this.location.markers[0].lng = position.coords.longitude;
+                this.location.zoom = 8;
+                this.getAddress(this.location.latitude, this.location.longitude);
+            });
+        }
+    }
+    markerDragEnd($event) {
+        console.log($event);
+        this.location.markers[0].lat = $event.latLng.lat();
+        this.location.markers[0].lng = $event.latLng.lng();
+        this.getAddress(this.location.latitude, this.location.longitude);
+    }
+    /**mapClicked($event: google.maps.MouseEvent) {
+      console.log($event);
+      this.location.markers[0].lat = $event.latLng.lat();
+      this.location.markers[0].lng = $event.latLng.lng();
+      this.getAddress(this.location.latitude, this.location.longitude);
+    }*/
+    getAddress(latitude, longitude) {
+        this.geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results, status) => {
+            console.log(results);
+            console.log(status);
+            if (status === 'OK') {
+                if (results[0]) {
+                    this.location.zoom = 12;
+                    //this.address = results[0].formatted_address;
+                }
+                else {
+                    window.alert('No results found');
+                }
+            }
+            else {
+                window.alert('Geocoder failed due to: ' + status);
+            }
+        });
+    }
+    mapReadyHandler(map) {
+        this.map = map;
+        this.mapClickListener = this.map.addListener('click', (e) => {
+            this.zone.run(() => {
+                this.location.markers[0].lat = e.latLng.lat();
+                this.location.markers[0].lng = e.latLng.lng();
+                // Here we can get correct event
+                console.log(e.latLng.lat(), e.latLng.lng());
+            });
+        });
+    }
+    save() {
+        this.modalController.dismiss(this.location.markers[0]);
+    }
+    cancel() {
+        this.modalController.dismiss('cancel');
+    }
+    ngOnDestroy() {
+        if (this.mapClickListener) {
+            this.mapClickListener.remove();
+        }
+    }
+};
+MapPage.ctorParameters = () => [
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ModalController"] },
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_4__["NgZone"] },
+    { type: _agm_core__WEBPACK_IMPORTED_MODULE_5__["MapsAPILoader"] },
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_4__["NgZone"] }
+];
+MapPage.propDecorators = {
+    searchElementRef: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_4__["ViewChild"], args: ['search', { static: false },] }]
+};
+MapPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_4__["Component"])({
+        selector: 'app-map',
+        template: _raw_loader_map_page_html__WEBPACK_IMPORTED_MODULE_1__["default"],
+        styles: [_map_page_scss__WEBPACK_IMPORTED_MODULE_2__["default"]]
+    })
+], MapPage);
+
+
+
+/***/ }),
+
 /***/ "Soql":
 /*!*********************************************!*\
   !*** ./src/app/response/response.page.scss ***!
@@ -440,17 +641,62 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
 /* harmony import */ var _raw_loader_app_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! raw-loader!./app.component.html */ "VzVu");
 /* harmony import */ var _app_component_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./app.component.scss */ "ynWL");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ "TEn/");
+/* harmony import */ var _users_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./users.service */ "U0XV");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ "fXoL");
 
 
 
+
+
+/* eslint-disable @typescript-eslint/quotes */
 
 let AppComponent = class AppComponent {
-    constructor() { }
+    constructor(loadingController, userSrv) {
+        this.loadingController = loadingController;
+        this.userSrv = userSrv;
+        this.sideMenu();
+    }
+    sideMenu() {
+        this.navigate =
+            [
+                {
+                    title: "Home",
+                    url: "/home",
+                    icon: "home"
+                },
+                {
+                    title: "Profile",
+                    url: "/profile/QSqITrKDOZPEY7qo68OnkTsXF8q1",
+                    icon: "person"
+                },
+                {
+                    title: "New Group",
+                    url: "/create-group-form",
+                    icon: "add"
+                },
+            ];
+    }
+    signout() {
+        this.presentLoading();
+        this.userSrv.signOut().then(() => this.loadingController.dismiss()).catch(er => alert(er.message));
+    }
+    presentLoading() {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            const loading = yield this.loadingController.create({
+                cssClass: 'my-custom-class',
+                message: 'Please wait...',
+            });
+            yield loading.present();
+        });
+    }
 };
-AppComponent.ctorParameters = () => [];
+AppComponent.ctorParameters = () => [
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["LoadingController"] },
+    { type: _users_service__WEBPACK_IMPORTED_MODULE_4__["UsersService"] }
+];
 AppComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_5__["Component"])({
         selector: 'app-root',
         template: _raw_loader_app_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
         styles: [_app_component_scss__WEBPACK_IMPORTED_MODULE_2__["default"]]
@@ -587,6 +833,95 @@ GrouppopoverComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])
 
 /***/ }),
 
+/***/ "U0XV":
+/*!**********************************!*\
+  !*** ./src/app/users.service.ts ***!
+  \**********************************/
+/*! exports provided: UsersService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UsersService", function() { return UsersService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/fire/firestore */ "I/3d");
+/* harmony import */ var _angular_fire_auth__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/fire/auth */ "UbJi");
+
+/* eslint-disable curly */
+/* eslint-disable @typescript-eslint/naming-convention */
+
+
+
+let UsersService = class UsersService {
+    constructor(afAuth, afs) {
+        this.afAuth = afAuth;
+        this.afs = afs;
+        this.currentUser = null;
+        this.afAuth.onAuthStateChanged((user) => {
+            this.currentUser = user;
+        });
+    }
+    createUser() {
+        return;
+    }
+    signup({ email, password, name, usrname, phone, }) {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            const credential = yield this.afAuth.createUserWithEmailAndPassword(email, password);
+            const uid = credential.user.uid;
+            return this.afs.doc(`users/${uid}`).set({
+                userID: uid,
+                email: credential.user.email,
+                phoneNumber: phone,
+                username: usrname,
+                Name: name
+            });
+        });
+    }
+    signIn({ email, password }) {
+        return this.afAuth.signInWithEmailAndPassword(email, password);
+    }
+    signOut() {
+        return this.afAuth.signOut();
+    }
+    getUsers(val) {
+        this.usersCollectionRef = this.afs.collection('users', ref => ref.where('username', '==', val));
+        this.usersCollectionRef.get().subscribe(res => res.docs.forEach(a => console.log(a.data())));
+        return this.usersCollectionRef.get();
+    }
+    getUser(id) {
+        return this.afs.collection('users', ref => ref.where('username', '==', id)).get();
+    }
+    getUserbyID(id) {
+        return this.afs.collection('users').doc(id);
+    }
+    searchUser(id) {
+        return this.afs.collection('users', ref => ref.orderBy('username').where('username', '>=', id).where('username', '<', id + '\uf8ff'))
+            .get();
+    }
+    updateUser(id, data) {
+        return this.afs.collection('users').doc(id).set(data);
+    }
+    deleteUser() {
+    }
+    checkDuplicate() {
+        return this.afs.collection('users').get();
+    }
+};
+UsersService.ctorParameters = () => [
+    { type: _angular_fire_auth__WEBPACK_IMPORTED_MODULE_3__["AngularFireAuth"] },
+    { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_2__["AngularFirestore"] }
+];
+UsersService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
+    })
+], UsersService);
+
+
+
+/***/ }),
+
 /***/ "VzVu":
 /*!**************************************************************************!*\
   !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/app.component.html ***!
@@ -596,7 +931,7 @@ GrouppopoverComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-app>\n  <ion-router-outlet></ion-router-outlet>\n</ion-app>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-app>\n  <ion-menu side=\"start\" menuId=\"first\" contentId=\"content1\">\n    <ion-header>\n      <ion-toolbar class=\"myBackgroundColor\">\n        <ion-buttons slot=\"start\">\n        <ion-menu-button color='light'></ion-menu-button>\n      </ion-buttons>\n        <ion-title color='light'>Menu</ion-title>\n      </ion-toolbar>\n    </ion-header>\n    <ion-content>\n      <ion-list *ngFor=\"let pages of navigate\">\n      <ion-menu-toggle auto-hide=\"true\">\n        <ion-item [routerLink]=\"pages.url\" routerDirection=\"forward\">\n            <ion-icon [name]=\"pages.icon\" slot=\"start\"></ion-icon>\n                {{pages.title}}\n        </ion-item>\n      </ion-menu-toggle>\n      </ion-list>\n      <div class='menu'>\n        <ion-item (click)='signout()' class=\"ion-margin-top\" color='medium' >\n          <ion-icon name=\"log-out-outline\" slot=\"start\"></ion-icon>\n          Signout\n        </ion-item>\n    </div>\n    </ion-content>\n  </ion-menu>\n\n  <ion-router-outlet id=\"content1\"></ion-router-outlet>\n</ion-app>\n");
 
 /***/ }),
 
@@ -642,9 +977,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_media_ngx__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @ionic-native/media/ngx */ "9YJ4");
 /* harmony import */ var _ionic_native_streaming_media_ngx__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @ionic-native/streaming-media/ngx */ "RU0F");
 /* harmony import */ var _ionic_native_photo_viewer_ngx__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @ionic-native/photo-viewer/ngx */ "U3FU");
+/* harmony import */ var _map_map_module__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./map/map.module */ "yX1w");
 
 /* eslint-disable @typescript-eslint/quotes */
 /* eslint-disable max-len */
+
 
 
 
@@ -674,7 +1011,7 @@ AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
             _angular_fire_storage__WEBPACK_IMPORTED_MODULE_8__["AngularFireStorageModule"],
             _app_routing_module__WEBPACK_IMPORTED_MODULE_11__["AppRoutingModule"],
             _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_7__["AngularFirestoreModule"].enablePersistence(),
-            _response_response_module__WEBPACK_IMPORTED_MODULE_12__["ResponsePageModule"]
+            _response_response_module__WEBPACK_IMPORTED_MODULE_12__["ResponsePageModule"], _map_map_module__WEBPACK_IMPORTED_MODULE_19__["MapPageModule"]
         ],
         providers: [_ionic_native_image_picker_ngx__WEBPACK_IMPORTED_MODULE_13__["ImagePicker"],
             _ionic_native_media_capture_ngx__WEBPACK_IMPORTED_MODULE_15__["MediaCapture"],
@@ -688,6 +1025,32 @@ AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 ], AppModule);
 
 
+
+/***/ }),
+
+/***/ "jBmT":
+/*!*************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/map/map.page.html ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header [translucent]=\"true\">\r\n  <ion-toolbar class=\"myBackgroundColor\">\r\n    <ion-title color='light'>\r\n      Map\r\n    </ion-title>\r\n      <ion-button fill=clear  style=\"font-size: large;\" slot=\"end\" (click)=\"cancel()\" color='light' defaultHref=\"home\"><ion-icon name=\"close-outline\"></ion-icon></ion-button>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content [fullscreen]=\"true\">\r\n  <ion-item style=\"width: 100%;\">\r\n    <input style=\"width: 100%;\" type=\"text\" class=\"native-input sc-ion-input-ios\" (keydown.enter)=\"$event.preventDefault()\" placeholder=\"Search Nearest Location\" autocorrect=\"off\" autocapitalize=\"off\" spellcheck=\"off\" type=\"text\" #search>\r\n  </ion-item>\r\n  <agm-map\r\n      [latitude]=\"location.latitude\"\r\n      [longitude]=\"location.longitude\"\r\n      [zoom]=\"location.zoom\"\r\n\r\n      (mapReady)=\"mapReadyHandler($event)\">\r\n      <agm-marker *ngFor=\"let marker of location.markers\"\r\n                [latitude]=\"marker.lat\"\r\n                [longitude]=\"marker.lng\"\r\n                draggable=\"true\"\r\n                (dragEnd)=\"markerDragEnd($event)\"\r\n                >\r\n    </agm-marker>\r\n  </agm-map>\r\n  <ion-button (click)=\"save()\" expand ='full'>Save</ion-button>\r\n</ion-content>\r\n");
+
+/***/ }),
+
+/***/ "je6D":
+/*!***********************************!*\
+  !*** ./src/app/map/map.page.scss ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("agm-map {\n  height: 80%;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXG1hcC5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxXQUNGO0FBQUEiLCJmaWxlIjoibWFwLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImFnbS1tYXB7XHJcbiAgaGVpZ2h0OiA4MCVcclxufVxyXG4iXX0= */");
 
 /***/ }),
 
@@ -952,7 +1315,7 @@ const redirectLoggedInToHome = () => Object(_angular_fire_auth_guard__WEBPACK_IM
 const routes = [
     {
         path: 'home',
-        loadChildren: () => Promise.all(/*! import() | home-home-module */[__webpack_require__.e("common"), __webpack_require__.e("home-home-module")]).then(__webpack_require__.bind(null, /*! ./home/home.module */ "ct+p")).then(m => m.HomePageModule),
+        loadChildren: () => __webpack_require__.e(/*! import() | home-home-module */ "home-home-module").then(__webpack_require__.bind(null, /*! ./home/home.module */ "ct+p")).then(m => m.HomePageModule),
     },
     {
         path: '',
@@ -961,7 +1324,7 @@ const routes = [
     },
     {
         path: 'sign-in',
-        loadChildren: () => Promise.all(/*! import() | sign-in-sign-in-module */[__webpack_require__.e("common"), __webpack_require__.e("sign-in-sign-in-module")]).then(__webpack_require__.bind(null, /*! ./sign-in/sign-in.module */ "FuQ6")).then(m => m.SignInPageModule),
+        loadChildren: () => __webpack_require__.e(/*! import() | sign-in-sign-in-module */ "sign-in-sign-in-module").then(__webpack_require__.bind(null, /*! ./sign-in/sign-in.module */ "FuQ6")).then(m => m.SignInPageModule),
     },
     {
         path: 'edit-group/:id/:view',
@@ -969,7 +1332,7 @@ const routes = [
     },
     {
         path: 'create-group-form',
-        loadChildren: () => Promise.all(/*! import() | create-group-form-create-group-form-module */[__webpack_require__.e("common"), __webpack_require__.e("create-group-form-create-group-form-module")]).then(__webpack_require__.bind(null, /*! ./create-group-form/create-group-form.module */ "SmK0")).then(m => m.CreateGroupFormPageModule)
+        loadChildren: () => __webpack_require__.e(/*! import() | create-group-form-create-group-form-module */ "create-group-form-create-group-form-module").then(__webpack_require__.bind(null, /*! ./create-group-form/create-group-form.module */ "SmK0")).then(m => m.CreateGroupFormPageModule)
     },
     {
         path: 'create-group-next/:users',
@@ -1028,8 +1391,16 @@ const routes = [
         loadChildren: () => __webpack_require__.e(/*! import() | chat-chat-module */ "chat-chat-module").then(__webpack_require__.bind(null, /*! ./chat/chat.module */ "2yxt")).then(m => m.ChatPageModule)
     },
     {
-        path: 'files',
-        loadChildren: () => __webpack_require__.e(/*! import() | files-files-module */ "files-files-module").then(__webpack_require__.bind(null, /*! ./files/files.module */ "UEel")).then(m => m.FilesPageModule)
+        path: 'map',
+        loadChildren: () => Promise.resolve(/*! import() */).then(__webpack_require__.bind(null, /*! ./map/map.module */ "yX1w")).then(m => m.MapPageModule)
+    },
+    {
+        path: 'profile/:id',
+        loadChildren: () => __webpack_require__.e(/*! import() | profile-profile-module */ "profile-profile-module").then(__webpack_require__.bind(null, /*! ./profile/profile.module */ "cRhG")).then(m => m.ProfilePageModule)
+    },
+    {
+        path: 'profile-form/:id',
+        loadChildren: () => __webpack_require__.e(/*! import() | profile-form-profile-form-module */ "profile-form-profile-form-module").then(__webpack_require__.bind(null, /*! ./profile-form/profile-form.module */ "Usns")).then(m => m.ProfileFormPageModule)
     },
 ];
 let AppRoutingModule = class AppRoutingModule {
@@ -1047,6 +1418,54 @@ AppRoutingModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 /***/ }),
 
+/***/ "yX1w":
+/*!***********************************!*\
+  !*** ./src/app/map/map.module.ts ***!
+  \***********************************/
+/*! exports provided: MapPageModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MapPageModule", function() { return MapPageModule; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "ofXK");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "3Pt+");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "TEn/");
+/* harmony import */ var _map_routing_module__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./map-routing.module */ "5MzG");
+/* harmony import */ var _map_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./map.page */ "SQ20");
+/* harmony import */ var _agm_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @agm/core */ "pxUr");
+
+
+
+
+
+
+
+
+let MapPageModule = class MapPageModule {
+};
+MapPageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+        imports: [
+            _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
+            _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"],
+            _map_routing_module__WEBPACK_IMPORTED_MODULE_5__["MapPageRoutingModule"],
+            _agm_core__WEBPACK_IMPORTED_MODULE_7__["AgmCoreModule"].forRoot({
+                apiKey: 'AIzaSyDAHKx6qty0oKdh0qSdl1-iEWS1agQzf-w',
+                libraries: ['places']
+            })
+        ],
+        declarations: [_map_page__WEBPACK_IMPORTED_MODULE_6__["MapPage"]]
+    })
+], MapPageModule);
+
+
+
+/***/ }),
+
 /***/ "ynWL":
 /*!************************************!*\
   !*** ./src/app/app.component.scss ***!
@@ -1056,7 +1475,7 @@ AppRoutingModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".myBackgroundColor {\n  --background: #000f50;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcYXBwLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UscUJBQWE7QUFDZiIsImZpbGUiOiJhcHAuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIubXlCYWNrZ3JvdW5kQ29sb3J7XHJcbiAgLS1iYWNrZ3JvdW5kOiAjMDAwZjUwO1xyXG59XHJcbiJdfQ== */");
+/* harmony default export */ __webpack_exports__["default"] = (".myBackgroundColor {\n  --background: #000f50;\n}\n\n.menu {\n  padding-top: 20%;\n  height: -webkit-fill-available;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcYXBwLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UscUJBQWE7QUFDZjs7QUFDQTtFQUNFLGdCQUFnQjtFQUNoQiw4QkFBOEI7QUFFaEMiLCJmaWxlIjoiYXBwLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLm15QmFja2dyb3VuZENvbG9ye1xyXG4gIC0tYmFja2dyb3VuZDogIzAwMGY1MDtcclxufVxyXG4ubWVudSB7XHJcbiAgcGFkZGluZy10b3A6IDIwJTtcclxuICBoZWlnaHQ6IC13ZWJraXQtZmlsbC1hdmFpbGFibGU7XHJcblxyXG59XHJcbiJdfQ== */");
 
 /***/ }),
 

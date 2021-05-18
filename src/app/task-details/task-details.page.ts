@@ -17,6 +17,7 @@ import { ModalController } from '@ionic/angular';
 import { ResponsePage } from '../response/response.page';
 import { ActivatedRoute } from '@angular/router';
 import * as firebase from 'firebase';
+import { take } from 'rxjs/operators';
 
 
 @Component({
@@ -46,22 +47,31 @@ export class TaskDetailsPage implements OnInit {
   finishers=[];
   newStep=false;
   stepTitle='';
-  titles=[];
   constructor( public modalController:ModalController, private taskSrv: TasksService,private activatedRoute: ActivatedRoute,
     ) {
-    this.taskSrv.getTask(this.activatedRoute.snapshot.paramMap.get('id')).subscribe(res=>{
+    this.taskSrv.getTask(this.activatedRoute.snapshot.paramMap.get('id')).pipe(take(1)).subscribe(res=>{
+                                                                            this.username={username:'',phoneNumber:''};
+
                                                                             console.log(this.task=res.data() );
                                                                             this.title=this.task.title;
                                                                             this.creationDate=this.toDateTime(this.task.creationDate).slice(0,21);
                                                                             this.dueDate=this.toDateTime(this.task.dueDate).slice(0,21);
                                                                             this.creator=this.task.creator;
                                                                             this.getUsername(this.creator);
+
+                                                                            this.b=[];
+                                                                            this.steps=[];
+                                                                            this.finishers=[];
+                                                                            this.count=0;
+                                                                            this.finished=0;
+                                                                            this.taskSrv.getSteps(res.id).pipe(take(1)).subscribe(re=>{re.forEach(step=>{this.steps.push(step);this.b.push(step.data().isFinished);});
+                                                                                          this.calcProgress();this.finisherName();});
+                                                                            this.taskSrv.getComments(this.activatedRoute.snapshot.paramMap.get('id')).pipe(take(1)).subscribe(rer=>rer.forEach(comment=>{this.comments.push(comment.data());this.addCommenter(comment.data().senderID);}));
+
                                                                           });
   }
   ngOnInit() {
-    this.taskSrv.getSteps(this.activatedRoute.snapshot.paramMap.get('id')).subscribe(res=>{res.forEach(step=>{this.titles.push(step.data());this.steps.push(step);this.b.push(step.data().isFinished);});
-                                                                                          this.calcProgress(this.activatedRoute.snapshot.paramMap.get('id'));this.finisherName();});
-    this.taskSrv.getComments(this.activatedRoute.snapshot.paramMap.get('id')).subscribe(res=>res.forEach(comment=>{this.comments.push(comment.data());this.addCommenter(comment.data().senderID);}));
+
 }
 //for the date type it will differ from the firestore so you can use the best method to show DD-MM-YYYY in the tasks page
   respond(index){
@@ -77,7 +87,8 @@ export class TaskDetailsPage implements OnInit {
     });
     return await modal.present();
   }
-  calcProgress(id){
+  calcProgress(){
+    this.finished=0;
     if(this.b.length>0){
       let mcolor='blue';
       console.log(this.b.length);
@@ -114,26 +125,11 @@ export class TaskDetailsPage implements OnInit {
     this.taskSrv.getuser(id).subscribe(res=>{name=res.data(); this.commenters.push(name.username);});
   }
   checkboxHandler(id,index){
+    let val=false;
     if(this.b[index])
-      {this.finished++;this.Ifinished(id);}
-    else{this.finished--;}
-    this.taskSrv.stepCheckHandeler(this.activatedRoute.snapshot.paramMap.get('id'),id,'IoBBNSa8mNwXQbm8vrIP');
-    this.updateProgress();
-  }
-  updateProgress(){
-    let mcolor='';
-    this.progress=Math.round((this.finished/this.count)*100);
-    if(this.progress<100){
-      this.sts="uncompleted";
-      this.clr="primary";
-      mcolor='#3880ff';
-    }else if(this.progress==100){
-      this.sts="Completed";
-      this.clr="success";
-      mcolor='#2dd36f';
-    }
-    if (this.progress==0){mcolor='#bcd4f3';}
-    this.mstyle='width:'+this.progress+'%; background-color:'+mcolor;
+      {this.Ifinished(id); val=true;}
+    this.taskSrv.stepCheckHandeler(this.activatedRoute.snapshot.paramMap.get('id'),id,'IoBBNSa8mNwXQbm8vrIP',val);
+    this.calcProgress();
   }
   sendComment(){
     if(this.comment.length<1){
@@ -141,9 +137,9 @@ export class TaskDetailsPage implements OnInit {
     }
     console.log(this.comments,this.commenters);
     let mtimeStamp=firebase.default.firestore.Timestamp.now();
-    this.comments.push({comment:this.comment,senderID:'QSqITrKDOZPEY7qo68OnkTsXF8q1',date:mtimeStamp});
-    this.getUsername('QSqITrKDOZPEY7qo68OnkTsXF8q1');
-    this.taskSrv.sendComment(this.comment,'QSqITrKDOZPEY7qo68OnkTsXF8q1',mtimeStamp,this.activatedRoute.snapshot.paramMap.get('id'));
+    this.comments.push({comment:this.comment,senderID:'IoBBNSa8mNwXQbm8vrIP',date:mtimeStamp});
+    this.getUsername('IoBBNSa8mNwXQbm8vrIP');
+    this.taskSrv.sendComment(this.comment,'IoBBNSa8mNwXQbm8vrIP',mtimeStamp,this.activatedRoute.snapshot.paramMap.get('id'));
     this.comment='';
   }
   doRefresh(ev){
@@ -156,9 +152,7 @@ export class TaskDetailsPage implements OnInit {
     this.finishers.push({stepid:res.id,name:''});
     });
     this.newStep=false;
-    this.titles.push({title:this.stepTitle});
     this.b.push(false);
-    this.count++;
   }
   deleteStep(id){
     return;
@@ -190,7 +184,7 @@ export class TaskDetailsPage implements OnInit {
   Ifinished(id){
     for(let i=0;i<this.finishers.length;i++){
       if(this.finishers[i].stepid==id){
-        this.finishers[i]={stepid:id,name:'me'};
+        this.finishers[i]={stepid:id,name:'Ahmad'};
       }
 
     }

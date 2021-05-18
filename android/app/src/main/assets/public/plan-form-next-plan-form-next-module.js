@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar class='myBackgroundColor'>\n    <ion-title color='light'>Add a task</ion-title>\n    <ion-buttons slot=\"start\">\n      <ion-back-button color='light' defaultHref=\"home\"></ion-back-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-content>\n    <ion-list>\n      <ion-item>\n        <ion-label position='stacked' style=\"font-size: x-large;\">Title</ion-label>\n        <ion-input [(ngModel)]=\"title\"></ion-input>\n        <ion-text *ngIf=\"error\"  color='danger'><ion-icon color='danger' name=\"alert-circle-outline\"></ion-icon>Please fill the Title</ion-text>\n      </ion-item>\n      <br>\n      <ion-item>\n        <ion-label position='stacked' style=\"font-size: x-large;\">Description</ion-label>\n        <ion-textarea [(ngModel)]=\"desc\"></ion-textarea>\n      </ion-item><br>\n      <ion-item>\n        <ion-label class=\"ion-margin\" position='stacked' style=\"font-size: x-large;\" >Due Date <ion-icon name=\"calendar-outline\"></ion-icon></ion-label>\n        <ion-datetime class=\"ion-margin\" placeholder=\"Select Date\" [(ngModel)]=\"date\" ></ion-datetime>\n        <ion-datetime placeholder='Select Time' class=\"ion-margin\" display-format=\"h:mm A\" picker-format=\"h:mm A\" [(ngModel)]=\"date\"></ion-datetime>\n\n      </ion-item>\n\n    </ion-list>\n\n    <ion-card id=\"subtaskcard\" *ngFor=\"let item of list; let i=index\">\n      <ion-grid>\n        <ion-row>\n          <ion-col size=\"1\"></ion-col>\n          <ion-col size=\"7\"> <ion-input style=\"font-size: large;\" placeholder=\"Sub task Name\" [disabled]=\"list[i].dis\" [(ngModel)]=\"list[i].title\"></ion-input></ion-col>\n          <ion-col size=\"2\">\n            <ion-button fill=\"none\" (click)=\"done(i)\" ><ion-icon name=\"checkmark-outline\" color=\"success\" ></ion-icon></ion-button></ion-col>\n          <ion-col size=\"2\" *ngIf=\"list[i].dis==false\">\n            <ion-button fill=\"none\" (click)=\"del(i)\"><ion-icon name=\"trash-outline\" color=\"danger\"></ion-icon></ion-button>\n          </ion-col>\n        </ion-row>\n      </ion-grid>\n    </ion-card >\n    <ion-grid>\n      <ion-row>\n        <ion-col size=\"3\">\n        </ion-col>\n        <ion-col style='text-align-last: center;' size=\"4\" id=\"col\">  <ion-button color=\"medium\" fill=\"outline\"  shape=\"round\" (click)=\"add()\">add a subtask <ion-icon name=\"add-outline\"></ion-icon></ion-button></ion-col>\n        <ion-col size=\"4\"></ion-col>\n      </ion-row>\n    </ion-grid>\n\n    <ion-button expand=\"block\" color=\"medium\" (click)=\"create()\">Save Task!</ion-button>\n\n    </ion-content>\n</ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n  <ion-toolbar class='myBackgroundColor'>\r\n    <ion-title color='light'>Add a task</ion-title>\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button color='light' defaultHref=\"home\"></ion-back-button>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <ion-content>\r\n    <ion-list>\r\n      <ion-item>\r\n        <ion-label position='stacked' style=\"font-size: x-large;\">Title</ion-label>\r\n        <ion-input [(ngModel)]=\"title\"></ion-input>\r\n        <ion-text *ngIf=\"error\"  color='danger'><ion-icon color='danger' name=\"alert-circle-outline\"></ion-icon>Please fill the Title</ion-text>\r\n      </ion-item>\r\n      <br>\r\n      <ion-item>\r\n        <ion-label position='stacked' style=\"font-size: x-large;\">Description</ion-label>\r\n        <ion-textarea [(ngModel)]=\"desc\"></ion-textarea>\r\n      </ion-item><br>\r\n      <ion-item>\r\n        <ion-label class=\"ion-margin\" position='stacked' style=\"font-size: x-large;\" >Due Date <ion-icon name=\"calendar-outline\"></ion-icon></ion-label>\r\n        <ion-datetime class=\"ion-margin\" placeholder=\"Select Date\" [(ngModel)]=\"date\" ></ion-datetime>\r\n        <ion-datetime placeholder='Select Time' class=\"ion-margin\" display-format=\"h:mm A\" picker-format=\"h:mm A\" [(ngModel)]=\"date\"></ion-datetime>\r\n\r\n      </ion-item>\r\n\r\n    </ion-list>\r\n\r\n    <ion-card id=\"subtaskcard\" *ngFor=\"let item of list; let i=index\">\r\n      <ion-grid>\r\n        <ion-row>\r\n          <ion-col size=\"1\"></ion-col>\r\n          <ion-col size=\"7\"> <ion-input style=\"font-size: large;\" placeholder=\"Sub task Name\" [disabled]=\"list[i].dis\" [(ngModel)]=\"list[i].title\"></ion-input></ion-col>\r\n          <ion-col size=\"2\">\r\n            <ion-button fill=\"none\" (click)=\"done(i)\" ><ion-icon name=\"checkmark-outline\" color=\"success\" ></ion-icon></ion-button></ion-col>\r\n          <ion-col size=\"2\" *ngIf=\"list[i].dis==false\">\r\n            <ion-button fill=\"none\" (click)=\"del(i)\"><ion-icon name=\"trash-outline\" color=\"danger\"></ion-icon></ion-button>\r\n          </ion-col>\r\n        </ion-row>\r\n      </ion-grid>\r\n    </ion-card >\r\n    <ion-grid>\r\n      <ion-row>\r\n        <ion-col size=\"3\">\r\n        </ion-col>\r\n        <ion-col style='text-align-last: center;' size=\"4\" id=\"col\">  <ion-button color=\"medium\" fill=\"outline\"  shape=\"round\" (click)=\"add()\">add a subtask <ion-icon name=\"add-outline\"></ion-icon></ion-button></ion-col>\r\n        <ion-col size=\"4\"></ion-col>\r\n      </ion-row>\r\n    </ion-grid>\r\n\r\n    <ion-button expand=\"block\" color=\"medium\" (click)=\"sav()\">Save Task!</ion-button>\r\n\r\n    </ion-content>\r\n</ion-content>\r\n");
 
 /***/ }),
 
@@ -26,9 +26,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
 /* harmony import */ var _raw_loader_plan_form_next_page_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! raw-loader!./plan-form-next.page.html */ "3mk4");
 /* harmony import */ var _plan_form_next_page_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./plan-form-next.page.scss */ "nhRH");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "tyNb");
-/* harmony import */ var _tasks_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./../tasks.service */ "0KrY");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ "TEn/");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var _tasks_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./../tasks.service */ "0KrY");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ "fXoL");
+
 
 
 
@@ -46,7 +48,8 @@ __webpack_require__.r(__webpack_exports__);
 /* eslint-disable @typescript-eslint/member-ordering */
 
 let PlanFormNextPage = class PlanFormNextPage {
-    constructor(router, taskSrv, activatedRoute) {
+    constructor(alertController, router, taskSrv, activatedRoute) {
+        this.alertController = alertController;
         this.router = router;
         this.taskSrv = taskSrv;
         this.activatedRoute = activatedRoute;
@@ -70,20 +73,47 @@ let PlanFormNextPage = class PlanFormNextPage {
     done(index) {
         this.list[index].dis = true;
     }
-    create() {
-        //Add for validation .. i didnt know how to do it :)
+    presentAlertConfirm() {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            const alert = yield this.alertController.create({
+                header: 'Confirm!',
+                message: 'Are you sure you want to create this task',
+                buttons: [
+                    {
+                        text: 'No',
+                        role: 'cancel',
+                        cssClass: 'secondary',
+                        handler: (blah) => {
+                        }
+                    }, {
+                        text: 'Yes',
+                        handler: () => {
+                            this.create();
+                        }
+                    }
+                ]
+            });
+            yield alert.present();
+        });
+    }
+    sav() {
+        this.error = false;
         if (this.title.length <= 0) {
             this.error = true;
             return;
         }
+        this.presentAlertConfirm();
+    }
+    create() {
+        //Add for validation .. i didnt know how to do it :)
         let id = this.activatedRoute.snapshot.paramMap.get('id');
         this.array.push({ title: this.capitalizeFirstLetter(this.title), dueDate: this.date, subtasks: this.list });
         this.taskSrv.addTask(id, this.title, this.date, this.desc, this.list).then(res => {
             {
-                for (let i = 0; i <= this.list.length; i++) {
+                for (let i = 0; i < this.list.length; i++) {
                     this.taskSrv.addStep(this.list[i].title, res.id, i);
-                    this.router.navigateByUrl('task-details/' + res.id);
                 }
+                this.router.navigateByUrl('task-details/' + res.id);
             }
         });
     }
@@ -92,12 +122,13 @@ let PlanFormNextPage = class PlanFormNextPage {
     }
 };
 PlanFormNextPage.ctorParameters = () => [
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] },
-    { type: _tasks_service__WEBPACK_IMPORTED_MODULE_4__["TasksService"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
+    { type: _tasks_service__WEBPACK_IMPORTED_MODULE_5__["TasksService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"] }
 ];
 PlanFormNextPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_5__["Component"])({
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_6__["Component"])({
         selector: 'app-plan-form-next',
         template: _raw_loader_plan_form_next_page_html__WEBPACK_IMPORTED_MODULE_1__["default"],
         styles: [_plan_form_next_page_scss__WEBPACK_IMPORTED_MODULE_2__["default"]]

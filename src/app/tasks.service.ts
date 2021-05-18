@@ -1,3 +1,4 @@
+import { take } from 'rxjs/operators';
 /* eslint-disable guard-for-in */
 /* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/naming-convention */
@@ -31,20 +32,15 @@ export class TasksService {
     return this.afs.collection('users').doc(mid).get();
   }
   getSteps(taskID){
-   return this.afs.collection('tasks',ref=>ref.orderBy('order')).doc(taskID).collection('steps',ref=>ref.orderBy('order')).get();
+   return this.afs.collection('tasks').doc(taskID).collection('steps',ref=>ref.orderBy('order')).get();
   }
   getComments(taskID){
     return this.afs.collection('tasks').doc(taskID).collection('comments',ref=>ref.orderBy('date')).get();
   }
-  stepCheckHandeler(taskId,stepId,user){
+  stepCheckHandeler(taskId,stepId,user,val){
     const FieldValue = firebase.firestore.FieldValue;
-    let val;
-    this.afs.collection('tasks').doc(taskId).collection('steps').doc(stepId).get().subscribe(res=>{
-                                                                                    if(res.data().isFinished){
-                                                                                      val=false;
-                                                                                    }
-                                                                                    else{val=true;}
-                                                                                      this.afs.collection('tasks').doc(taskId).collection('steps').doc(stepId).update({isFinished: val});
+    this.afs.collection('tasks').doc(taskId).collection('steps').doc(stepId).get().pipe(take(1)).subscribe(res=>{
+                                                                                    this.afs.collection('tasks').doc(taskId).collection('steps').doc(stepId).update({isFinished: val});
                                                                                     if(val){
                                                                                       this.afs.collection('tasks').doc(taskId).collection('steps').doc(stepId).update({finisherID: user});
                                                                                     }
@@ -63,7 +59,6 @@ export class TasksService {
   addTask(pID,t,dueD,desc,stps){
     let timestampDate=firebase.firestore.Timestamp.fromDate(new Date(dueD));
     let tsCreationDate=firebase.firestore.Timestamp.fromDate(new Date());
-
     return this.afs.collection('tasks').add({planID:pID,creationDate:tsCreationDate,creator:'QSqITrKDOZPEY7qo68OnkTsXF8q1',title:t,dueDate:timestampDate,description:desc});
   }
 }

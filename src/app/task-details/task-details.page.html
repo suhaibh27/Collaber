@@ -14,10 +14,10 @@
   <h2 class="ion-text-center">
     <b>{{this.title.toUpperCase()}}</b>
   </h2>
-  <h2 class="ion-text-center ion-no-margin">
+  <h4 class="ion-text-center ion-no-margin">
     <ion-icon name="hourglass-outline"></ion-icon>
-            Due {{this.dueDate}}<ion-note *ngIf="isOverdue()" color='danger'>(Overdue)</ion-note>
-  </h2>
+            Due {{this.dueDate}}<ion-note style="font-size: small;" *ngIf="isOverdue()" color='danger'>(Overdue)</ion-note>
+  </h4>
   <ion-item-divider></ion-item-divider>
   <ion-grid>
     <ion-row id="firstRow">
@@ -32,16 +32,16 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <ion-card>
+  <ion-card style="margin-bottom: 0px;">
     <h3 style="color:cornflowerblue;" class="ion-text-center"> <b>Files and Media</b></h3>
 </ion-card>
   <ion-grid>
     <ion-row>
-      <ion-card id="subtasks-card">
+      <ion-card style="margin-bottom: 0px;" id="subtasks-card">
         <h3 class="ion-text-center"> <b>Sub-tasks</b><br><ion-note >swipe left to delete right to edit</ion-note>
         </h3>
-        <ion-card-content>
-          <ion-list  *ngFor="let item of titles;let i=index">
+        <ion-card-content style="padding-bottom: 24px;">
+          <ion-list  *ngFor="let item of steps;let i=index">
             <ion-item-sliding>
               <ion-item-options side="end">
                 <ion-item-option color='light'><ion-icon name="create-outline"></ion-icon></ion-item-option>
@@ -50,7 +50,7 @@
                 <ion-item-option (click)='deleteStep(steps[i].id)' color='light' ><ion-icon color='danger' name="trash-outline"></ion-icon></ion-item-option>
               </ion-item-options>
             <ion-item>
-              <ion-text>{{titles[i].title}} </ion-text>
+              <ion-text>{{item.data().title}} </ion-text>
               <span *ngIf="b[i]" slot="end" style="color:blue"> ({{fini(steps[i].id)}})</span>
               <ion-checkbox (ionChange)='checkboxHandler(steps[i].id,i)' [(ngModel)]="b[i]" slot="end" color="success"></ion-checkbox>
             </ion-item>
@@ -59,7 +59,7 @@
           <ion-item *ngIf="newStep">
             <ion-label >Title</ion-label>
             <ion-input [(ngModel)]="stepTitle" placeholder='What to do'></ion-input>
-            <ion-button color='dark' (click)='addStep()' fill='outline'><ion-icon name="add-circle-outline"></ion-icon></ion-button>
+            <ion-button style="height:50%;" color='dark' (click)='addStep()' fill='outline'><ion-icon name="add-circle-outline"></ion-icon></ion-button>
           </ion-item>
           <div style="height: 24px;">
             <ion-button (click)='newStep=true' expand='block' fill='outline'>
@@ -73,16 +73,16 @@
     <ion-row>
       <ion-card id="comments-card" >
         <h3 class="ion-text-center"> <b>Comments</b></h3>
-          <ion-card-content>
+          <ion-card-content class="ion-no-padding">
             <ion-list *ngFor="let item of comments; let i=index" >
               <ion-item>
                 <ion-grid>
                   <ion-row>
                     <ion-col size="10">
                       <ion-row id="title-row">
-                        <ion-text style="font-size: large;" color='primary'>{{commenters[i]}}</ion-text>
+                        <ion-text style="font-size: medium;" color='primary'>{{commenters[i]}}</ion-text>
                       </ion-row>
-                      <ion-row id="body-row"><ion-text>{{item.comment}}</ion-text></ion-row>
+                      <ion-row id="body-row"><ion-text style="font-size: small;">{{item.comment}}</ion-text></ion-row>
                     </ion-col>
                     <ion-col size="2">
                       <ion-button fill="none" id="response-button" size="default" (click)="respond(0)">
@@ -90,7 +90,7 @@
                       </ion-button>
                     </ion-col>
                   </ion-row>
-                  <ion-note style='float: right;'>{{item.date.toDate().toString().slice(0,21)}}</ion-note>
+                  <ion-note style='float: right;font-size: small;'>{{item.date.toDate().toString().slice(0,21)}}</ion-note>
                 </ion-grid>
               </ion-item>
             </ion-list>

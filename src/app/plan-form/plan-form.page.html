@@ -13,12 +13,11 @@
     <ion-input [(ngModel)]='title' color='dark' placeholder='Your plan name'></ion-input>
     <ion-text *ngIf="error" color='danger'><ion-icon color='danger' name="alert-circle-outline"></ion-icon>Please fill give the plan a title</ion-text>
   </ion-item>
-  <ion-item-divider></ion-item-divider>
   <ion-item>
     <ion-label style="font-size: x-large;" position='stacked'>Description</ion-label><br>
     <ion-textarea [(ngModel)]='description' placeholder='what is it about?'></ion-textarea>
   </ion-item>
   <div class="ion-margin" style="text-align-last: center;">
-    <ion-button (click)='create()'>Create</ion-button>
+    <ion-button color='medium' (click)='create()'>Create</ion-button>
   </div>
 </ion-content>
