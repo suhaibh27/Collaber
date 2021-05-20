@@ -96,7 +96,11 @@ const routes: Routes = [
   {
     path: 'profile-form/:id',
     loadChildren: () => import('./profile-form/profile-form.module').then( m => m.ProfileFormPageModule)
+  },  {
+    path: 'files',
+    loadChildren: () => import('./files/files.module').then( m => m.FilesPageModule)
   },
+
 
 
 

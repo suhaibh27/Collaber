@@ -60,7 +60,6 @@ apply from: "../../node_modules/com-sarriaroman-photoviewer/src/android/photovie
 apply from: "../../node_modules/cordova-plugin-firebase/src/android/build.gradle"
 apply from: "../../node_modules/cordova-plugin-telerik-imagepicker/src/android/ignorelinterrors.gradle"
 apply from: "../../node_modules/cordova-plugin-telerik-imagepicker/src/android/androidtarget.gradle"
-apply from: "../../node_modules/cordova-android-support-gradle-release/cordova-android-support-gradle-release.gradle"
 // PLUGIN GRADLE EXTENSIONS END
 
 for (def func : cdvPluginPostBuildExtras) {

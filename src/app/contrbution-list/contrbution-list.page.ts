@@ -37,7 +37,7 @@ export class ContrbutionListPage implements OnInit {
     this.listID=this.activatedRoute.snapshot.paramMap.get('id');
     //this.groupSrv.getgroup(this.grId).get().subscribe(res=>{this.thisGroup=res.data();});
     this.presentLoading();
-    this.listSrv.getcList(this.listID).get().subscribe(res=>{this.dataObj=res.data();
+    this.listSrv.getcList(this.listID).get().pipe(take(1)).subscribe(res=>{this.dataObj=res.data();
                                                                         this.grId=this.dataObj.groupID;
                                                                         this.title=this.dataObj.Title;
                                                                         this.description=this.dataObj.Description;
@@ -58,7 +58,7 @@ export class ContrbutionListPage implements OnInit {
                                                                                                                         ;}
                                                                                                                         ));
                                                                                                                       this.groupSrv.getuser(re.userID).then(n=>
-                                                                                                                                            n.get().subscribe(us=>this.usersNames.push(us.data())));}));
+                                                                                                                                            n.get().pipe(take(1)).subscribe(us=>this.usersNames.push(us.data())));}));
                                                                       });
 
   }
