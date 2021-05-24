@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 /* eslint-disable curly */
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Injectable, ɵɵinjectPipeChangeDetectorRef } from '@angular/core';
@@ -12,13 +13,15 @@ import { AngularFireAuth } from '@angular/fire/auth';
 export class UsersService {
   usersCollectionRef: AngularFirestoreCollection<any>;
   currentUser = null;
-  constructor(private afAuth: AngularFireAuth,public afs: AngularFirestore) {
+  constructor(private router: Router,private afAuth: AngularFireAuth,public afs: AngularFirestore) {
     this.afAuth.onAuthStateChanged((user) => {
       this.currentUser = user;
     });
   }
   createUser(){
     return;
+  }
+  getCurrent(){
   }
   async signup({ email, password,name,usrname,phone, }): Promise<any> {
     const credential = await this.afAuth.createUserWithEmailAndPassword(
@@ -38,7 +41,9 @@ export class UsersService {
   }
 
   signIn({ email, password }) {
-    return this.afAuth.signInWithEmailAndPassword(email, password);
+    return this.afAuth.signInWithEmailAndPassword(email, password).then(()=>{this.afAuth.onAuthStateChanged((user) => {
+      console.log(this.currentUser = user.uid);
+    });this.router.navigateByUrl('home');});
   }
 
   signOut(): Promise<void> {

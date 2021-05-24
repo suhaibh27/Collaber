@@ -27,9 +27,10 @@ export class ChatService {
   currentUser = null;
   constructor(private afAuth: AngularFireAuth, private afs: AngularFirestore) {
     this.currentUser={uid:'QSqITrKDOZPEY7qo68OnkTsXF8q1'};
-    /**this.afAuth.onAuthStateChanged((user) => {
-      this.currentUser = user;
-    });*/
+    this.afAuth.onAuthStateChanged((user) => {
+      this.currentUser = {uid:user.uid};
+      ;
+    });
   }
 
 

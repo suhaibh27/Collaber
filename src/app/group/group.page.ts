@@ -1,4 +1,4 @@
-import { ActionSheetController } from '@ionic/angular';
+import { ActionSheetController, LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
 /* eslint-disable max-len */
 import { GroupsServiceService } from './../groups-service.service';
@@ -22,17 +22,21 @@ export class GroupPage implements OnInit {
   displaylists=true;
   chevronIcon='chevron-down-outline';
   listChevronIcon='chevron-down-outline';
-  constructor(private router: Router ,
+  showNothing=false;
+  constructor(
+              private loadingController: LoadingController,
+              private router: Router ,
               private grpSrv: GroupsServiceService,
               private planSrv: PlanService,
               private listSrv: ClistService,
               private activatedRoute: ActivatedRoute,
               private actionSheetController: ActionSheetController){
     this.id=this.activatedRoute.snapshot.paramMap.get('id');
+    this.presentLoading();
     this.grpSrv.getgroup(this.id).get().subscribe(res=>this.g=res);
     this.planSrv.getPlans(this.id).subscribe(res=>res.forEach(plan=>this.plans.push(plan)));
     this.listSrv.getgroupLists(this.id).subscribe(res=>res.forEach(list=>this.contLists.push(list)));
-    this.grpSrv.getgroup(this.id).get().subscribe(res=>this.g=res);
+    this.grpSrv.getgroup(this.id).get().subscribe(res=>{this.g=res; this.loadingController.dismiss(); this.showNothing=true;});
 }
   ngOnInit() {
   }
@@ -100,5 +104,12 @@ export class GroupPage implements OnInit {
 
     const { role } = await actionSheet.onDidDismiss();
     console.log('onDidDismiss resolved with role', role);
+  }
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'Please wait...',
+    });
+    await loading.present();
   }
 }

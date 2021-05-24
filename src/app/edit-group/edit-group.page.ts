@@ -1,3 +1,4 @@
+import { AngularFireAuth } from '@angular/fire/auth';
 import { take } from 'rxjs/operators';
 import { Router } from '@angular/router';
 /* eslint-disable curly */
@@ -39,7 +40,9 @@ export class EditGroupPage implements OnInit {
   myUsersId=[];
   desc='';
   saved=false;
+  currentUser=null;
   constructor(
+        private afAuth: AngularFireAuth,
         private navCtrl: NavController,
         private alertController:AlertController,
         public groupSrv: GroupsServiceService,
@@ -48,6 +51,9 @@ export class EditGroupPage implements OnInit {
         private router: Router
         ) {  this.usersNames=[];
           this.myUsersId=[];
+          this.afAuth.onAuthStateChanged((user) => {
+            this.currentUser = user.uid;
+          });
 
           }
 
@@ -83,7 +89,7 @@ export class EditGroupPage implements OnInit {
   }
   async presentActionSheet(user,name,index) {
     let stat="Delete";
-    if(user=='QSqITrKDOZPEY7qo68OnkTsXF8q1'){
+    if(user==this.currentUser){
       stat="Leave";
     }
     const actionSheet = await this.actionSheetController.create({
@@ -121,7 +127,7 @@ export class EditGroupPage implements OnInit {
   }
   async presentDemoteActionSheet(user,name,index) {
     let stat="Delete";
-    if(user=='QSqITrKDOZPEY7qo68OnkTsXF8q1'){
+    if(user==this.currentUser){
       stat="Leave";
     }
     const actionSheet = await this.actionSheetController.create({
@@ -156,7 +162,7 @@ export class EditGroupPage implements OnInit {
     const { role } = await actionSheet.onDidDismiss();
     console.log('onDidDismiss resolved with role', role);
   }
-  doesUserExist(userId='QSqITrKDOZPEY7qo68OnkTsXF8q1'){
+  doesUserExist(userId=this.currentUser){
     for(let user of this.myUsersId ){
       if(user==userId){
         console.log(this.userExist);
@@ -165,11 +171,11 @@ export class EditGroupPage implements OnInit {
     }
 
   }
-  deleteUser(stat,user='RJvbBwI1ZtCHbEs6EWP3'){
+  deleteUser(stat,user=this.currentUser){
     this.groupSrv.removeUser(user,this.grId).then(()=>{this.usersNames=[];if(stat=='Leave'){
                                                                               this.router.navigateByUrl('home');}})
   }
-  addUser(user='RJvbBwI1ZtCHbEs6EWP3'){
+  addUser(user=this.currentUser){
     this.groupSrv.addUser(user,this.grId).then(()=>this.usersNames=[])
   }
   async presentAlertConfirm(stat) {

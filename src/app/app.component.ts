@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { LoadingController } from '@ionic/angular';
 import { UsersService } from './users.service';
 /* eslint-disable @typescript-eslint/quotes */
@@ -8,8 +10,14 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
+  currentUser;
   navigate: any;
-  constructor(private loadingController: LoadingController,private userSrv: UsersService) {this.sideMenu();  }
+  constructor(private router: Router,
+    private afAuth: AngularFireAuth,
+     private loadingController: LoadingController,private userSrv: UsersService) {this.sideMenu();
+    this.afAuth.onAuthStateChanged((user) => {
+      this.currentUser = user.uid;
+    });  }
   sideMenu()
   {
     this.navigate =
@@ -21,7 +29,7 @@ export class AppComponent {
       },
       {
         title : "Profile",
-        url   : "/profile/QSqITrKDOZPEY7qo68OnkTsXF8q1",
+        url   : "/profile/"+this.currentUser,
         icon  : "person"
       },
       {
@@ -33,7 +41,9 @@ export class AppComponent {
   }
   signout(){
     this.presentLoading();
-    this.userSrv.signOut().then(()=>this.loadingController.dismiss()).catch(er=>alert(er.message));
+    this.userSrv.signOut().then(()=>this.loadingController.dismiss())
+                  .catch(er=>alert(er.message)).
+                  then(()=>this.router.navigateByUrl('sign-in'));
   }
   async presentLoading() {
     const loading = await this.loadingController.create({

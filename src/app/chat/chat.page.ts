@@ -1,4 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable @typescript-eslint/member-ordering */
 /* eslint-disable @typescript-eslint/semi */
@@ -15,7 +15,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonContent } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { ChatService } from '../chat.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-chat',
@@ -27,7 +26,7 @@ export class ChatPage implements OnInit {
 
   messages: Observable<any[]>;
   newMsg = '';
-  gid='GOl2qCH9kKVbVq1x1SSc'
+  gid=null;
   constructor(private activatedRoute:ActivatedRoute, private chatService: ChatService, private router: Router) {
     this.gid=this.activatedRoute.snapshot.paramMap.get('id')
    }
@@ -42,5 +41,7 @@ export class ChatPage implements OnInit {
       this.content.scrollToBottom();
     });
   }
-
+  goBack(){
+    this.router.navigateByUrl('group/'+this.gid);
+  }
 }

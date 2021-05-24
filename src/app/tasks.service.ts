@@ -1,3 +1,4 @@
+import { AngularFireAuth } from '@angular/fire/auth';
 import { take } from 'rxjs/operators';
 /* eslint-disable guard-for-in */
 /* eslint-disable prefer-const */
@@ -16,8 +17,13 @@ import firebase from 'firebase/app';
 })
 
 export class TasksService {
+  currentUser=null;
   userGroupsCollectionRef: AngularFirestoreCollection<any>;
-  constructor(public afs: AngularFirestore) { }
+  constructor(private afAuth: AngularFireAuth, public afs: AngularFirestore) {
+    this.afAuth.onAuthStateChanged((user) => {
+      this.currentUser = user.uid;
+    });
+   }
   getTasks(pID){
     return this.afs.collection('tasks',ref=>ref.where('planID','==',pID)).get();
   }
@@ -32,7 +38,7 @@ export class TasksService {
     return this.afs.collection('users').doc(mid).get();
   }
   getSteps(taskID){
-   return this.afs.collection('tasks').doc(taskID).collection('steps',ref=>ref.orderBy('order')).get();
+   return this.afs.collection('tasks').doc(taskID).collection('steps',ref=>ref.orderBy('order')).get  ();
   }
   getComments(taskID){
     return this.afs.collection('tasks').doc(taskID).collection('comments',ref=>ref.orderBy('date')).get();
@@ -42,14 +48,14 @@ export class TasksService {
     this.afs.collection('tasks').doc(taskId).collection('steps').doc(stepId).get().pipe(take(1)).subscribe(res=>{
                                                                                     this.afs.collection('tasks').doc(taskId).collection('steps').doc(stepId).update({isFinished: val});
                                                                                     if(val){
-                                                                                      this.afs.collection('tasks').doc(taskId).collection('steps').doc(stepId).update({finisherID: user});
+                                                                                      this.afs.collection('tasks').doc(taskId).collection('steps').doc(stepId).update({finisherID: this.currentUser});
                                                                                     }
                                                                                     else{this.afs.collection('tasks').doc(taskId).collection('steps').doc(stepId).update({finisherID: FieldValue.delete()});}
                                                                                   });
   }
   sendComment(comm,sender,d,taskID){
 
-    return this.afs.collection('tasks').doc(taskID).collection('comments').add({comment:comm,senderID:sender,date:d});
+    return this.afs.collection('tasks').doc(taskID).collection('comments').add({comment:comm,senderID:this.currentUser,date:d});
   }
   async addStep(tit,tID,ind){
     let s;
@@ -59,6 +65,9 @@ export class TasksService {
   addTask(pID,t,dueD,desc,stps){
     let timestampDate=firebase.firestore.Timestamp.fromDate(new Date(dueD));
     let tsCreationDate=firebase.firestore.Timestamp.fromDate(new Date());
-    return this.afs.collection('tasks').add({planID:pID,creationDate:tsCreationDate,creator:'QSqITrKDOZPEY7qo68OnkTsXF8q1',title:t,dueDate:timestampDate,description:desc});
+    return this.afs.collection('tasks').add({planID:pID,creationDate:tsCreationDate,creator:this.currentUser,title:t,dueDate:timestampDate,description:desc});
+  }
+  getCurrent(){
+    return this.currentUser;
   }
 }

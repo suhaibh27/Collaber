@@ -23,9 +23,9 @@ export class GroupsServiceService {
   usersCollectionRef: AngularFirestoreCollection<any>;
   currentUser=null;
   constructor(private afAuth: AngularFireAuth,public afs: AngularFirestore) {
-    //this.afAuth.onAuthStateChanged((user) => {
-      this.currentUser = 'QSqITrKDOZPEY7qo68OnkTsXF8q1';
-    //});
+    this.afAuth.onAuthStateChanged((user) => {
+      this.currentUser = user.uid;
+    });
    }
   createGroup(){
     return;
@@ -74,9 +74,9 @@ export class GroupsServiceService {
                                                                         });
     return groups;
   }
-  getGroups2(){
+  getGroups2(us){
     let groups=[];
-    this.userGroupsCollectionRef = this.afs.collection('users-groups',ref=>ref.where('userID','==','QSqITrKDOZPEY7qo68OnkTsXF8q1'));
+    this.userGroupsCollectionRef = this.afs.collection('users-groups',ref=>ref.where('userID','==',us));
     let count=0;
     return this.userGroupsCollectionRef.valueChanges();
     //return groups;

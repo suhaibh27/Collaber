@@ -1,3 +1,4 @@
+import { AngularFireAuth } from '@angular/fire/auth';
 /* eslint-disable @typescript-eslint/prefer-for-of */
 /* eslint-disable no-trailing-spaces */
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -47,8 +48,13 @@ export class TaskDetailsPage implements OnInit {
   finishers=[];
   newStep=false;
   stepTitle='';
-  constructor( public modalController:ModalController, private taskSrv: TasksService,private activatedRoute: ActivatedRoute,
+  currentUser=null;
+  taskID=null;
+  constructor( private afAuth: AngularFireAuth,public modalController:ModalController, private taskSrv: TasksService,private activatedRoute: ActivatedRoute,
     ) {
+      this.afAuth.onAuthStateChanged((user) => {
+        console.log(this.currentUser = user.uid);
+      });
     this.taskSrv.getTask(this.activatedRoute.snapshot.paramMap.get('id')).pipe(take(1)).subscribe(res=>{
                                                                             this.username={username:'',phoneNumber:''};
 
@@ -66,7 +72,7 @@ export class TaskDetailsPage implements OnInit {
                                                                             this.finished=0;
                                                                             this.taskSrv.getSteps(res.id).pipe(take(1)).subscribe(re=>{re.forEach(step=>{this.steps.push(step);this.b.push(step.data().isFinished);});
                                                                                           this.calcProgress();this.finisherName();});
-                                                                            this.taskSrv.getComments(this.activatedRoute.snapshot.paramMap.get('id')).pipe(take(1)).subscribe(rer=>rer.forEach(comment=>{this.comments.push(comment.data());this.addCommenter(comment.data().senderID);}));
+                                                                            this.taskSrv.getComments(this.activatedRoute.snapshot.paramMap.get('id')).pipe(take(1)).subscribe(rer=>rer.forEach(comment=>{this.addCommenter(comment.data());}));
 
                                                                           });
   }
@@ -89,6 +95,7 @@ export class TaskDetailsPage implements OnInit {
   }
   calcProgress(){
     this.finished=0;
+    this.count=0;
     if(this.b.length>0){
       let mcolor='blue';
       console.log(this.b.length);
@@ -122,24 +129,25 @@ export class TaskDetailsPage implements OnInit {
   }
   addCommenter(id){
     let name;
-    this.taskSrv.getuser(id).subscribe(res=>{name=res.data(); this.commenters.push(name.username);});
+    this.taskSrv.getuser(id.senderID).subscribe(res=>{name=res.data();console.log(name.username,id.comment);this.comments.push(id); this.commenters.push(name.username);});
   }
   checkboxHandler(id,index){
     let val=false;
     if(this.b[index])
       {this.Ifinished(id); val=true;}
-    this.taskSrv.stepCheckHandeler(this.activatedRoute.snapshot.paramMap.get('id'),id,'IoBBNSa8mNwXQbm8vrIP',val);
+    else{this.finished--;}
+    this.taskSrv.stepCheckHandeler(this.activatedRoute.snapshot.paramMap.get('id'),id,this.currentUser,val);
     this.calcProgress();
   }
   sendComment(){
     if(this.comment.length<1){
       return;
     }
-    console.log(this.comments,this.commenters);
     let mtimeStamp=firebase.default.firestore.Timestamp.now();
-    this.comments.push({comment:this.comment,senderID:'IoBBNSa8mNwXQbm8vrIP',date:mtimeStamp});
-    this.getUsername('IoBBNSa8mNwXQbm8vrIP');
-    this.taskSrv.sendComment(this.comment,'IoBBNSa8mNwXQbm8vrIP',mtimeStamp,this.activatedRoute.snapshot.paramMap.get('id'));
+    this.comments.push({comment:this.comment,senderID:this.currentUser,date:mtimeStamp});
+    this.addCommenter(this.currentUser);
+    //this.getUsername(this.currentUser);
+    this.taskSrv.sendComment(this.comment,this.currentUser,mtimeStamp,this.activatedRoute.snapshot.paramMap.get('id'));
     this.comment='';
   }
   doRefresh(ev){
@@ -184,9 +192,8 @@ export class TaskDetailsPage implements OnInit {
   Ifinished(id){
     for(let i=0;i<this.finishers.length;i++){
       if(this.finishers[i].stepid==id){
-        this.finishers[i]={stepid:id,name:'Ahmad'};
+        this.finishers[i]={stepid:id,name:'Me'};
       }
-
     }
   }
   isOverdue(){

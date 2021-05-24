@@ -1,3 +1,4 @@
+import { AngularFireAuth } from '@angular/fire/auth';
 import { UsersService } from './../users.service';
 /* eslint-disable eqeqeq */
 /* eslint-disable curly */
@@ -28,11 +29,15 @@ export class HomePage {
   count=0;
   seg;
   isAdmin=[];
-  constructor(private userSrv:UsersService, private loadingController:LoadingController, public groupSrv: GroupsServiceService, public popoverController: PopoverController , public alertController: AlertController,public router:Router)
+  currentUser=null;
+  constructor(private afAuth: AngularFireAuth, private userSrv:UsersService, private loadingController:LoadingController, public groupSrv: GroupsServiceService, public popoverController: PopoverController , public alertController: AlertController,public router:Router)
   {
     this.seg='home';
     this.presentLoading();
-    this.groupSrv.getGroups2().subscribe(res=>{ if (this.count<1){
+    console.log(this.currentUser);
+    this.afAuth.onAuthStateChanged((user) => {
+      console.log(this.currentUser = user.uid);
+    }).then(()=>{this.groupSrv.getGroups2(this.currentUser).subscribe(res=>{ if (this.count<1){
       this.count++;
       res.map(r=>{
           this.isAdmin.push(r.isAdmin);
@@ -47,7 +52,23 @@ export class HomePage {
           });
       });}
       this.loadingController.dismiss();this.filteredList=this.myGroups;
-    });
+    });});
+    // this.groupSrv.getGroups2(this.currentUser).subscribe(res=>{ if (this.count<1){
+    //   this.count++;
+    //   res.map(r=>{
+    //       this.isAdmin.push(r.isAdmin);
+    //       let myref= this.groupSrv.getMyref(r.groupID);
+    //       myref.get().subscribe((snap)=>{
+    //         if(snap.exists){
+    //             console.log(snap.id);
+    //             this.myGroups.push((snap));
+    //           }
+    //         else
+    //             console.log('no data');
+    //       });
+    //   });}
+    //   this.loadingController.dismiss();this.filteredList=this.myGroups;
+    // });
 
     //this.filteredList=this.myGroups;
   }

@@ -1,3 +1,4 @@
+import { AngularFireAuth } from '@angular/fire/auth';
 /* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/quotes */
 /* eslint-disable @typescript-eslint/naming-convention */
@@ -11,7 +12,12 @@ import firebase from 'firebase/app';
 })
 export class ClistService {
   cListCollectionRef: AngularFirestoreCollection<any>;
-  constructor(public afs: AngularFirestore) { }
+  currentUser=null;
+  constructor(private afAuth: AngularFireAuth, public afs: AngularFirestore) {
+    this.afAuth.onAuthStateChanged((user) => {
+      this.currentUser = user.uid;
+    });
+   }
   getgroup(lID){
   }
   getgroupLists(grid){
@@ -24,13 +30,13 @@ export class ClistService {
     return this.afs.collection('contributionList').doc(id).collection('joinedUsers').get();
 }
 updateJoin(uid,isjoin,lid,jid){
-  console.log(uid+" " +isjoin+" "+ lid+" "+jid);
+  console.log(this.currentUser+" " +isjoin+" "+ lid+" "+jid);
   this.cListCollectionRef=this.afs.collection('contributionList').doc(lid).collection('joinedUsers');
   if(!isjoin){
     this.cListCollectionRef.doc(jid).delete();
   }
   else{
-    this.cListCollectionRef.add({userID:uid});
+    this.cListCollectionRef.add({userID:this.currentUser});
   }
 }
 createList(title,desc,loc,locLink,dT,gID){

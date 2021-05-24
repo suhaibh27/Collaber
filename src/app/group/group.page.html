@@ -7,9 +7,17 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="plans.length<=0 && contLists.length<=0 && showNothing">
+  <div  style="text-align: -webkit-center;height: 100%; padding-top: 50%; text-align-last: center;">
+    <ion-text style="font-size: x-large;">
+          There are not any plans or lists Here !
+    </ion-text><br>
+    <ion-button color='medium' (click)='presentActionSheet()'>Add a new plan or list here</ion-button>
+  </div>
+</ion-content>
+<ion-content *ngIf="plans.length>0 && contLists.length>0">
   <ion-searchbar></ion-searchbar>
-  <ion-grid>
+  <ion-grid *ngIf="plans.length>0">
     <ion-row>
       <ion-col size='10'><h3>plans</h3></ion-col>
       <ion-col size='2' style='align-self: flex-end;'><ion-button (click)='togglePlans()' fill='clear' color='dark'><ion-icon [name]="chevronIcon"></ion-icon></ion-button></ion-col>
@@ -34,7 +42,7 @@
     </ion-row>
   </div>
   </ion-grid>
-  <ion-grid>
+  <ion-grid *ngIf="contLists.length>0">
     <ion-row>
       <ion-col size='10'><h3>Contbution Lists</h3></ion-col>
       <ion-col size='2' style='align-self: flex-end;'><ion-button (click)='togglecList()' fill='clear' color='dark'><ion-icon [name]="listChevronIcon"></ion-icon></ion-button></ion-col>
@@ -67,7 +75,7 @@
 </ion-content>
 <ion-footer>
   <ion-row>
-    <ion-col  size='6' class="ion-no-padding"><ion-button (click)='goChat()' color='dark' fill='outline' size='large' expand='full'><ion-icon name="chatbubbles"></ion-icon>Chat Lobby</ion-button></ion-col>
+    <ion-col  size='6' class="ion-no-padding"><ion-button (click)='goChat()' color='dark' fill='outline' size='large' expand='full'><ion-icon name="chatbubbles"></ion-icon>Chat</ion-button></ion-col>
     <ion-col size='6' class="ion-no-padding"><ion-button (click)='goCalender()' color='dark' fill='outline' size='large' expand='full'><ion-icon name="calendar"></ion-icon>Calender</ion-button>
     </ion-col>
   </ion-row>
